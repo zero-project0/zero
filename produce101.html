@@ -1,9 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJGG47RBT3"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJGG47RBT3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -43,7 +41,7 @@
         .debut-zone .rank-num { color: var(--debut-gold); }
         
         .tag-wrap { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
-        .tag { font-size: 13px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .tag { font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
         .tag-national { background: #e0f7fa; color: #0097e6; }
         .tag-global { background: #ffeaa7; color: #d35400; }
         .tag-balance { background: #f3e5f5; color: #8e24aa; }
@@ -61,104 +59,134 @@
             display: none; align-items: center; justify-content: center; z-index: 1000; 
         }
         .modal-content { 
-            background: white; width: 1100px; height: 80vh; max-height: 618px; border-radius: 30px; 
-            display: flex; overflow: hidden; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            background: white;
+            width: 1100px;
+            height: 85vh;
+            max-height: 700px;
+            border-radius: 30px;
+            display: flex;
+            overflow: hidden;
+            align-items: stretch;
         }
 
-        .modal-left { 
-    width: 340px; 
-    background: #fdfdfd; 
-    border-right: 1px solid var(--border-light); 
-    padding: 30px; 
-    display: flex; 
-    flex-direction: column; 
-    box-sizing: border-box;             /* 💡 パディングによる高さのズレ・膨らみを防ぐ */
-    
-    max-height: 100%;                   /* 💡 左側の高さをモーダルの内側にカチッと制限する */
-    overflow-y: auto;                   /* 💡 これで「入りきらないときだけ」出るようになります */
-}
+        .modal-left {
+            width: 34%;
+            padding: 36px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            border-right: 1px solid #eef2f7;
+            display: flex;
+            flex-direction: column;
+            height: 98%;
+            box-sizing: border-box;
+            overflow-y: auto;
+            min-height: 0;
+        }
         .modal-right {
-    width: 70%;
-    background: #fdfdfd; 
-    border-right: 1px solid var(--border-light); 
-    padding: 30px; 
-    display: flex; 
-    flex-direction: column; 
-    
-    /* 💡 縦に入りきらないときにスクロールさせるための重要設定 */
-    max-height: 100%;                   /* 💡左側エリアの高さをモーダル内に制限する */
-    overflow-y: auto;                   /* 💡入りきらないときだけ縦スクロールを出す */
-    box-sizing: border-box;             /* 💡パディングを含めた高さ計算にする */
-}
-
+            width: 70%;
+            background: #fdfdfd; 
+            border-right: 1px solid var(--border-light); 
+            padding: 25px; 
+            display: flex; 
+            flex-direction: column; 
+            max-height: 98%;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: #f3f6fa;
+            border-radius: 10px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #cfd8e3;
+            border-radius: 10px;
+        }
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #b8c4d3;
+        }
+        .modal-left::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-left::-webkit-scrollbar-track {
+            background: #f5f7fa;
+        }
+        .modal-left::-webkit-scrollbar-thumb {
+            background: #cfd8e3;
+            border-radius: 10px;
+        }
         
         .m-rank-display { font-size: 55px; font-weight: 900; color: var(--accent-blue); line-height: 1; margin-bottom: 5px; }
         .m-name-display { font-size: 28px; font-weight: 900; margin: 5px 0; color: #333; }
 
-        .m-tag-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin: 15px 0; }
+        .m-tag-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
         .m-tag { font-size: 14px; padding: 6px 14px; border-radius: 30px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .m-tag-national { background: #e0f7fa; color: #0097e6; }
         .m-tag-global { background: #ffeaa7; color: #d35400; }
         .m-tag-balance { background: #f3e5f5; color: #8e24aa; }
         .m-tag-rise { background: #e8f8f5; color: #00b894; }
-
         
-        /* ランクヒストリーの縮小とSNSグラフ用の追加スタイル */
-        .history-box { 
-            padding: 12px; /* 縮小 */
-            margin-bottom: 12px;
-        }
-        .h-item { padding: 4px 15px; } /* 縮小 */
-        .h-item .ep-lab { font-size: 13px; }
-        .h-item .ep-rank { font-size: 16px; }
-        .h-item.final .ep-rank { font-size: 20px; }
-        
-        .sns-dist-box {
+        /* ランクヒストリー */
+        .history-box {
+            margin-top: 24px;
             background: #fff;
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid #f1f2f6;
-            text-align: center;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
-        .sns-dist-title {
-            font-size: 12px; font-weight: bold; color: #636e72; margin-bottom: 10px; letter-spacing: 1px;
+        .h-title { font-size: 11px; font-weight: bold; color: #636e72; margin-bottom: 8px; text-align: center; letter-spacing: 2px; }
+        
+        .h-timeline {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            position: relative; /* 💡ズレていた縦線の基準位置を設定 */
         }
-        .sns-chart-container {
-            width: 100%;
-            height: 160px;
-            position: relative;
-        }
-
-        /* RANK HISTORY (縦並び) */
-        .history-box { margin-top: 10px; background: #fff; border-radius: 20px; padding: 20px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #f1f2f6; }
-        .h-title { font-size: 12px; font-weight: bold; color: #636e72; margin-bottom: 15px; text-align: center; letter-spacing: 2px; }
-        .h-timeline { display: flex; flex-direction: column; gap: 5px; position: relative; }
         .h-timeline::before { content: ''; position: absolute; left: 24px; top: 5px; bottom: 5px; width: 2px; background: #dfe6e9; z-index: 0; }
 
-        .h-item { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; background: #f8f9fa; border-radius: 12px; padding: 7px 20px; border: 1px solid #eee; transition: 0.2s; }
+        .h-item {
+            position: relative; /* 💡アイテムを縦線の手前に持ってくるための基準 */
+            z-index: 1; /* 💡縦線（z-index: 0）より前面にする */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            min-height: 30px;
+            border-radius: 16px;
+            background: #f8fbff;
+            font-size: 18px;
+            font-weight: 700;
+            transition: 0.2s; /* 💡ホバーを滑らかに */
+        }
         .h-item:hover { transform: translateX(5px); box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
-        .h-item.final { background: linear-gradient(135deg, #0984e3, #00d2ff); color: white; border: none; transform: scale(1.02); box-shadow: 0 6px 12px rgba(9, 132, 227, 0.3); }
-        .h-item .ep-lab { font-size: 16px; font-weight: bold; opacity: 0.8; }
-        .h-item .ep-rank { font-size: 20px; font-weight: 900; }
-        .h-item.final .ep-rank { font-size: 26px; }
-
+        .h-item.final { background: linear-gradient(135deg, #0984e3, #00d2ff); color: white; border: none; transform: scale(1.02); box-shadow: 0 4px 10px rgba(9, 132, 227, 0.3); }
+        .h-item .ep-lab { font-size: 12px; font-weight: bold; opacity: 0.8; }
+        .h-item .ep-rank { font-size: 15px; font-weight: 900; }
+        .h-item.final .ep-rank { font-size: 18px; }
         
-        /* 分析セクション - 上下配置用の新しいレイアウト */
+        /* 分析セクション */
         .analysis-container { 
             display: flex; 
             flex-direction: column;
-            gap: 15px; 
+            gap: 12px; 
             height: 100%; 
         }
         
-        /* 投票セクションをコンパクトに */
         .vote-section { 
             border: 1px solid #eee; 
-            border-radius: 16px; 
-            padding: 12px 25px; 
+            border-radius: 12px; 
+            padding: 12px 20px; 
             background: #fff; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .section-header { 
             display: flex; 
@@ -167,24 +195,24 @@
             margin-bottom: 8px;
         }
         .section-title { 
-            font-size: 16px; 
+            font-size: 15px; 
             font-weight: 900; 
             color: #2d3436; 
-            border-left: 5px solid var(--accent-blue); 
-            padding-left: 10px; 
+            border-left: 4px solid var(--accent-blue); 
+            padding-left: 8px; 
             margin: 0;
         }
         .total-strip { 
             background: #2d3436; 
             color: #fff; 
-            padding: 5px 12px; 
-            border-radius: 8px; 
+            padding: 4px 12px; 
+            border-radius: 6px; 
             display: flex; 
-            gap: 10px;
+            gap: 8px;
             align-items: center; 
         }
-        .total-strip span { font-size: 12px; font-weight: bold; }
-        .total-strip .pt-val { font-size: 18px; font-weight: 900; }
+        .total-strip span { font-size: 15px; font-weight: bold; }
+        .total-strip .pt-val { font-size: 20px; font-weight: 900; }
 
         .vote-content { 
             display: flex; 
@@ -201,97 +229,92 @@
         .v-card { 
             background: #fdfdfd; 
             border: 1px solid #f0f0f0; 
-            border-radius: 12px; 
-            padding: 10px 15px; 
+            border-radius: 8px; 
+            padding: 8px 12px; 
             display: flex; 
             flex-direction: column;
             justify-content: center;
         }
-        .v-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0px; }
+        .v-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
         .v-label { font-size: 11px; color: #999; font-weight: bold; }
-        .v-pct-pill { font-size: 12px; font-weight: 900; padding: 2px 8px; border-radius: 10px; }
+        .v-pct-pill { font-size: 11px; font-weight: 900; padding: 2px 6px; border-radius: 8px; }
         .v-card-bottom { display: flex; align-items: baseline; gap: 6px;}
-        .v-count-big { font-size: 24px; font-weight: 900; color: #2d3436; }
-        .v-rank-sub { font-size: 18px; color: var(--accent-blue); font-weight: 900; }
+        .v-count-big { font-size: 18px; font-weight: 900; color: #2d3436; }
+        .v-rank-sub { font-size: 14px; color: var(--accent-blue); font-weight: 900; }
         .chart-box-doughnut { 
-            width: 90px; 
-            height: 90px; 
+            width: 70px; 
+            height: 70px; 
             position: relative; 
             flex-shrink: 0; 
         }
-        
-        /* SNSエリアの新しいレイアウト (SNS数字縦並び + 右にパイチャート) */
+
         .bottom-sns-area {
             display: flex;
-            gap: 20px;
-            margin-top: 5px;
+            gap: 15px;
+            margin-top: 2px;
+            flex-shrink: 0;
         }
         .sns-stats-col {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             flex: 1;
         }
         .sns-card {
             background: #f8fafc;
             border: 1px solid #f1f5f9;
-            border-radius: 12px;
-            padding: 8px 25px;
+            border-radius: 10px;
+            padding: 6px 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100%;
         }
         .sns-header {
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: bold;
             color: #64748b;
             margin-bottom: 0px;
         }
-        .sns-val { font-size: 18px; font-weight: 900; color: #1e293b; }
-        .sns-rank { font-size: 16px; font-weight: 900; color: var(--accent-blue); margin-left: 10px; }
+        .sns-val { font-size: 15px; font-weight: 900; color: #1e293b; }
+        .sns-rank { font-size: 13px; font-weight: 900; color: var(--accent-blue); margin-left: 8px; }
         
         .sns-dist-box-right {
             background: #fff;
             border: 1px solid #eee;
-            border-radius: 16px;
-            padding: 10px 15px;
-            width: 340px;
+            border-radius: 12px;
+            padding: 6px 12px;
+            width: 280px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
         .sns-dist-title {
-            font-size: 13px; font-weight: bold; color: #636e72; margin-bottom: 5px; text-align: center;
+            font-size: 11px; font-weight: bold; color: #636e72; margin-bottom: 2px; text-align: center;
         }
         .sns-chart-container {
             width: 100%;
             flex: 1;
             position: relative;
-            min-height: 100px;
-            max-height: 110px;
+            min-height: 75px;
+            max-height: 80px;
         }
 
-        /* すべての要素でパディングが幅を壊さないように設定 */
         * {
             box-sizing: border-box;
         }
 
-        /* --- レスポンシブ完全最適化 --- */
         @media (max-width: 1200px) {
             .trainee-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
         }
 
         @media (max-width: 1024px) {
             .trainee-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-            
-            /* タブレット・スマホではモーダルを縦並びにして、右側の潰れ（詰まり）を解消 */
             .modal-content { 
                 width: 100%; 
-                max-width: 700px; /* 縦並びの時はすっきりした幅に制限 */
+                max-width: 700px; 
                 height: 95vh; 
                 flex-direction: column; 
                 overflow-y: auto; 
@@ -300,44 +323,31 @@
                 width: 100%; 
                 border-right: none; 
                 border-bottom: 1px solid var(--border-light); 
-                padding: 24px; 
+                padding: 20px; 
                 flex-shrink: 0; 
                 background: #f8f9fa;
             }
             .modal-right { 
                 width: 100%; 
-                padding: 24px; 
-                overflow-y: visible; /* 親の modal-content でスクロールさせるため */
-            }
-            .sns-section { 
-                flex-direction: column; 
-                gap: 12px;
+                padding: 20px; 
+                overflow-y: visible;
             }
             .sns-card {
-                width: 100% !important; /* SNSカードを横いっぱいに広げる */
+                width: 100% !important;
             }
         }
-
         
         @media (max-width: 768px) {
             .bottom-sns-area { flex-direction: column; }
-            .sns-dist-box-right { width: 100%; min-height: 200px; }
-        }
-
-        @media (max-width: 768px) {
+            .sns-dist-box-right { width: 100%; min-height: 150px; }
             .page-title { font-size: 22px; margin-bottom: 20px; }
             .trainee-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
             .summary-card { padding: 12px 10px; }
-            
-            /* モーダル内の文字サイズや余白の微調整 */
             .modal-content { width: 95%; height: 90vh; }
-            .modal-left, .modal-right { padding: 16px; }
             .m-rank-display { font-size: 48px; }
             .m-name-display { font-size: 24px; }
-            
-            /* 投票セクション内のグリッド調整 */
             .stats-grid { 
-                grid-template-columns: 1fr; /* 左右並びを縦並びにして右詰まりを解消 */
+                grid-template-columns: 1fr; 
                 gap: 8px; 
             }
             .vote-content {
@@ -346,31 +356,30 @@
                 gap: 15px;
             }
             .chart-box-doughnut {
-                margin: 0 auto; /* ドーナツグラフを中央寄せに */
+                margin: 0 auto;
             }
         }
 
         @media (max-width: 480px) {
-            .trainee-grid { grid-template-columns: 1fr; } /* 完全なスマホ縦持ち用 */
+            .trainee-grid { grid-template-columns: 1fr; }
         }
-    
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #ccc; border:none; background:none; z-index: 10; padding: 5px; }
+            .close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #ccc; border:none; background:none; z-index: 10; padding: 5px; }
         .close-btn:hover { color: #888; }
-    </style>
+
+      </style>
 </head>
 <body>
 
 <h1 class="page-title">PRODUCE 101 JAPAN 新世界</h1>
 
-
 <div class="controls" style="max-width: 1400px; margin: 0 auto 20px; display: flex; justify-content: flex-end; align-items: center; gap: 10px;">
     <label for="sortSelect" style="font-weight: bold; font-size: 14px; color: var(--text-main);">並び替え:</label>
     <select id="sortSelect" onchange="renderGrid()" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; outline: none; cursor: pointer; background-color: var(--white);">
         <option value="rank_asc">最新順位 (高い順)</option>
-        <option value="n2_desc">第2回 国内票 (多い順)</option>
-        <option value="g2_desc">第2回 海外票 (多い順)</option>
-        <option value="x_desc">X ポスト数(5/11～5/17) (多い順)</option>
-        <option value="tiktok_desc">TikTok 投稿数(5/11～5/17) (多い順)</option>
+        <option value="n3_desc">第3回 国内票 (多い順)</option>
+        <option value="g3_desc">第3回 海外票 (多い順)</option>
+        <option value="x_desc">X ポスト数(5/23～5/29) (多い順)</option>
+        <option value="tiktok_desc">TikTok 投稿数(5/25～5/29) (多い順)</option>
     </select>
 </div>
 
@@ -394,17 +403,14 @@
                     <div class="h-item"><span class="ep-lab">Ep 3</span><span class="ep-rank" id="h3">--</span></div>
                     <div class="h-item"><span class="ep-lab">Ep 5 (1st)</span><span class="ep-rank" id="h5">--</span></div>
                     <div class="h-item"><span class="ep-lab">Ep 6</span><span class="ep-rank" id="h6">--</span></div>
-                    <div class="h-item final"><span class="ep-lab">Ep 8 (2nd)</span><span class="ep-rank" id="h8">--</span></div>
+                    <div class="h-item"><span class="ep-lab">Ep 8 (2nd)</span><span class="ep-rank" id="h8">--</span></div>
+                    <div class="h-item final"><span class="ep-lab">Ep 10</span><span class="ep-rank" id="h10">--</span></div>
                 </div>
             </div>
-
-            
         </div>
 
-        
         <div class="modal-right">
             <div class="analysis-container">
-                <!-- 1st Section -->
                 <div class="vote-section">
                     <div class="section-header">
                         <h3 class="section-title">第1回順位発表式</h3>
@@ -425,7 +431,6 @@
                     </div>
                 </div>
 
-                <!-- 2nd Section -->
                 <div class="vote-section">
                     <div class="section-header">
                         <h3 class="section-title">第2回順位発表式</h3>
@@ -446,17 +451,36 @@
                     </div>
                 </div>
 
-                <!-- SNS Bottom Area -->
+                <div class="vote-section">
+                    <div class="section-header">
+                        <h3 class="section-title">第3回順位発表式</h3>
+                        <div class="total-strip" style="background:#e84393;"><span>Total Score</span><span class="pt-val" id="v3t">0 pt</span></div>
+                    </div>
+                    <div class="vote-content">
+                        <div class="stats-grid">
+                            <div class="v-card" style="border-left: 4px solid #0097e6;">
+                                <div class="v-card-top"><span class="v-label">国内投票</span><span class="v-pct-pill" id="p3n" style="color:#0097e6; background:#e0f7fa;">0%</span></div>
+                                <div class="v-card-bottom"><span class="v-count-big" id="v3n">0</span><span class="v-rank-sub" id="r3n">--位</span></div>
+                            </div>
+                            <div class="v-card" style="border-left: 4px solid #ffc000;">
+                                <div class="v-card-top"><span class="v-label">海外投票</span><span class="v-pct-pill" id="p3g" style="color:#d35400; background:#ffeaa7;">0%</span></div>
+                                <div class="v-card-bottom"><span class="v-count-big" id="v3g">0</span><span class="v-rank-sub" id="r3g">--位</span></div>
+                            </div>
+                        </div>
+                        <div class="chart-box-doughnut"><canvas id="chart3"></canvas></div>
+                    </div>
+                </div>
+
                 <div class="bottom-sns-area">
                     <div class="sns-stats-col">
                         <div class="sns-card" style="border-left: 4px solid #1e293b;">
-                            <div class="sns-header"><span style="color: #000; font-weight: bold;">𝕏</span> <span>X  #名前 ポスト数(5/11～5/17)</span></div>
+                            <div class="sns-header"><span style="color: #000; font-weight: bold;">𝕏</span> <span>X  #名前 ポスト数(5/23～5/29)</span></div>
                             <div style="display: flex; align-items: baseline;">
                                 <span class="sns-val" id="x_posts">0</span><span class="sns-rank" id="x_rank">--位</span>
                             </div>
                         </div>
                         <div class="sns-card" style="border-left: 4px solid #1da1f2;">
-                            <div class="sns-header"><span style="color: #1da1f2;">♪</span> <span>TikTok #名前 投稿数(5/11～5/17)</span></div>
+                            <div class="sns-header"><span style="color: #1da1f2;">♪</span> <span>TikTok #名前 投稿数(5/25～5/29)</span></div>
                             <div style="display: flex; align-items: baseline;">
                                 <span class="sns-val" id="tt_posts">0</span><span class="sns-rank" id="tt_rank">--位</span>
                             </div>
@@ -476,9 +500,6 @@
 
     </div>
 </div>
-        </div>
-    </div>
-</div>
 
 <script>
 const rawData = [
@@ -489,7 +510,8 @@ const rawData = [
             2,
             1,
             1,
-            1
+            1,
+            10
         ],
         "n1": 1296479,
         "g1": 488603,
@@ -503,16 +525,22 @@ const rawData = [
         "g1_rank": 4,
         "n2_rank": 2,
         "g2_rank": 3,
-        "x_posts": 981,
-        "x_rank": 18,
-        "tiktok_posts": 376,
-        "tiktok_rank": 10,
+        "x_posts": 2253,
+        "x_rank": 12,
+        "tiktok_posts": 160,
+        "tiktok_rank": 2,
         "sns_dist": {
             "X": 18.4,
             "Instagram": 33.6,
             "TikTok": 26.6,
             "YouTube": 21.5
-        }
+        },
+        "n3": 157868,
+        "g3": 67410,
+        "nr3": 70.1,
+        "gr3": 29.9,
+        "n3_rank": 7,
+        "g3_rank": 10
     },
     {
         "name": "安部 結蘭",
@@ -521,6 +549,7 @@ const rawData = [
             4,
             3,
             4,
+            2,
             2
         ],
         "n1": 1051560,
@@ -535,16 +564,20 @@ const rawData = [
         "g1_rank": 3,
         "n2_rank": 4,
         "g2_rank": 2,
-        "x_posts": 1123,
-        "x_rank": 14,
-        "tiktok_posts": 345,
-        "tiktok_rank": 13,
+        "x_posts": 2569,
+        "x_rank": 11,
+        "tiktok_posts": 122,
+        "tiktok_rank": 7,
         "sns_dist": {
             "X": 17.4,
             "Instagram": 25.5,
             "TikTok": 30.8,
             "YouTube": 26.3
-        }
+        },
+        "n3": 201685,
+        "g3": 88061,
+        "nr3": 69.6,
+        "gr3": 30.4
     },
     {
         "name": "照井 康祐",
@@ -553,7 +586,8 @@ const rawData = [
             8,
             7,
             2,
-            3
+            3,
+            4
         ],
         "n1": 981058,
         "g1": 209766,
@@ -564,51 +598,23 @@ const rawData = [
         "nr2": 78.4,
         "gr2": 21.6,
         "n1_rank": 4,
-        "g1_rank": 12,
+        "g1_rank": 13,
         "n2_rank": 1,
         "g2_rank": 12,
-        "x_posts": 2562,
-        "x_rank": 1,
-        "tiktok_posts": 533,
-        "tiktok_rank": 1,
+        "x_posts": 3871,
+        "x_rank": 5,
+        "tiktok_posts": 131,
+        "tiktok_rank": 5,
         "sns_dist": {
             "X": 27.4,
             "Instagram": 21.1,
             "TikTok": 26.2,
             "YouTube": 25.4
-        }
-    },
-    {
-        "name": "釼持 吉成",
-        "history": [
-            2,
-            1,
-            2,
-            3,
-            4
-        ],
-        "n1": 1372025,
-        "g1": 392007,
-        "nr1": 77.8,
-        "gr1": 22.2,
-        "n2": 1045520,
-        "g2": 484313,
-        "nr2": 68.3,
-        "gr2": 31.7,
-        "n1_rank": 1,
-        "g1_rank": 7,
-        "n2_rank": 3,
-        "g2_rank": 5,
-        "x_posts": 824,
-        "x_rank": 23,
-        "tiktok_posts": 326,
-        "tiktok_rank": 16,
-        "sns_dist": {
-            "X": 19.8,
-            "Instagram": 40.7,
-            "TikTok": 14.9,
-            "YouTube": 24.5
-        }
+        },
+        "n3": 207714,
+        "g3": 67914,
+        "nr3": 75.4,
+        "gr3": 24.6
     },
     {
         "name": "矢田 佳暉",
@@ -617,7 +623,8 @@ const rawData = [
             3,
             4,
             6,
-            5
+            5,
+            3
         ],
         "n1": 939786,
         "g1": 590728,
@@ -631,16 +638,20 @@ const rawData = [
         "g1_rank": 1,
         "n2_rank": 8,
         "g2_rank": 1,
-        "x_posts": 1184,
-        "x_rank": 12,
-        "tiktok_posts": 341,
-        "tiktok_rank": 14,
+        "x_posts": 3120,
+        "x_rank": 8,
+        "tiktok_posts": 101,
+        "tiktok_rank": 12,
         "sns_dist": {
             "X": 20.7,
             "Instagram": 27.1,
             "TikTok": 22.9,
             "YouTube": 29.4
-        }
+        },
+        "n3": 131167,
+        "g3": 150172,
+        "nr3": 46.6,
+        "gr3": 53.4
     },
     {
         "name": "パク・シヨン",
@@ -649,6 +660,7 @@ const rawData = [
             5,
             6,
             5,
+            6,
             6
         ],
         "n1": 897732,
@@ -663,16 +675,20 @@ const rawData = [
         "g1_rank": 2,
         "n2_rank": 5,
         "g2_rank": 4,
-        "x_posts": 845,
-        "x_rank": 21,
-        "tiktok_posts": 364,
-        "tiktok_rank": 11,
+        "x_posts": 1674,
+        "x_rank": 15,
+        "tiktok_posts": 131,
+        "tiktok_rank": 5,
         "sns_dist": {
             "X": 19.5,
             "Instagram": 28.3,
             "TikTok": 24.2,
             "YouTube": 27.9
-        }
+        },
+        "n3": 136731,
+        "g3": 86186,
+        "nr3": 61.3,
+        "gr3": 38.7
     },
     {
         "name": "オ・シンヘン",
@@ -681,7 +697,8 @@ const rawData = [
             6,
             5,
             7,
-            7
+            7,
+            1
         ],
         "n1": 939330,
         "g1": 472529,
@@ -695,16 +712,20 @@ const rawData = [
         "g1_rank": 5,
         "n2_rank": 10,
         "g2_rank": 6,
-        "x_posts": 879,
-        "x_rank": 20,
-        "tiktok_posts": 262,
-        "tiktok_rank": 19,
+        "x_posts": 1400,
+        "x_rank": 18,
+        "tiktok_posts": 100,
+        "tiktok_rank": 14,
         "sns_dist": {
             "X": 21.2,
             "Instagram": 31.6,
             "TikTok": 23.4,
             "YouTube": 23.8
-        }
+        },
+        "n3": 125315,
+        "g3": 89780,
+        "nr3": 58.3,
+        "gr3": 41.7
     },
     {
         "name": "飯塚 亮賀",
@@ -713,7 +734,8 @@ const rawData = [
             11,
             12,
             12,
-            8
+            8,
+            5
         ],
         "n1": 783434,
         "g1": 142348,
@@ -724,19 +746,23 @@ const rawData = [
         "nr2": 79.4,
         "gr2": 20.6,
         "n1_rank": 10,
-        "g1_rank": 24,
+        "g1_rank": 27,
         "n2_rank": 7,
         "g2_rank": 16,
-        "x_posts": 1002,
-        "x_rank": 16,
-        "tiktok_posts": 383,
-        "tiktok_rank": 9,
+        "x_posts": 4921,
+        "x_rank": 1,
+        "tiktok_posts": 106,
+        "tiktok_rank": 8,
         "sns_dist": {
-            "X": 14.6,
+            "X": 27.6,
             "Instagram": 24.9,
-            "TikTok": 31.6,
-            "YouTube": 29.0
-        }
+            "TikTok": 23.6,
+            "YouTube": 24.0
+        },
+        "n3": 171106,
+        "g3": 63471,
+        "nr3": 72.9,
+        "gr3": 27.1
     },
     {
         "name": "ユ・ヒョンスン",
@@ -745,7 +771,8 @@ const rawData = [
             10,
             8,
             8,
-            9
+            9,
+            21
         ],
         "n1": 634710,
         "g1": 426353,
@@ -759,16 +786,20 @@ const rawData = [
         "g1_rank": 6,
         "n2_rank": 14,
         "g2_rank": 8,
-        "x_posts": 298,
-        "x_rank": 34,
-        "tiktok_posts": 144,
-        "tiktok_rank": 31,
+        "x_posts": 689,
+        "x_rank": 21,
+        "tiktok_posts": 40,
+        "tiktok_rank": 20,
         "sns_dist": {
             "X": 13.0,
             "Instagram": 29.6,
             "TikTok": 18.0,
             "YouTube": 39.3
-        }
+        },
+        "n3": 75317,
+        "g3": 71773,
+        "nr3": 51.2,
+        "gr3": 48.8
     },
     {
         "name": "杉山 竜司",
@@ -777,7 +808,8 @@ const rawData = [
             25,
             23,
             11,
-            10
+            10,
+            12
         ],
         "n1": 517442,
         "g1": 107469,
@@ -788,19 +820,23 @@ const rawData = [
         "nr2": 80.0,
         "gr2": 20.0,
         "n1_rank": 17,
-        "g1_rank": 29,
+        "g1_rank": 34,
         "n2_rank": 9,
         "g2_rank": 18,
-        "x_posts": 1427,
-        "x_rank": 9,
-        "tiktok_posts": 258,
-        "tiktok_rank": 20,
+        "x_posts": 2483,
+        "x_rank": 13,
+        "tiktok_posts": 77,
+        "tiktok_rank": 18,
         "sns_dist": {
             "X": 28.3,
             "Instagram": 21.2,
             "TikTok": 24.9,
             "YouTube": 25.6
-        }
+        },
+        "n3": 143840,
+        "g3": 50154,
+        "nr3": 74.1,
+        "gr3": 25.9
     },
     {
         "name": "柳谷 伊冴",
@@ -809,7 +845,8 @@ const rawData = [
             37,
             19,
             9,
-            11
+            8,
+            8
         ],
         "n1": 554421,
         "g1": 93744,
@@ -820,19 +857,23 @@ const rawData = [
         "nr2": 83.7,
         "gr2": 16.3,
         "n1_rank": 16,
-        "g1_rank": 30,
+        "g1_rank": 37,
         "n2_rank": 6,
         "g2_rank": 22,
-        "x_posts": 1988,
-        "x_rank": 4,
-        "tiktok_posts": 396,
-        "tiktok_rank": 6,
+        "x_posts": 3675,
+        "x_rank": 6,
+        "tiktok_posts": 101,
+        "tiktok_rank": 12,
         "sns_dist": {
             "X": 29.6,
             "Instagram": 21.2,
             "TikTok": 20.5,
             "YouTube": 28.7
-        }
+        },
+        "n3": 191035,
+        "g3": 38565,
+        "nr3": 83.2,
+        "gr3": 16.8
     },
     {
         "name": "土田 央修",
@@ -841,7 +882,8 @@ const rawData = [
             14,
             13,
             10,
-            12
+            12,
+            13
         ],
         "n1": 714427,
         "g1": 166755,
@@ -852,19 +894,23 @@ const rawData = [
         "nr2": 72.7,
         "gr2": 27.3,
         "n1_rank": 12,
-        "g1_rank": 18,
+        "g1_rank": 20,
         "n2_rank": 12,
         "g2_rank": 13,
-        "x_posts": 2212,
-        "x_rank": 3,
-        "tiktok_posts": 385,
-        "tiktok_rank": 7,
+        "x_posts": 3220,
+        "x_rank": 7,
+        "tiktok_posts": 97,
+        "tiktok_rank": 15,
         "sns_dist": {
             "X": 43.9,
             "Instagram": 18.7,
             "TikTok": 18.2,
             "YouTube": 19.2
-        }
+        },
+        "n3": 138751,
+        "g3": 46381,
+        "nr3": 74.9,
+        "gr3": 25.1
     },
     {
         "name": "チェン・リッキー",
@@ -873,7 +919,8 @@ const rawData = [
             28,
             25,
             14,
-            13
+            13,
+            7
         ],
         "n1": 480239,
         "g1": 116014,
@@ -884,19 +931,23 @@ const rawData = [
         "nr2": 88.4,
         "gr2": 11.6,
         "n1_rank": 24,
-        "g1_rank": 28,
+        "g1_rank": 32,
         "n2_rank": 11,
         "g2_rank": 33,
-        "x_posts": 842,
-        "x_rank": 22,
-        "tiktok_posts": 252,
-        "tiktok_rank": 22,
+        "x_posts": 1616,
+        "x_rank": 16,
+        "tiktok_posts": 105,
+        "tiktok_rank": 10,
         "sns_dist": {
             "X": 14.8,
             "Instagram": 25.3,
             "TikTok": 24.7,
             "YouTube": 35.2
-        }
+        },
+        "n3": 220740,
+        "g3": 27768,
+        "nr3": 88.8,
+        "gr3": 11.2
     },
     {
         "name": "濱田 永遠",
@@ -905,6 +956,7 @@ const rawData = [
             16,
             15,
             13,
+            14,
             14
         ],
         "n1": 515483,
@@ -919,16 +971,20 @@ const rawData = [
         "g1_rank": 10,
         "n2_rank": 18,
         "g2_rank": 9,
-        "x_posts": 1810,
-        "x_rank": 5,
-        "tiktok_posts": 385,
-        "tiktok_rank": 7,
+        "x_posts": 4775,
+        "x_rank": 2,
+        "tiktok_posts": 175,
+        "tiktok_rank": 1,
         "sns_dist": {
             "X": 28.7,
             "Instagram": 24.6,
             "TikTok": 23.9,
             "YouTube": 22.8
-        }
+        },
+        "n3": 136405,
+        "g3": 46296,
+        "nr3": 74.7,
+        "gr3": 25.3
     },
     {
         "name": "熊部 拓斗",
@@ -937,7 +993,8 @@ const rawData = [
             9,
             9,
             15,
-            15
+            15,
+            11
         ],
         "n1": 904298,
         "g1": 147917,
@@ -948,19 +1005,23 @@ const rawData = [
         "nr2": 82.4,
         "gr2": 17.6,
         "n1_rank": 7,
-        "g1_rank": 22,
+        "g1_rank": 25,
         "n2_rank": 13,
         "g2_rank": 27,
-        "x_posts": 1716,
-        "x_rank": 6,
-        "tiktok_posts": 516,
-        "tiktok_rank": 2,
+        "x_posts": 3948,
+        "x_rank": 3,
+        "tiktok_posts": 146,
+        "tiktok_rank": 3,
         "sns_dist": {
             "X": 29.6,
             "Instagram": 26.0,
             "TikTok": 15.8,
             "YouTube": 28.7
-        }
+        },
+        "n3": 156572,
+        "g3": 38698,
+        "nr3": 80.2,
+        "gr3": 19.8
     },
     {
         "name": "後藤 結",
@@ -969,7 +1030,8 @@ const rawData = [
             17,
             17,
             18,
-            16
+            16,
+            9
         ],
         "n1": 493758,
         "g1": 180964,
@@ -980,51 +1042,23 @@ const rawData = [
         "nr2": 76.8,
         "gr2": 23.2,
         "n1_rank": 19,
-        "g1_rank": 17,
+        "g1_rank": 19,
         "n2_rank": 15,
         "g2_rank": 20,
-        "x_posts": 981,
-        "x_rank": 18,
-        "tiktok_posts": 232,
-        "tiktok_rank": 23,
+        "x_posts": 2749,
+        "x_rank": 10,
+        "tiktok_posts": 133,
+        "tiktok_rank": 4,
         "sns_dist": {
             "X": 15.6,
             "Instagram": 23.4,
             "TikTok": 43.3,
             "YouTube": 17.6
-        }
-    },
-    {
-        "name": "浅香 孝太郎",
-        "history": [
-            26,
-            24,
-            18,
-            21,
-            17
-        ],
-        "n1": 485986,
-        "g1": 188343,
-        "nr1": 72.1,
-        "gr1": 27.9,
-        "n2": 589934,
-        "g2": 166196,
-        "nr2": 78.0,
-        "gr2": 22.0,
-        "n1_rank": 23,
-        "g1_rank": 16,
-        "n2_rank": 17,
-        "g2_rank": 25,
-        "x_posts": 1603,
-        "x_rank": 7,
-        "tiktok_posts": 281,
-        "tiktok_rank": 17,
-        "sns_dist": {
-            "X": 45.1,
-            "Instagram": 18.4,
-            "TikTok": 12.3,
-            "YouTube": 24.2
-        }
+        },
+        "n3": 181124,
+        "g3": 46549,
+        "nr3": 79.6,
+        "gr3": 20.4
     },
     {
         "name": "小野 慶人",
@@ -1033,7 +1067,8 @@ const rawData = [
             15,
             16,
             17,
-            18
+            18,
+            15
         ],
         "n1": 577221,
         "g1": 193555,
@@ -1044,19 +1079,23 @@ const rawData = [
         "nr2": 79.1,
         "gr2": 20.9,
         "n1_rank": 14,
-        "g1_rank": 15,
+        "g1_rank": 17,
         "n2_rank": 16,
         "g2_rank": 23,
-        "x_posts": 999,
+        "x_posts": 1559,
         "x_rank": 17,
-        "tiktok_posts": 413,
-        "tiktok_rank": 4,
+        "tiktok_posts": 106,
+        "tiktok_rank": 8,
         "sns_dist": {
             "X": 18.9,
             "Instagram": 23.9,
             "TikTok": 32.8,
             "YouTube": 24.5
-        }
+        },
+        "n3": 126475,
+        "g3": 45080,
+        "nr3": 73.7,
+        "gr3": 26.3
     },
     {
         "name": "青沼 昂史朗",
@@ -1065,7 +1104,8 @@ const rawData = [
             27,
             26,
             19,
-            19
+            19,
+            16
         ],
         "n1": 384186,
         "g1": 203900,
@@ -1075,20 +1115,24 @@ const rawData = [
         "g2": 366617,
         "nr2": 54.5,
         "gr2": 45.5,
-        "n1_rank": 28,
-        "g1_rank": 13,
+        "n1_rank": 30,
+        "g1_rank": 14,
         "n2_rank": 31,
         "g2_rank": 11,
-        "x_posts": 1249,
-        "x_rank": 10,
-        "tiktok_posts": 190,
-        "tiktok_rank": 28,
+        "x_posts": 2441,
+        "x_rank": 14,
+        "tiktok_posts": 44,
+        "tiktok_rank": 19,
         "sns_dist": {
             "X": 33.5,
             "Instagram": 26.3,
             "TikTok": 21.5,
             "YouTube": 18.7
-        }
+        },
+        "n3": 71328,
+        "g3": 91572,
+        "nr3": 43.8,
+        "gr3": 56.2
     },
     {
         "name": "小清水 蓮",
@@ -1097,7 +1141,8 @@ const rawData = [
             12,
             14,
             16,
-            20
+            20,
+            23
         ],
         "n1": 565502,
         "g1": 297370,
@@ -1111,16 +1156,20 @@ const rawData = [
         "g1_rank": 9,
         "n2_rank": 33,
         "g2_rank": 7,
-        "x_posts": 629,
-        "x_rank": 28,
-        "tiktok_posts": 205,
-        "tiktok_rank": 24,
+        "x_posts": 1287,
+        "x_rank": 19,
+        "tiktok_posts": 87,
+        "tiktok_rank": 16,
         "sns_dist": {
             "X": 30.4,
             "Instagram": 29.8,
             "TikTok": 22.2,
             "YouTube": 17.7
-        }
+        },
+        "n3": 56660,
+        "g3": 78281,
+        "nr3": 42.0,
+        "gr3": 58.0
     },
     {
         "name": "アダム・ナガイ",
@@ -1129,7 +1178,8 @@ const rawData = [
             7,
             10,
             22,
-            21
+            21,
+            19
         ],
         "n1": 749512,
         "g1": 298131,
@@ -1143,144 +1193,20 @@ const rawData = [
         "g1_rank": 8,
         "n2_rank": 20,
         "g2_rank": 14,
-        "x_posts": 316,
-        "x_rank": 33,
-        "tiktok_posts": 125,
-        "tiktok_rank": 33,
+        "x_posts": 363,
+        "x_rank": 22,
+        "tiktok_posts": 20,
+        "tiktok_rank": 22,
         "sns_dist": {
             "X": 9.4,
             "Instagram": 24.1,
             "TikTok": 34.3,
             "YouTube": 32.2
-        }
-    },
-    {
-        "name": "山下 柊",
-        "history": [
-            28,
-            31,
-            34,
-            34,
-            22
-        ],
-        "n1": 251103,
-        "g1": 156737,
-        "nr1": 61.6,
-        "gr1": 38.4,
-        "n2": 493081,
-        "g2": 232878,
-        "nr2": 67.9,
-        "gr2": 32.1,
-        "n1_rank": 32,
-        "g1_rank": 19,
-        "n2_rank": 24,
-        "g2_rank": 15,
-        "x_posts": 1199,
-        "x_rank": 11,
-        "tiktok_posts": 333,
-        "tiktok_rank": 15,
-        "sns_dist": {
-            "X": 29.9,
-            "Instagram": 27.4,
-            "TikTok": 24.8,
-            "YouTube": 17.9
-        }
-    },
-    {
-        "name": "横山 奏夢",
-        "history": [
-            27,
-            26,
-            21,
-            24,
-            23
-        ],
-        "n1": 489111,
-        "g1": 147710,
-        "nr1": 76.8,
-        "gr1": 23.2,
-        "n2": 519064,
-        "g2": 179861,
-        "nr2": 74.3,
-        "gr2": 25.7,
-        "n1_rank": 22,
-        "g1_rank": 23,
-        "n2_rank": 21,
-        "g2_rank": 21,
-        "x_posts": 1134,
-        "x_rank": 13,
-        "tiktok_posts": 418,
-        "tiktok_rank": 3,
-        "sns_dist": {
-            "X": 24.1,
-            "Instagram": 22.3,
-            "TikTok": 30.4,
-            "YouTube": 23.1
-        }
-    },
-    {
-        "name": "イ・ヒョンジェ",
-        "history": [
-            21,
-            21,
-            20,
-            25,
-            24
-        ],
-        "n1": 491405,
-        "g1": 152334,
-        "nr1": 76.3,
-        "gr1": 23.7,
-        "n2": 537611,
-        "g2": 144126,
-        "nr2": 78.9,
-        "gr2": 21.1,
-        "n1_rank": 21,
-        "g1_rank": 20,
-        "n2_rank": 19,
-        "g2_rank": 29,
-        "x_posts": 726,
-        "x_rank": 26,
-        "tiktok_posts": 364,
-        "tiktok_rank": 11,
-        "sns_dist": {
-            "X": 23.2,
-            "Instagram": 27.7,
-            "TikTok": 26.0,
-            "YouTube": 23.2
-        }
-    },
-    {
-        "name": "ユン・ジェヨン",
-        "history": [
-            32,
-            33,
-            33,
-            35,
-            25
-        ],
-        "n1": 224307,
-        "g1": 197307,
-        "nr1": 53.2,
-        "gr1": 46.8,
-        "n2": 458905,
-        "g2": 217900,
-        "nr2": 67.8,
-        "gr2": 32.2,
-        "n1_rank": 34,
-        "g1_rank": 14,
-        "n2_rank": 29,
-        "g2_rank": 19,
-        "x_posts": 585,
-        "x_rank": 29,
-        "tiktok_posts": 204,
-        "tiktok_rank": 25,
-        "sns_dist": {
-            "X": 24.2,
-            "Instagram": 27.1,
-            "TikTok": 21.0,
-            "YouTube": 27.7
-        }
+        },
+        "n3": 108155,
+        "g3": 45142,
+        "nr3": 70.6,
+        "gr3": 29.4
     },
     {
         "name": "小林 千悟",
@@ -1289,7 +1215,8 @@ const rawData = [
             23,
             27,
             26,
-            26
+            26,
+            18
         ],
         "n1": 342390,
         "g1": 232804,
@@ -1299,52 +1226,24 @@ const rawData = [
         "g2": 376913,
         "nr2": 48.0,
         "gr2": 52.0,
-        "n1_rank": 29,
+        "n1_rank": 31,
         "g1_rank": 11,
         "n2_rank": 34,
         "g2_rank": 10,
-        "x_posts": 547,
-        "x_rank": 30,
-        "tiktok_posts": 273,
-        "tiktok_rank": 18,
+        "x_posts": 1160,
+        "x_rank": 20,
+        "tiktok_posts": 35,
+        "tiktok_rank": 21,
         "sns_dist": {
             "X": 38.5,
             "Instagram": 21.6,
             "TikTok": 11.0,
             "YouTube": 28.9
-        }
-    },
-    {
-        "name": "大林 悠成",
-        "history": [
-            24,
-            22,
-            24,
-            23,
-            27
-        ],
-        "n1": 491658,
-        "g1": 123081,
-        "nr1": 80.0,
-        "gr1": 20.0,
-        "n2": 518578,
-        "g2": 141270,
-        "nr2": 78.6,
-        "gr2": 21.4,
-        "n1_rank": 20,
-        "g1_rank": 26,
-        "n2_rank": 22,
-        "g2_rank": 30,
-        "x_posts": 745,
-        "x_rank": 25,
-        "tiktok_posts": 192,
-        "tiktok_rank": 27,
-        "sns_dist": {
-            "X": 27.3,
-            "Instagram": 26.6,
-            "TikTok": 21.0,
-            "YouTube": 25.2
-        }
+        },
+        "n3": 35536,
+        "g3": 120540,
+        "nr3": 22.8,
+        "gr3": 77.2
     },
     {
         "name": "倉橋 吾槙",
@@ -1353,7 +1252,8 @@ const rawData = [
             13,
             11,
             20,
-            28
+            28,
+            20
         ],
         "n1": 804763,
         "g1": 120893,
@@ -1364,115 +1264,23 @@ const rawData = [
         "nr2": 76.1,
         "gr2": 23.9,
         "n1_rank": 9,
-        "g1_rank": 27,
+        "g1_rank": 30,
         "n2_rank": 23,
         "g2_rank": 26,
-        "x_posts": 2395,
-        "x_rank": 2,
-        "tiktok_posts": 403,
-        "tiktok_rank": 5,
+        "x_posts": 2877,
+        "x_rank": 9,
+        "tiktok_posts": 102,
+        "tiktok_rank": 11,
         "sns_dist": {
             "X": 52.0,
             "Instagram": 20.4,
             "TikTok": 13.3,
             "YouTube": 14.3
-        }
-    },
-    {
-        "name": "小笠原ジュゼッペ慧",
-        "history": [
-            18,
-            20,
-            28,
-            27,
-            29
-        ],
-        "n1": 413742,
-        "g1": 149834,
-        "nr1": 73.4,
-        "gr1": 26.6,
-        "n2": 463370,
-        "g2": 167013,
-        "nr2": 73.5,
-        "gr2": 26.5,
-        "n1_rank": 26,
-        "g1_rank": 21,
-        "n2_rank": 28,
-        "g2_rank": 24,
-        "x_posts": 343,
-        "x_rank": 32,
-        "tiktok_posts": 120,
-        "tiktok_rank": 34,
-        "sns_dist": {
-            "X": 15.2,
-            "Instagram": 24.0,
-            "TikTok": 38.2,
-            "YouTube": 22.6
-        }
-    },
-    {
-        "name": "石田 亮太",
-        "history": [
-            41,
-            38,
-            38,
-            37,
-            30
-        ],
-        "n1": 285753,
-        "g1": 35288,
-        "nr1": 89.0,
-        "gr1": 11.0,
-        "n2": 411066,
-        "g2": 151893,
-        "nr2": 73.0,
-        "gr2": 27.0,
-        "n1_rank": 31,
-        "g1_rank": 35,
-        "n2_rank": 32,
-        "g2_rank": 28,
-        "x_posts": 657,
-        "x_rank": 27,
-        "tiktok_posts": 253,
-        "tiktok_rank": 21,
-        "sns_dist": {
-            "X": 34.7,
-            "Instagram": 19.2,
-            "TikTok": 17.1,
-            "YouTube": 28.9
-        }
-    },
-    {
-        "name": "リュウ・カイチ",
-        "history": [
-            68,
-            73,
-            43,
-            28,
-            31
-        ],
-        "n1": 199855,
-        "g1": 57688,
-        "nr1": 77.6,
-        "gr1": 22.4,
-        "n2": 479797,
-        "g2": 125347,
-        "nr2": 79.3,
-        "gr2": 20.7,
-        "n1_rank": 35,
-        "g1_rank": 33,
-        "n2_rank": 25,
-        "g2_rank": 32,
-        "x_posts": 278,
-        "x_rank": 35,
-        "tiktok_posts": 110,
-        "tiktok_rank": 35,
-        "sns_dist": {
-            "X": 12.3,
-            "Instagram": 26.8,
-            "TikTok": 27.3,
-            "YouTube": 33.6
-        }
+        },
+        "n3": 134151,
+        "g3": 17409,
+        "nr3": 88.5,
+        "gr3": 11.5
     },
     {
         "name": "岡田 侑磨",
@@ -1481,7 +1289,8 @@ const rawData = [
             48,
             39,
             32,
-            32
+            32,
+            17
         ],
         "n1": 237995,
         "g1": 63227,
@@ -1491,127 +1300,43 @@ const rawData = [
         "g2": 126329,
         "nr2": 78.7,
         "gr2": 21.3,
-        "n1_rank": 33,
-        "g1_rank": 32,
+        "n1_rank": 37,
+        "g1_rank": 41,
         "n2_rank": 27,
         "g2_rank": 31,
-        "x_posts": 793,
-        "x_rank": 24,
-        "tiktok_posts": 180,
-        "tiktok_rank": 30,
+        "x_posts": 3881,
+        "x_rank": 4,
+        "tiktok_posts": 78,
+        "tiktok_rank": 17,
         "sns_dist": {
-            "X": 20.3,
+            "X": 29.3,
             "Instagram": 28.2,
-            "TikTok": 29.8,
+            "TikTok": 20.8,
             "YouTube": 21.7
-        }
-    },
-    {
-        "name": "篠ヶ谷 歩夢",
-        "history": [
-            29,
-            30,
-            32,
-            33,
-            33
-        ],
-        "n1": 307665,
-        "g1": 135249,
-        "nr1": 69.4,
-        "gr1": 30.6,
-        "n2": 328398,
-        "g2": 219610,
-        "nr2": 59.9,
-        "gr2": 40.1,
-        "n1_rank": 30,
-        "g1_rank": 25,
-        "n2_rank": 35,
-        "g2_rank": 17,
-        "x_posts": 511,
-        "x_rank": 31,
-        "tiktok_posts": 138,
-        "tiktok_rank": 32,
-        "sns_dist": {
-            "X": 33.5,
-            "Instagram": 22.3,
-            "TikTok": 16.3,
-            "YouTube": 27.9
-        }
-    },
-    {
-        "name": "田中 蒔",
-        "history": [
-            25,
-            29,
-            30,
-            30,
-            34
-        ],
-        "n1": 454479,
-        "g1": 73109,
-        "nr1": 86.1,
-        "gr1": 13.9,
-        "n2": 454276,
-        "g2": 93291,
-        "nr2": 83.0,
-        "gr2": 17.0,
-        "n1_rank": 25,
-        "g1_rank": 31,
-        "n2_rank": 30,
-        "g2_rank": 34,
-        "x_posts": 1451,
-        "x_rank": 8,
-        "tiktok_posts": 203,
-        "tiktok_rank": 26,
-        "sns_dist": {
-            "X": 23.3,
-            "Instagram": 21.0,
-            "TikTok": 35.5,
-            "YouTube": 20.2
-        }
-    },
-    {
-        "name": "今江 陸斗",
-        "history": [
-            35,
-            36,
-            31,
-            29,
-            35
-        ],
-        "n1": 410634,
-        "g1": 48771,
-        "nr1": 89.4,
-        "gr1": 10.6,
-        "n2": 468774,
-        "g2": 74999,
-        "nr2": 86.2,
-        "gr2": 13.8,
-        "n1_rank": 27,
-        "g1_rank": 34,
-        "n2_rank": 26,
-        "g2_rank": 35,
-        "x_posts": 1033,
-        "x_rank": 15,
-        "tiktok_posts": 187,
-        "tiktok_rank": 29,
-        "sns_dist": {
-            "X": 40.0,
-            "Instagram": 20.2,
-            "TikTok": 13.0,
-            "YouTube": 26.8
-        }
+        },
+        "n3": 129567,
+        "g3": 19192,
+        "nr3": 87.1,
+        "gr3": 12.9
     }
 ];
 
+// 第3回国内票・海外票の順位を動的に計算してセットする処理（デモ用）
+const n3Sorted = [...rawData].sort((a, b) => (b.n3 || 0) - (a.n3 || 0));
+const g3Sorted = [...rawData].sort((a, b) => (b.g3 || 0) - (a.g3 || 0));
+rawData.forEach(t => {
+    t.n3_rank = n3Sorted.findIndex(x => x.name === t.name) + 1;
+    t.g3_rank = g3Sorted.findIndex(x => x.name === t.name) + 1;
+});
+
 function generateTags(t, isModal = false) {
     let tags = '';
-    const diff = t.history[3] - t.history[4];
+    const diff = t.history[4] - t.history[5];
     const prefix = isModal ? 'm-tag m-tag-' : 'tag tag-';
     
-    if (t.nr2 >= 75) tags += `<span class="${prefix}national">#国内型</span>`;
-    if (t.nr2 > 65 && t.nr2 < 75) tags += `<span class="${prefix}balance">#バランス型</span>`;
-    if (t.gr2 >= 35) tags += `<span class="${prefix}global">#グローバル型</span>`;
+    if (t.nr3 >= 75) tags += `<span class="${prefix}national">#国内型</span>`;
+    if (t.nr3 > 65 && t.nr3 < 75) tags += `<span class="${prefix}balance">#バランス型</span>`;
+    if (t.gr3 >= 35) tags += `<span class="${prefix}global">#グローバル型</span>`;
     if (diff >= 5) tags += `<span class="${prefix}rise">#急上昇</span>`;
     return tags;
 }
@@ -1626,19 +1351,16 @@ function renderGrid() {
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
     
-    // 現在のソート条件を取得
     const sortValue = document.getElementById('sortSelect').value;
-    
-    // データのコピーを作成してソート
     let sortedData = [...rawData];
     
     sortedData.sort((a, b) => {
         if (sortValue === 'rank_asc') {
-            return a.history[4] - b.history[4];
-        } else if (sortValue === 'n2_desc') {
-            return b.n2 - a.n2;
-        } else if (sortValue === 'g2_desc') {
-            return b.g2 - a.g2;
+            return a.history[5] - b.history[5]; // EP 10 (history[5]) の順位に変更
+        } else if (sortValue === 'n3_desc') {
+            return (b.n3 || 0) - (a.n3 || 0);
+        } else if (sortValue === 'g3_desc') {
+            return (b.g3 || 0) - (a.g3 || 0);
         } else if (sortValue === 'x_desc') {
             return b.x_posts - a.x_posts;
         } else if (sortValue === 'tiktok_desc') {
@@ -1648,16 +1370,15 @@ function renderGrid() {
     });
 
     sortedData.forEach(t => {
-        const diff = t.history[3] - t.history[4];
+        const diff = t.history[4] - t.history[5]; // EP8からEP10への変動に変更
         const card = document.createElement('div');
-        card.className = `summary-card ${t.history[4] <= 12 ? 'debut-zone' : ''}`;
+        card.className = `summary-card ${t.history[5] <= 12 ? 'debut-zone' : ''}`; // デビュー圏内判定をEP10基準に変更
         
-        // ソート条件に応じて表示するサブ情報を決定
         let subInfoHtml = '';
-        if (sortValue === 'n2_desc') {
-            subInfoHtml = `<div style="font-size: 12px; color: #0097e6; margin-top: 4px; font-weight: bold;">国内票: ${t.n2.toLocaleString()} pt</div>`;
-        } else if (sortValue === 'g2_desc') {
-            subInfoHtml = `<div style="font-size: 12px; color: #d35400; margin-top: 4px; font-weight: bold;">海外票: ${t.g2.toLocaleString()} pt</div>`;
+        if (sortValue === 'n3_desc') {
+            subInfoHtml = `<div style="font-size: 12px; color: #0097e6; margin-top: 4px; font-weight: bold;">第3回国内票: ${(t.n3 || 0).toLocaleString()} pt</div>`;
+        } else if (sortValue === 'g3_desc') {
+            subInfoHtml = `<div style="font-size: 12px; color: #d35400; margin-top: 4px; font-weight: bold;">第3回海外票: ${(t.g3 || 0).toLocaleString()} pt</div>`;
         } else if (sortValue === 'x_desc') {
             subInfoHtml = `<div style="font-size: 12px; color: #000; margin-top: 4px; font-weight: bold;">𝕏: ${t.x_posts.toLocaleString()} posts</div>`;
         } else if (sortValue === 'tiktok_desc') {
@@ -1666,7 +1387,7 @@ function renderGrid() {
 
         card.innerHTML = `
             <div style="display:flex; align-items:center; width: 100%;">
-                <div class="rank-num">${t.history[4]}</div>
+                <div class="rank-num">${t.history[5]}</div> 
                 <div style="flex: 1;">
                       <div class="name-main" style="font-size: 17px; font-weight: bold; color: var(--text-main);">${t.name}</div>
                     ${subInfoHtml}
@@ -1683,8 +1404,8 @@ function renderGrid() {
 let charts = [];
 function openModal(t) {
     document.getElementById('mName').innerText = t.name;
-    document.getElementById('mRank').innerText = t.history[4];
-    document.getElementById('mDiff').innerHTML = getDiffBadge(t.history[3] - t.history[4]);
+    document.getElementById('mRank').innerText = t.history[5];
+    document.getElementById('mDiff').innerHTML = getDiffBadge(t.history[4] - t.history[5]);
     document.getElementById('mTags').innerHTML = generateTags(t, true);
     
     document.getElementById('h2').innerText = t.history[0] + "位";
@@ -1692,6 +1413,7 @@ function openModal(t) {
     document.getElementById('h5').innerText = t.history[2] + "位";
     document.getElementById('h6').innerText = t.history[3] + "位";
     document.getElementById('h8').innerText = t.history[4] + "位";
+    document.getElementById('h10').innerText = t.history[5] + "位";
 
     document.getElementById('v1n').innerText = t.n1.toLocaleString();
     document.getElementById('v1g').innerText = t.g1.toLocaleString();
@@ -1708,34 +1430,39 @@ function openModal(t) {
     document.getElementById('p2n').innerText = t.nr2 + "%";
     document.getElementById('p2g').innerText = t.gr2 + "%";
     document.getElementById('v2t').innerText = (t.n2 + t.g2).toLocaleString() + " pt";
-
-    // SNSデータのセット
+    
+    document.getElementById('v3n').innerText = t.n3 ? t.n3.toLocaleString() : "0";
+    document.getElementById('v3g').innerText = t.g3 ? t.g3.toLocaleString() : "0";
+    document.getElementById('r3n').innerText = t.n3_rank ? t.n3_rank + "位" : "--位"; // 第3回国内順位を反映
+    document.getElementById('r3g').innerText = t.g3_rank ? t.g3_rank + "位" : "--位"; // 第3回海外順位を反映
+    document.getElementById('p3n').innerText = t.nr3 ? t.nr3 + "%" : "0%";
+    document.getElementById('p3g').innerText = t.gr3 ? t.gr3 + "%" : "0%";
+    document.getElementById('v3t').innerText = (t.n3 && t.g3) ? (t.n3 + t.g3).toLocaleString() + " pt" : "0 pt";
+    
     document.getElementById('x_posts').innerText = t.x_posts ? t.x_posts.toLocaleString() : "0";
     document.getElementById('x_rank').innerText = t.x_rank ? t.x_rank + "位" : "--位";
     document.getElementById('tt_posts').innerText = t.tiktok_posts ? t.tiktok_posts.toLocaleString() : "0";
     document.getElementById('tt_rank').innerText = t.tiktok_rank ? t.tiktok_rank + "位" : "--位";
 
-
     document.getElementById('modal').style.display = 'flex';
-
     document.body.style.overflow = 'hidden';
 
     charts.forEach(c => c.destroy());
+    
     charts = [
         createDoughnut('chart1', [t.nr1, t.gr1]),
-        createDoughnut('chart2', [t.nr2, t.gr2])
+        createDoughnut('chart2', [t.nr2, t.gr2]),
+        createDoughnut('chart3', [t.nr3 || 50, t.gr3 || 50])
     ];
 
-    // SNS分布の100%調整ロジック
     let snsData = t.sns_dist ? [t.sns_dist.X, t.sns_dist.Instagram, t.sns_dist.TikTok, t.sns_dist.YouTube] : [40, 30, 20, 10];
     let sum = snsData.reduce((a, b) => a + b, 0);
     if (sum !== 100) {
         let diff = 100 - sum;
         let maxIndex = snsData.indexOf(Math.max(...snsData));
-        snsData[maxIndex] += diff; // 一番大きい数字で調整
+        snsData[maxIndex] += diff;
     }
 
-    // グラフの追加
     charts.push(
         new Chart(document.getElementById('snsChart').getContext('2d'), {
             type: 'pie',
@@ -1753,7 +1480,7 @@ function openModal(t) {
                 plugins: {
                     legend: {
                         position: 'right',
-                        labels: { boxWidth: 10, font: { size: 10 } }
+                        labels: { boxWidth: 10, font: { size: 9 } }
                     },
                     tooltip: {
                         callbacks: {
@@ -1766,7 +1493,6 @@ function openModal(t) {
             }
         })
     );
-
 }
 
 function createDoughnut(id, data) {
@@ -1791,9 +1517,10 @@ function createDoughnut(id, data) {
     });
 }
 
-function closeModal() { document.getElementById('modal').style.display = 'none';
-                      　document.body.style.overflow = '';
-                      }
+function closeModal() { 
+    document.getElementById('modal').style.display = 'none';
+    document.body.style.overflow = '';
+}
 renderGrid();
 </script>
 </body>

@@ -1,110 +1,1527 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JAPAN CHART PULSE</title>
-<style>
-:root{--paper:#f4f4f0;--white:#fff;--ink:#050505;--muted:#686868;--line:#0a0a0a;--soft:#deded8;--acid:#b8ff25;--cyan:#25d8ff;--pink:#ff4b91;--violet:#7557ff;--green:#15935a;--red:#d62f49;--shadow:0 12px 30px rgba(0,0,0,.08)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font-family:Arial,"Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;line-height:1.55}button,input,select{font:inherit}button{cursor:pointer;color:inherit}.wrap{width:min(1220px,calc(100% - 40px));margin:auto}
-.top{position:sticky;top:0;z-index:30;background:#050505;color:#fff;border-bottom:1px solid #333}.topin{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:20px}.brand{display:flex;align-items:center;gap:11px;color:#fff;font-size:.82rem;font-weight:1000;letter-spacing:.16em;text-decoration:none}.mark{display:grid;width:38px;height:38px;place-items:center;background:var(--acid);color:#050505;font-weight:1000}nav{display:flex;gap:3px}nav a{padding:8px 11px;color:#fff;font-size:.72rem;font-weight:900;text-decoration:none;text-transform:uppercase}nav a:hover{background:var(--acid);color:#050505}
-.hero{padding:68px 0 54px;background:#050505;color:#fff;border-bottom:10px solid var(--acid)}.eyebrow{display:inline-block;margin:0 0 20px;padding:5px 9px;background:var(--acid);color:#050505;font-size:.7rem;font-weight:1000;letter-spacing:.14em}h1{max-width:1000px;margin:0;font-family:Arial Black,Arial,sans-serif;font-size:clamp(3.4rem,8.5vw,7.2rem);font-weight:1000;letter-spacing:-.085em;line-height:.84}.slash{color:var(--acid)}.lead{max-width:720px;margin:24px 0 0;color:#d7d7d7;font-size:clamp(.96rem,1.5vw,1.15rem);font-weight:700}.scope-tabs{display:inline-flex;gap:0;margin-top:26px;border:1px solid #666}.scope-tab{padding:9px 14px;border:0;border-right:1px solid #666;background:#050505;color:#fff;font-size:.68rem;font-weight:1000;letter-spacing:.08em}.scope-tab:last-child{border-right:0}.scope-tab:hover{background:#272727}.scope-tab.active{background:#fff;color:#050505}.chart-tabs{display:inline-flex;flex-wrap:wrap;gap:4px;margin-top:26px;padding:4px;border:1px solid #555;background:#171717}.chart-tab{padding:10px 17px;border:0;background:transparent;color:#fff;font-size:.78rem;font-weight:1000}.chart-tab:hover{background:#292929}.chart-tab.active{background:var(--acid);color:#050505}.fresh{display:flex;flex-wrap:wrap;gap:7px;margin-top:17px}.pill{padding:6px 10px;border:1px solid #4b4b4b;background:#111;color:#e5e5e5;font-size:.7rem;font-weight:800}
-.section{padding:48px 0}.section:nth-of-type(even){background:#fff}.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:22px;padding-top:13px;border-top:5px solid var(--line)}.kicker{margin:0 0 5px;color:#577b00;font-size:.68rem;font-weight:1000;letter-spacing:.18em;text-transform:uppercase}.section h2{margin:0;font-family:Arial Black,Arial,sans-serif;font-size:clamp(1.9rem,4vw,3.4rem);letter-spacing:-.06em;line-height:.95}.section-copy{max-width:510px;margin:0;color:var(--muted);font-size:.82rem;font-weight:600}
-.latest-section{padding-top:34px;background:#fff}.latest-section .section-head{border-top-color:var(--acid)}.latest-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.latest-song{display:grid;grid-template-columns:50px 1fr;gap:12px;align-items:center;min-height:112px;padding:15px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;text-align:left;transition:.14s}.latest-song:hover{background:var(--acid)}.latest-rank{font-family:Arial Black,Arial,sans-serif;font-size:1.25rem;font-weight:1000;letter-spacing:-.05em}.latest-title{display:block;font-size:.91rem;font-weight:1000;line-height:1.25}.latest-artist{display:block;margin-top:5px;color:var(--muted);font-size:.68rem;font-weight:900}.latest-song:hover .latest-artist{color:#222}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.stat{min-height:145px;padding:19px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}.stat:first-child{background:var(--acid)}.stat-label{color:var(--muted);font-size:.7rem;font-weight:900}.stat:first-child .stat-label{color:#273300}.stat-value{margin-top:9px;font-family:Arial Black,Arial,sans-serif;font-size:clamp(1.6rem,3.5vw,2.45rem);font-weight:1000;letter-spacing:-.06em;line-height:1}.stat-note{margin-top:8px;color:var(--muted);font-size:.7rem;font-weight:700}
-.card-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.artist-card{position:relative;min-height:238px;padding:17px;border:1px solid var(--line);border-radius:0;background:#fff;text-align:left;box-shadow:none;transition:.14s}.artist-card:hover{transform:translateY(-4px);box-shadow:8px 8px 0 var(--acid)}.card-rank{font-size:.68rem;font-weight:1000;color:var(--muted)}.artist-card h3{margin:15px 0 20px;font-size:1.15rem;line-height:1.13}.big-number{font-family:Arial Black,Arial,sans-serif;font-size:2.45rem;font-weight:1000;letter-spacing:-.07em}.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:13px}.mini{border-top:1px solid var(--soft);padding-top:6px;font-size:.64rem;color:var(--muted)}.mini strong{display:block;color:var(--ink);font-size:.9rem}.live{position:absolute;right:10px;top:10px;padding:3px 6px;background:var(--acid);font-size:.57rem;font-weight:1000}
-.panel{padding:0;border:1px solid var(--line);background:#fff;box-shadow:none}.tools{display:flex;flex-wrap:wrap;gap:8px;padding:14px;border-bottom:1px solid var(--line);background:#f7f7f3}.tools input,.tools select,.compare-add select{min-height:42px;padding:8px 11px;border:1px solid var(--line);border-radius:0;background:#fff}.tools input{flex:1;min-width:220px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{position:sticky;top:0;z-index:2;padding:11px 9px;border-bottom:1px solid var(--line);background:#050505;color:#fff;font-size:.66rem;text-align:right}th:nth-child(2){text-align:left}td{padding:12px 9px;border-bottom:1px solid var(--soft);font-size:.79rem;text-align:right}td:nth-child(2){text-align:left;font-weight:1000}.click-row{cursor:pointer}.click-row:hover{background:#efffcf}.rank-dot{display:inline-grid;width:27px;height:27px;place-items:center;background:var(--acid);font-weight:1000}.badge{display:inline-block;padding:2px 5px;background:var(--acid);font-size:.57rem;font-weight:1000}.muted{color:var(--muted)}
-.compare-add{display:flex;gap:8px;padding:14px;border-bottom:1px solid var(--line)}.compare-add select{flex:1}.action{padding:9px 14px;border:1px solid var(--line);border-radius:0;background:var(--acid);font-weight:1000}.action:hover{background:#050505;color:#fff}.chips{display:flex;flex-wrap:wrap;gap:6px;min-height:35px;margin:15px}.chip{display:inline-flex;align-items:center;gap:7px;padding:5px 8px;border:1px solid var(--line);background:#fff;font-size:.7rem;font-weight:900}.chip button{width:19px;height:19px;padding:0;border:0;background:#050505;color:#fff}.compare-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding:18px}.metric h3{margin:0 0 9px;font-size:.8rem}.bar-row{display:grid;grid-template-columns:130px 1fr 42px;align-items:center;gap:8px;margin:8px 0;font-size:.68rem}.bar-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}.track{height:12px;background:#e9e9e4;overflow:hidden}.fill{height:100%;background:#050505}.metric:nth-child(2) .fill{background:#6b6b6b}.metric:nth-child(3) .fill{background:var(--acid)}.metric:nth-child(4) .fill{background:#7e5cff}
-.trend-panel{margin:22px 0;padding:16px;border:1px solid var(--line);background:#fff}.trend-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:10px}.trend-head h3{margin:0}.trend-legend{display:flex;gap:12px;font-size:.68rem;font-weight:900}.trend-legend i{display:inline-block;width:16px;height:4px;margin-right:5px;vertical-align:middle}.trend-wrap{overflow-x:auto}.trend-wrap canvas{display:block;min-width:560px;width:100%;height:300px}.method{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.method article{padding:17px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}.method strong{display:block;margin-bottom:5px;font-size:1rem}footer{padding:38px 0 70px;background:#050505;color:#aaa;font-size:.7rem}
-dialog{width:min(840px,calc(100% - 24px));max-height:88vh;padding:0;border:1px solid var(--line);border-radius:0;background:var(--paper);box-shadow:12px 12px 0 var(--acid)}dialog::backdrop{background:rgba(0,0,0,.72)}.modal-head{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;gap:20px;padding:19px 21px;border-bottom:1px solid #333;background:#050505;color:#fff}.modal-head h2{margin:0;font-size:clamp(1.5rem,4vw,2.6rem);letter-spacing:-.05em}.close{width:38px;height:38px;border:0;background:var(--acid);font-weight:1000}.modal-body{padding:22px}.detail-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);margin-bottom:22px}.detail-stat{padding:12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}.detail-stat span{display:block;color:var(--muted);font-size:.62rem}.detail-stat strong{font-size:1.3rem}.song-list{display:grid;gap:7px}.song-item{padding:12px;border:1px solid var(--line);background:#fff}.song-title{font-weight:1000}.song-meta{color:var(--muted);font-size:.7rem}.up{color:var(--green)}.down{color:var(--red)}
-.control-group{margin-top:24px}.control-heading{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}.control-label{font-size:.75rem;font-weight:1000;letter-spacing:.08em}.control-help{color:#a8a8a8;font-size:.68rem;font-weight:700}.scope-tabs,.chart-tabs{margin-top:0;border-radius:16px}.scope-tabs{display:inline-flex;flex-wrap:wrap;gap:5px;padding:5px}.scope-tab{border-right:0;border-radius:11px}.scope-tab.active{background:var(--acid);color:#050505}.chart-tab{border-radius:11px}.chart-tab.active{background:var(--cyan)}.mark{border-radius:11px}.eyebrow,.pill,.live,.badge{border-radius:999px}.latest-grid,.stats,.method{gap:10px;border:0}.latest-song,.stat,.method article{border:1px solid var(--line);border-radius:18px}.artist-card{border-radius:18px}.panel{overflow:hidden;border-radius:20px}.tools input,.tools select,.compare-add select{border-radius:12px}.action{border-radius:12px}.chip{border-radius:999px}.chip button,.rank-dot{border-radius:50%}.trend-panel{border-radius:18px}.track{border-radius:999px}.fill{border-radius:999px}.song-item,.detail-stat{border-radius:14px}button.song-item{width:100%;text-align:left}.detail-stats{gap:8px;border:0}.detail-stat{border:1px solid var(--line)}dialog{overflow:hidden;border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.34),8px 8px 0 var(--acid)}.modal-head>div:first-child{min-width:0}.modal-head h2{overflow-wrap:anywhere}.modal-actions{display:flex;flex:0 0 auto;align-items:center;gap:8px}.share-x{min-height:38px;padding:0 14px;border:1px solid #666;border-radius:999px;background:#fff;color:#050505;font-size:.72rem;font-weight:1000}.share-x:hover{background:var(--cyan)}.close{border-radius:50%}dialog[open]{display:flex;flex-direction:column}.modal-head{flex:0 0 auto}.modal-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.song-artist-button{display:inline-flex;align-items:center;margin:0 0 18px;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:var(--acid);font-weight:1000}.song-artist-button:hover{background:var(--cyan)}.song-history{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}.song-history-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 12px;border:1px solid var(--soft);border-radius:12px;background:#fff;font-size:.76rem}.song-history-item strong{font-size:1rem}
-@media(max-width:950px){.stats{grid-template-columns:repeat(2,1fr)}.latest-grid{grid-template-columns:repeat(2,1fr)}.card-grid{grid-template-columns:repeat(3,1fr)}.method{grid-template-columns:1fr 1fr}}
-@media(max-width:650px){.wrap{width:calc(100% - 20px)}nav a:not(:first-child){display:none}.hero{padding:48px 0 38px}h1{font-size:clamp(3rem,18vw,5.2rem)}.section{padding:36px 0}.section-head{display:block}.section-copy{margin-top:13px}.stats,.latest-grid,.card-grid,.compare-grid,.method,.detail-stats{grid-template-columns:1fr}.artist-card{min-height:0}.panel{border-left:0;border-right:0}.bar-row{grid-template-columns:95px 1fr 35px}.compare-add{display:grid}.compare-grid{padding:14px}.latest-song{min-height:92px}dialog{max-height:92vh}.detail-stats{grid-template-columns:1fr 1fr}}
-.share-dialog{width:min(720px,calc(100% - 24px))}.share-view-picker,.share-chart-picker{display:flex;flex-wrap:wrap;gap:7px;padding:18px 20px 0}.share-chart-picker{padding-top:9px}.share-chart-picker[hidden]{display:none}.share-chart-button{padding:8px 12px;border:1px solid #999;border-radius:999px;background:#fff;font-size:.7rem;font-weight:1000}.share-chart-button:hover{background:var(--acid-soft)}.share-chart-button.active{border-color:#111;background:var(--acid);color:#111}.share-preview{padding:18px 20px 0}.share-preview canvas{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:16px;background:#fffdf8}.share-copy{margin:14px 20px 0;color:var(--muted);font-size:.76rem;font-weight:700}.share-actions{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;padding:16px 20px 20px}.share-action{min-height:46px;padding:10px 15px;border:1px solid var(--line);border-radius:13px;background:#fff;font-weight:1000}.share-action.primary{background:var(--acid)}.share-action:hover{background:var(--cyan)}.share-status{min-height:1.5em;margin:0;padding:0 20px 18px;color:var(--muted);font-size:.75rem;font-weight:800}.share-status.success{color:var(--green)}.share-status.error{color:var(--red)}
-.song-rank-caption{margin:4px 0 0;color:var(--muted);font-size:.68rem;font-weight:800}.song-history-heading{margin:22px 0 8px;font-size:.82rem}.song-rank-empty{display:grid;min-height:180px;place-items:center;color:var(--muted);font-size:.76rem;font-weight:800}
-@media(max-width:650px){.modal-actions{gap:5px}.share-x{padding:0 10px}.share-actions{grid-template-columns:1fr}.share-preview{padding:14px 14px 0}.share-copy{margin:12px 14px 0}.share-actions{padding:14px}.share-status{padding:0 14px 14px}}
-/* Readability refresh: keep the editorial character while clarifying visual hierarchy. */
-:root{--paper:#f6f5f0;--ink:#11110f;--muted:#64645f;--line:#292925;--soft:#d8d8d0;--acid-soft:#efffcf;--cyan-soft:#dff8ff;--green:#0b7a4b;--red:#c43d52}
-body{background:var(--paper)}.top{background:#11110f;border-bottom-color:#292925}.topin{min-height:62px}.hero{padding:50px 0 44px;background:#11110f;border-bottom-width:6px}.eyebrow{margin-bottom:16px}.hero h1{max-width:920px;font-size:clamp(3.1rem,7.6vw,6.35rem);line-height:.88;letter-spacing:-.075em}.lead{max-width:760px;margin-top:20px;color:#e1e1dc;font-weight:650}
-.control-group{margin-top:20px}.control-heading{margin-bottom:7px}.scope-tabs,.chart-tabs{border-color:#555;background:#1b1b19}.scope-tab,.chart-tab{min-height:42px;padding:9px 15px}.scope-tab:hover,.chart-tab:hover{background:#32322f}.scope-tab.active,.chart-tab.active{background:var(--acid);color:#11110f}.fresh{margin-top:14px}.pill{border-color:#4d4d48;background:#191917;color:#eeeeea}
-.section{padding:54px 0;background:transparent}.section:nth-of-type(even){background:transparent}.latest-section,#ranking,#compare{background:#fff}#power,#songs,#method{background:var(--paper)}.section-head{margin-bottom:24px;padding-top:14px;border-top:2px solid var(--line)}.latest-section .section-head{border-top-width:4px}.section h2{font-size:clamp(1.9rem,3.6vw,3.15rem);letter-spacing:-.045em}.section-copy{font-size:.88rem;line-height:1.7}.kicker{color:#506f08}
-.latest-grid{gap:12px;border:0}.latest-song{min-height:108px;border:1px solid var(--soft);border-radius:16px;box-shadow:0 4px 14px rgba(17,17,15,.04)}.latest-song:hover{background:var(--acid-soft);border-color:#9fcd3c;transform:translateY(-2px)}.latest-title{font-size:.96rem}.latest-artist{font-size:.73rem}.latest-rank{display:grid;width:44px;height:44px;place-items:center;border-radius:50%;background:#11110f;color:#fff;font-size:1rem}
-.artist-card{border-color:var(--soft);box-shadow:0 4px 16px rgba(17,17,15,.035)}.artist-card:hover{transform:translateY(-2px);border-color:#9fcd3c;box-shadow:0 10px 24px rgba(17,17,15,.09)}.artist-card h3{font-size:1.18rem}.mini{font-size:.69rem}.live{background:var(--cyan)}
-.panel{border-color:var(--soft);box-shadow:0 8px 24px rgba(17,17,15,.04)}.tools{padding:16px;border-bottom-color:var(--soft);background:#fafaf7}.tools input,.tools select,.compare-add select{min-height:44px;border-color:#aaa9a1}.table-wrap{scrollbar-color:#b6b6ae transparent}th{padding:13px 10px;background:#171715;font-size:.71rem;letter-spacing:.02em}td{padding:13px 10px;font-size:.84rem}.click-row:hover{background:var(--acid-soft)}.rank-dot{background:#171715;color:#fff}.badge{background:var(--acid);color:#11110f}
-.trend-panel,.song-item,.detail-stat{border-color:var(--soft)}.trend-panel{box-shadow:0 4px 16px rgba(17,17,15,.035)}.method article{border-color:var(--soft)}.action{border-color:#11110f}.action:hover{background:#11110f}.share-action:hover,.share-x:hover,.song-artist-button:hover{background:var(--cyan-soft)}
-@media(max-width:650px){.hero{padding:40px 0 34px}.hero h1{font-size:clamp(2.8rem,16vw,4.7rem)}.lead{font-size:.95rem}.topin{gap:10px}.topin nav{display:flex;max-width:calc(100vw - 84px);overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none}.topin nav::-webkit-scrollbar{display:none}.topin nav a,.topin nav a:not(:first-child){display:block;flex:0 0 auto;white-space:nowrap}.control-heading{display:block}.control-help{display:block;margin-top:2px}.scope-tabs,.chart-tabs{display:grid;width:100%;grid-template-columns:1fr}.scope-tab,.chart-tab{width:100%}.section{padding:40px 0}.section-head{padding-top:11px}.latest-grid{gap:9px}th{font-size:.68rem}td{font-size:.81rem}}
-@media(max-width:650px){.hero{padding:28px 0 24px}.hero h1{font-size:clamp(2.35rem,13vw,3.85rem)}.lead{margin-top:12px;font-size:.84rem}.control-group{margin-top:11px}.control-heading{margin-bottom:5px}.control-help{display:none}.scope-tabs,.chart-tabs{display:flex;width:100%;grid-template-columns:none;flex-wrap:nowrap;gap:4px;padding:4px;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none}.scope-tabs::-webkit-scrollbar,.chart-tabs::-webkit-scrollbar{display:none}.scope-tab,.chart-tab{flex:0 0 auto;width:auto;min-height:36px;padding:7px 10px;font-size:.65rem;white-space:nowrap}.latest-viewport{scrollbar-width:none}.latest-viewport::-webkit-scrollbar{display:none}}
-/* Progressive lists and latest-chart carousel. */
-.latest-carousel{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;gap:10px}.latest-viewport{overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:none;overscroll-behavior-inline:contain;scrollbar-width:none;-ms-overflow-style:none}.latest-viewport::-webkit-scrollbar{display:none}.latest-carousel .latest-grid{display:flex;width:max-content;gap:12px;border:0}.latest-carousel .latest-song{flex:0 0 var(--latest-card-width,340px);width:auto;scroll-snap-align:start}.carousel-button{display:grid;width:42px;height:42px;place-items:center;border:1px solid var(--line);border-radius:50%;background:#fff;font-size:1.25rem;font-weight:1000}.carousel-button:hover{background:var(--acid)}.carousel-button[hidden]{display:none}.list-more{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px;border-top:1px solid var(--soft);background:#fafaf7}.list-count{color:var(--muted);font-size:.75rem;font-weight:800}.ranking-note{margin:-8px 0 18px;padding:10px 12px;border-left:4px solid var(--acid);background:#f5f5f0;color:var(--muted);font-size:.76rem;font-weight:700;line-height:1.65}.more-button{min-height:42px;padding:9px 18px;border:1px solid var(--line);border-radius:12px;background:#fff;font-weight:1000}.more-button:hover{background:var(--acid-soft)}
-.search-section{padding:28px 0;background:#111;color:#fff;border-bottom:1px solid #333}.search-shell{display:grid;grid-template-columns:minmax(250px,.8fr) minmax(0,1.2fr);gap:22px;align-items:start}.search-intro .kicker{color:var(--acid)}.search-intro h2{margin:0 0 8px;font-family:Arial Black,Arial,sans-serif;font-size:clamp(1.6rem,3vw,2.45rem);letter-spacing:-.045em}.search-intro p{margin:0;color:#bdbdb8;font-size:.78rem;font-weight:700}.global-search{width:100%;min-height:52px;padding:12px 16px;border:1px solid #777;border-radius:14px;background:#fff;color:#111;font-size:1rem;font-weight:800}.global-search:focus{outline:3px solid var(--acid);outline-offset:2px}.search-status{min-height:1.6em;margin:8px 2px 0;color:#aaa;font-size:.72rem;font-weight:800}.search-results{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.search-result{display:flex;min-width:0;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:1px solid #555;border-radius:12px;background:#1c1c1c;color:#fff;text-align:left}.search-result:hover,.search-result:focus-visible{border-color:var(--acid);background:#292929}.search-result-main{min-width:0}.search-result-name{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.8rem;font-weight:1000}.search-result-sub{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#aaa;font-size:.66rem}.search-result-type{flex:0 0 auto;padding:3px 7px;border-radius:999px;background:var(--acid);color:#111;font-size:.6rem;font-weight:1000}.detail-chart-switch{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px}.detail-chart-button{padding:8px 12px;border:1px solid #999;border-radius:999px;background:#fff;font-size:.7rem;font-weight:1000}.detail-chart-button:hover{background:var(--cyan-soft)}.detail-chart-button.active{border-color:#111;background:#111;color:#fff}.detail-chart-context{margin:0 0 18px;color:var(--muted);font-size:.72rem;font-weight:800}
-@media(max-width:650px){.latest-carousel{grid-template-columns:minmax(0,1fr)}.carousel-button{display:none}.latest-carousel .latest-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(5,minmax(68px,auto));grid-auto-columns:min(88vw,350px);gap:8px 10px}.latest-carousel .latest-song{width:100%;min-height:68px;padding:10px;grid-template-columns:42px minmax(0,1fr)}.latest-carousel .latest-rank{width:38px;height:38px;font-size:.88rem}.latest-viewport{margin-right:-10px;padding-right:10px}.list-more{align-items:stretch;flex-direction:column;text-align:center}.more-button{width:100%}.search-shell{grid-template-columns:1fr}.search-results{grid-template-columns:1fr}.search-section{padding:24px 0}}
-@media(prefers-reduced-motion:reduce){.latest-viewport{scroll-behavior:auto}}
-</style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJGG47RBT3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RJGG47RBT3');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCE 101 JAPAN 新世界</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --accent-blue: #0984e3;
+            --debut-gold: #ffd700;
+            --up-color: #00b894;
+            --down-color: #d63031;
+            --text-main: #2d3436;
+            --border-light: #f1f2f6;
+        }
+
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f0f3f5; padding: 20px; color: var(--text-main); }
+        .page-title { text-align: center; font-size: 28px; font-weight: 900; color: var(--accent-blue); margin-bottom: 30px; }
+
+        .trainee-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1400px; margin: 0 auto; }
+        .summary-card { 
+            background: var(--bg-color); border-radius: 12px; padding: 6px 6px;
+            display: flex; align-items: center; justify-content: space-between;
+            cursor: pointer; transition: 0.3s; border-left: 6px solid var(--accent-blue);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); min-height: 80px;
+        }
+        .summary-card.debut-zone { border-left-color: var(--debut-gold); background: #fffdf9; }
+        .summary-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+
+        .rank-num { font-size: 22px; font-weight: 900; color: var(--accent-blue); width: 35px; }
+        .debut-zone .rank-num { color: var(--debut-gold); }
+        
+        .tag-wrap { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+        .tag { font-size: 12px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .tag-national { background: #e0f7fa; color: #0097e6; }
+        .tag-global { background: #ffeaa7; color: #d35400; }
+        .tag-balance { background: #f3e5f5; color: #8e24aa; }
+        .tag-rise { background: #e8f8f5; color: #00b894; }
+
+        .diff-badge { padding: 4px 2px; border-radius: 20px; font-size: 14px; font-weight: bold; min-width: 50px; text-align: center; }
+        .diff-up { background: #e6f7e6; color: var(--up-color); }
+        .diff-down { background: #fff1f0; color: var(--down-color); }
+        .diff-none { background: #f5f5f5; color: #999; }
+
+        /* モーダル */
+        .modal-overlay { 
+            position: fixed; top:0; left:0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+            display: none; align-items: center; justify-content: center; z-index: 1000; 
+        }
+        .modal-content { 
+            background: white;
+            width: 1100px;
+            height: 85vh;
+            max-height: 700px;
+            border-radius: 30px;
+            display: flex;
+            overflow: hidden;
+            align-items: stretch;
+        }
+
+        .modal-left {
+            width: 34%;
+            padding: 36px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+            border-right: 1px solid #eef2f7;
+            display: flex;
+            flex-direction: column;
+            height: 98%;
+            box-sizing: border-box;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        .modal-right {
+            width: 70%;
+            background: #fdfdfd; 
+            border-right: 1px solid var(--border-light); 
+            padding: 25px; 
+            display: flex; 
+            flex-direction: column; 
+            max-height: 98%;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: #f3f6fa;
+            border-radius: 10px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #cfd8e3;
+            border-radius: 10px;
+        }
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #b8c4d3;
+        }
+        .modal-left::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-left::-webkit-scrollbar-track {
+            background: #f5f7fa;
+        }
+        .modal-left::-webkit-scrollbar-thumb {
+            background: #cfd8e3;
+            border-radius: 10px;
+        }
+        
+        .m-rank-display { font-size: 55px; font-weight: 900; color: var(--accent-blue); line-height: 1; margin-bottom: 5px; }
+        .m-name-display { font-size: 28px; font-weight: 900; margin: 5px 0; color: #333; }
+
+        .m-tag-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+        .m-tag { font-size: 14px; padding: 6px 14px; border-radius: 30px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .m-tag-national { background: #e0f7fa; color: #0097e6; }
+        .m-tag-global { background: #ffeaa7; color: #d35400; }
+        .m-tag-balance { background: #f3e5f5; color: #8e24aa; }
+        .m-tag-rise { background: #e8f8f5; color: #00b894; }
+        
+        /* ランクヒストリー */
+        .history-box {
+            margin-top: 24px;
+            background: #fff;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .h-title { font-size: 11px; font-weight: bold; color: #636e72; margin-bottom: 8px; text-align: center; letter-spacing: 2px; }
+        
+        .h-timeline {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            position: relative; /* 💡ズレていた縦線の基準位置を設定 */
+        }
+        .h-timeline::before { content: ''; position: absolute; left: 24px; top: 5px; bottom: 5px; width: 2px; background: #dfe6e9; z-index: 0; }
+
+        .h-item {
+            position: relative; /* 💡アイテムを縦線の手前に持ってくるための基準 */
+            z-index: 1; /* 💡縦線（z-index: 0）より前面にする */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            min-height: 30px;
+            border-radius: 16px;
+            background: #f8fbff;
+            font-size: 18px;
+            font-weight: 700;
+            transition: 0.2s; /* 💡ホバーを滑らかに */
+        }
+        .h-item:hover { transform: translateX(5px); box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .h-item.final { background: linear-gradient(135deg, #0984e3, #00d2ff); color: white; border: none; transform: scale(1.02); box-shadow: 0 4px 10px rgba(9, 132, 227, 0.3); }
+        .h-item .ep-lab { font-size: 12px; font-weight: bold; opacity: 0.8; }
+        .h-item .ep-rank { font-size: 18px; font-weight: 900; }
+        .h-item.final .ep-rank { font-size: 20px; }
+        
+        /* 分析セクション */
+        .analysis-container { 
+            display: flex; 
+            flex-direction: column;
+            gap: 12px; 
+            height: 100%; 
+        }
+        
+        .vote-section { 
+            border: 1px solid #eee; 
+            border-radius: 12px; 
+            padding: 12px 20px; 
+            background: #fff; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .section-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 8px;
+        }
+        .section-title { 
+            font-size: 15px; 
+            font-weight: 900; 
+            color: #2d3436; 
+            border-left: 4px solid var(--accent-blue); 
+            padding-left: 8px; 
+            margin: 0;
+        }
+        .total-strip { 
+            background: #2d3436; 
+            color: #fff; 
+            padding: 4px 12px; 
+            border-radius: 6px; 
+            display: flex; 
+            gap: 8px;
+            align-items: center; 
+        }
+        .total-strip span { font-size: 15px; font-weight: bold; }
+        .total-strip .pt-val { font-size: 20px; font-weight: 900; }
+
+        .vote-content { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 15px; 
+        }
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            flex: 1; 
+        }
+        .v-card { 
+            background: #fdfdfd; 
+            border: 1px solid #f0f0f0; 
+            border-radius: 8px; 
+            padding: 8px 12px; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+        }
+        .v-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+        .v-label { font-size: 11px; color: #999; font-weight: bold; }
+        .v-pct-pill { font-size: 11px; font-weight: 900; padding: 2px 6px; border-radius: 8px; }
+        .v-card-bottom { display: flex; align-items: baseline; gap: 6px;}
+        .v-count-big { font-size: 18px; font-weight: 900; color: #2d3436; }
+        .v-rank-sub { font-size: 14px; color: var(--accent-blue); font-weight: 900; }
+        .chart-box-doughnut { 
+            width: 70px; 
+            height: 70px; 
+            position: relative; 
+            flex-shrink: 0; 
+        }
+
+        .bottom-sns-area {
+            display: flex;
+            gap: 15px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .sns-stats-col {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+        .sns-card {
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            border-radius: 10px;
+            padding: 6px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .sns-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #64748b;
+            margin-bottom: 0px;
+        }
+        .sns-val { font-size: 15px; font-weight: 900; color: #1e293b; }
+        .sns-rank { font-size: 13px; font-weight: 900; color: var(--accent-blue); margin-left: 8px; }
+        
+        .sns-dist-box-right {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 6px 12px;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .sns-dist-title {
+            font-size: 11px; font-weight: bold; color: #636e72; margin-bottom: 2px; text-align: center;
+        }
+        .sns-chart-container {
+            width: 100%;
+            flex: 1;
+            position: relative;
+            min-height: 75px;
+            max-height: 80px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 1200px) {
+            .trainee-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        }
+
+        @media (max-width: 1024px) {
+            .trainee-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            .modal-content { 
+                width: 100%; 
+                max-width: 700px; 
+                height: 95vh; 
+                flex-direction: column; 
+                overflow-y: auto; 
+            }
+            .modal-left { 
+                width: 100%; 
+                border-right: none; 
+                border-bottom: 1px solid var(--border-light); 
+                padding: 20px; 
+                flex-shrink: 0; 
+                background: #f8f9fa;
+            }
+            .modal-right { 
+                width: 100%; 
+                padding: 20px; 
+                overflow-y: visible;
+            }
+            .sns-card {
+                width: 100% !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .bottom-sns-area { flex-direction: column; }
+            .sns-dist-box-right { width: 100%; min-height: 150px; }
+            .page-title { font-size: 22px; margin-bottom: 20px; }
+            .trainee-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .summary-card { padding: 12px 10px; }
+            .modal-content { width: 95%; height: 90vh; }
+            .m-rank-display { font-size: 48px; }
+            .m-name-display { font-size: 24px; }
+            .stats-grid { 
+                grid-template-columns: 1fr; 
+                gap: 8px; 
+            }
+            .vote-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .chart-box-doughnut {
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .trainee-grid { grid-template-columns: 1fr; }
+        }
+            .close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #ccc; border:none; background:none; z-index: 10; padding: 5px; }
+        .close-btn:hover { color: #888; }
+
+      </style>
 </head>
 <body>
-<header class="top"><div class="wrap topin"><a class="brand" href="#top"><span class="mark">JP</span>CHART PULSE</a><nav><a href="#search">検索</a><a href="#latest">最新週</a><a href="#ranking">ランキング</a><a href="#songs">楽曲</a></nav></div></header>
-<main id="top">
-<section class="hero"><div class="wrap"><p class="eyebrow">BILLBOARD JAPAN / CHART EXPLORER</p><h1>MUSIC<br>IN <span class="slash">MOTION.</span></h1><p class="lead">順位の変化や継続をたどりながら、アーティストと楽曲の現在地を多角的に見ていく。</p><div class="control-group"><div class="control-heading"><span class="control-label">表示するアーティスト</span><span class="control-help">分析対象の範囲を選択</span></div><div class="scope-tabs" role="tablist" aria-label="表示するアーティストの範囲を切り替える"><button class="scope-tab active" data-scope="boys">ボーイズグループ</button><button class="scope-tab" data-scope="girls">ガールズグループ</button><button class="scope-tab" data-scope="korean">K-POPグループ</button><button class="scope-tab" data-scope="all">全アーティスト</button></div></div><div class="control-group"><div class="control-heading"><span class="control-label">集計するチャート</span><span class="control-help">総合・ストリーミング・ダウンロードから選択</span></div><div class="chart-tabs" role="tablist" aria-label="集計するチャートを切り替える"><button class="chart-tab active" data-chart="hot100">総合 Hot 100</button><button class="chart-tab" data-chart="stsongs">ストリーミング</button><button class="chart-tab" data-chart="dlsongs">ダウンロード</button></div></div><span id="scopeName" hidden>ボーイズグループ</span><span id="chartName" hidden>Billboard Japan Hot 100</span></div></section>
-<section class="search-section" id="search"><div class="wrap search-shell"><div class="search-intro"><p class="kicker">SEARCH ALL DATA</p><h2>アーティスト・楽曲検索</h2><p>表示中のカテゴリやランキング表示数に関係なく、すべての集計対象を横断して検索できます。</p></div><div><label class="control-label" for="globalSearch">名前・曲名から探す</label><input class="global-search" id="globalSearch" type="search" autocomplete="off" placeholder="アーティスト名、楽曲名"><input id="artistSearch" type="search" hidden tabindex="-1" aria-hidden="true"><input id="songSearch" type="search" hidden tabindex="-1" aria-hidden="true"><p class="search-status" id="searchStatus" aria-live="polite">文字を入力すると候補を表示します。</p><div class="search-results" id="searchResults"></div></div></div></section>
-<section class="section latest-section" id="latest"><div class="wrap"><div class="section-head"><div><p class="kicker">LATEST CHART</p><h2>最新週のランクイン楽曲</h2></div><p class="section-copy"><span id="latestChartName">Billboard Japan Hot 100</span>・<span id="latestWeek">2026-08-26</span>公開分。今週チャートにいる対象アーティストの楽曲を順位順に表示します。</p></div><div class="latest-carousel"><button class="carousel-button" id="latestPrev" type="button" aria-label="前の楽曲を見る">‹</button><div class="latest-viewport" id="latestViewport" tabindex="0" aria-label="最新週のランクイン楽曲。横にスクロールできます"><div class="latest-grid" id="latestGrid"></div></div><button class="carousel-button" id="latestNext" type="button" aria-label="次の楽曲を見る">›</button></div></div></section>
-<div id="stats" hidden></div><div id="powerGrid" hidden></div>
-<section class="section" id="ranking"><div class="wrap"><div class="section-head"><div><p class="kicker">TOP 50 ARTISTS</p><h2>アーティストランキング</h2></div><p class="section-copy">年間の延べ登場回数を軸に、存在感・継続力・ヒットの強さを確認できます。行を押すと詳細が開きます。</p></div><p class="ranking-note">※ <span id="artistRankingYear">2026</span>年に一度でもランクインした対象のうち、集計指標の上位50組までを表示します。圏外のアーティストは上部の横断検索から探せます。</p><div class="panel"><div class="tools"><select id="artistFilter" aria-label="アーティストランキングの絞り込み"><option value="all">すべて</option><option value="active">最新週ランクイン中</option><option value="rising">前年同期より増加</option><option value="top10">Top 10実績あり</option></select></div><div class="table-wrap"><table><thead><tr><th>順位</th><th>アーティスト</th><th>延べ登場</th><th>登場週</th><th>楽曲</th><th>Top 10</th><th>最高</th><th>前年同期比</th></tr></thead><tbody id="artistRows"></tbody></table></div><div class="list-more"><span class="list-count" id="artistCount"></span><button class="more-button" id="artistMore" type="button">もっと見る</button></div></div></div></section>
-<section class="section" id="songs"><div class="wrap"><div class="section-head"><div><p class="kicker">HIT SONGS</p><h2>ヒット曲ランキング</h2></div><p class="section-copy">どの曲がアーティストの存在感を作ったのか。延べ登場回数順に表示します。</p></div><p class="ranking-note">※ <span id="songRankingYear">2026</span>年に一度でもランクインした楽曲のうち、上位100曲までを表示します。圏外の楽曲は上部の横断検索から探せます。</p><div class="panel"><div class="table-wrap"><table><thead><tr><th>順位</th><th>曲名</th><th>アーティスト</th><th>延べ登場</th><th>登場週</th><th>最高順位</th><th>Top 10</th></tr></thead><tbody id="songRows"></tbody></table></div><div class="list-more"><span class="list-count" id="songCount"></span><button class="more-button" id="songMore" type="button">もっと見る</button></div></div></div></section>
 
-</main>
-<footer><div class="wrap">集計対象: Billboard Japan Hot 100・Streaming Songs・Download Songs / 1〜100位　生成: 2026-08-31 14:32<br>本サイトは公式Billboardサイトではありません。順位データの権利は各権利者に帰属します。</div></footer>
-<dialog id="detailDialog"><div class="modal-head"><div><div class="kicker">ARTIST DETAIL</div><h2 id="detailName"></h2></div><div class="modal-actions"><button class="share-x" id="openShare" type="button" aria-label="このアーティストの詳細を共有">共有</button><button id="shareX" type="button" hidden aria-hidden="true" tabindex="-1"></button><button class="close" id="detailClose" aria-label="閉じる">×</button></div></div><div class="modal-body"><div class="detail-chart-switch" id="detailChartSwitch" role="tablist" aria-label="アーティスト詳細のチャートを切り替える"><button class="detail-chart-button" type="button" data-detail-chart="hot100">Hot 100</button><button class="detail-chart-button" type="button" data-detail-chart="stsongs">ストリーミング</button><button class="detail-chart-button" type="button" data-detail-chart="dlsongs">ダウンロード</button></div><p class="detail-chart-context" id="detailChartContext"></p><div class="detail-stats" id="detailStats"></div><section class="trend-panel"><div class="trend-head"><div><div class="kicker">WEEK BY WEEK</div><h3>2024〜2026年の累積推移</h3></div><div class="trend-legend"><span><i style="background:#6b7280"></i>2024</span><span><i style="background:#0072b2"></i>2025</span><span><i style="background:#d55e00"></i>2026</span></div></div><div class="trend-wrap"><canvas id="yearTrend" aria-label="2024年から2026年の週別累積ランクイン数"></canvas></div></section><h3>2026年の楽曲</h3><div class="song-list" id="detailSongs"></div></div></dialog>
-<dialog class="share-dialog" id="shareDialog"><div class="modal-head"><div><div class="kicker" id="shareKind">SHARE PROFILE</div><h2 id="shareTitle">共有</h2></div><button class="close" id="shareClose" aria-label="共有画面を閉じる">×</button></div><div class="modal-body"><div class="share-view-picker" id="shareViewPicker" role="tablist" aria-label="共有画像の種類を選択"><button class="share-chart-button active" type="button" data-share-view="summary">概要</button><button class="share-chart-button" type="button" data-share-view="graph">グラフ</button></div><div class="share-chart-picker" id="shareChartPicker" role="tablist" aria-label="共有画像に使うチャートを選択" hidden><button class="share-chart-button" type="button" data-share-chart="hot100">Hot 100</button><button class="share-chart-button" type="button" data-share-chart="stsongs">ストリーミング</button><button class="share-chart-button" type="button" data-share-chart="dlsongs">ダウンロード</button></div><div class="share-preview"><canvas id="shareCard" width="1200" height="630" aria-label="共有用の詳細画像"></canvas></div><p class="share-copy">グラフなしの概要画像と、詳細画面をもとにしたグラフ画像を選べます。アーティストは対象チャートも変更できます。</p><div class="share-actions"><button class="share-action" id="copyShareLink" type="button">リンクをコピー</button><button class="share-action primary" id="shareWithImage" type="button">Xへ画像付き共有</button></div><p class="share-status" id="shareStatus" role="status" aria-live="polite"></p></div></dialog>
-<dialog id="songDialog"><div class="modal-head"><div><div class="kicker">SONG DETAIL</div><h2 id="songDetailTitle"></h2></div><div class="modal-actions"><button class="share-x" id="openSongShare" type="button" aria-label="この楽曲の詳細を共有">共有</button><button class="close" id="songDetailClose" aria-label="閉じる">×</button></div></div><div class="modal-body"><button class="song-artist-button" id="songDetailArtist" type="button"></button><p class="song-meta" id="songDetailChart"></p><div class="detail-stats" id="songDetailStats"></div><section class="trend-panel"><div class="trend-head"><div><div class="kicker">CHART TREND</div><h3>週ごとの順位推移</h3><p class="song-rank-caption">1位に近いほど上に表示。ランク外の期間は線をつなぎません。</p></div></div><div class="trend-wrap" id="songRankTrendWrap"><canvas id="songRankTrend" aria-label="楽曲の週別順位推移"></canvas></div><h4 class="song-history-heading">順位データ</h4><div class="song-history" id="songDetailHistory"></div></section></div></dialog>
-<script src="data/manifest.js"></script>
-<script src="data/boys-hot100.js"></script>
+<h1 class="page-title">PRODUCE 101 JAPAN 新世界</h1>
+
+<div class="controls" style="max-width: 1400px; margin: 0 auto 20px; display: flex; justify-content: flex-end; align-items: center; gap: 10px;">
+    <label for="sortSelect" style="font-weight: bold; font-size: 14px; color: var(--text-main);">並び替え:</label>
+    <select id="sortSelect" onchange="renderGrid()" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; outline: none; cursor: pointer; background-color: var(--white);">
+        <option value="rank_asc">最新順位 (高い順)</option>
+        <option value="n3_desc">第3回 国内票 (多い順)</option>
+        <option value="g3_desc">第3回 海外票 (多い順)</option>
+        <option value="x_desc">X ポスト数(5/23～5/29) (多い順)</option>
+        <option value="tiktok_desc">TikTok 投稿数(5/25～5/29) (多い順)</option>
+    </select>
+</div>
+
+<div class="trainee-grid" id="grid"></div>
+
+<div class="modal-overlay" id="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <div class="modal-left">
+            <div style="font-size: 12px; font-weight: bold; color: #b2bec3;">CURRENT RANK</div>
+            <div class="m-rank-display" id="mRank">--</div>
+            <h2 class="m-name-display" id="mName">--</h2>
+            <div id="mDiff"></div> 
+            
+            <div class="m-tag-wrap" id="mTags"></div> 
+            
+            <div class="history-box">
+                <div class="h-title">RANK HISTORY</div>
+                <div class="h-timeline">
+                    <div class="h-item"><span class="ep-lab">Ep 2</span><span class="ep-rank" id="h2">--</span></div>
+                    <div class="h-item"><span class="ep-lab">Ep 3</span><span class="ep-rank" id="h3">--</span></div>
+                    <div class="h-item"><span class="ep-lab">Ep 5 (1st)</span><span class="ep-rank" id="h5">--</span></div>
+                    <div class="h-item"><span class="ep-lab">Ep 6</span><span class="ep-rank" id="h6">--</span></div>
+                    <div class="h-item"><span class="ep-lab">Ep 8 (2nd)</span><span class="ep-rank" id="h8">--</span></div>
+                    <div class="h-item final"><span class="ep-lab">Ep 10 (3rd)</span><span class="ep-rank" id="h10">--</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-right">
+            <div class="analysis-container">
+                <div class="vote-section">
+                    <div class="section-header">
+                        <h3 class="section-title">第1回順位発表式</h3>
+                        <div class="total-strip"><span>Total Score</span><span class="pt-val" id="v1t">0 pt</span></div>
+                    </div>
+                    <div class="vote-content">
+                        <div class="stats-grid">
+                            <div class="v-card" style="border-left: 5px solid #0097e6;">
+                                <div class="v-card-top"><span class="v-label">国内投票</span><span class="v-pct-pill" id="p1n" style="color:#0097e6; background:#e0f7fa;">0%</span></div>
+                                <div class="v-card-bottom"><span class="v-count-big" id="v1n">0</span><span class="v-rank-sub" id="r1n">--位</span></div>
+                            </div>
+                            <div class="v-card" style="border-left: 5px solid #ffc000;">
+                                <div class="v-card-top"><span class="v-label">海外投票</span><span class="v-pct-pill" id="p1g" style="color:#d35400; background:#ffeaa7;">0%</span></div>
+                                <div class="v-card-bottom"><span class="v-count-big" id="v1g">0</span><span class="v-rank-sub" id="r1g">--位</span></div>
+                            </div>
+                        </div>
+                        <div class="chart-box-doughnut"><canvas id="chart1"></canvas></div>
+                    </div>
+                </div>
+
+                <div class="vote-section">
+                    <div class="section-header">
+                        <h3 class="section-title">第2回順位発表式</h3>
+                        <div class="total-strip" style="background:var(--accent-blue);"><span>Total Score</span><span class="pt-val" id="v2t">0 pt</span></div>
+                    </div>
+                    <div class="vote-content">
+                        <div class="stats-grid">
+                            <div class="v-card" style="border-left: 5px solid #0097e6;">
+                                <div class="v-card-top"><span class="v-label">国内投票</span><span class="v-pct-pill" id="p2n" style="color:#0097e6; background:#e0f7fa;">0%</span></div>
+                                <div class="v-card-bottom"><span class="v-count-big" id="v2n">0</span><span class="v-rank-sub" id="r2n">--位</span></div>
+                            </div>
+                            <div class="v-card" style="border-left: 5px solid #ffc000;">
+                                <div class="v-card-top"><span class="v-label">海外投票</span><span class="v-pct-pill" id="p2g" style="color:#d35400; background:#ffeaa7;">0%</span></div>
+                                <div class="v-card-bottom"><span class="v-count-big" id="v2g">0</span><span class="v-rank-sub" id="r2g">--位</span></div>
+                            </div>
+                        </div>
+                        <div class="chart-box-doughnut"><canvas id="chart2"></canvas></div>
+                    </div>
+                </div>
+
+                <div class="vote-section">
+                    <div class="section-header">
+                        <h3 class="section-title">第3回順位発表式</h3>
+                        <div class="total-strip" style="background:#e84393;"><span>Total Score</span><span class="pt-val" id="v3t">0 pt</span></div>
+                    </div>
+                    <div class="vote-content">
+                        <div class="stats-grid">
+                            <div class="v-card" style="border-left: 4px solid #0097e6;">
+                                <div class="v-card-top"><span class="v-label">国内投票</span><span class="v-pct-pill" id="p3n" style="color:#0097e6; background:#e0f7fa;">0%</span></div>
+                                <div class="v-card-bottom"><span class="v-count-big" id="v3n">0</span><span class="v-rank-sub" id="r3n">--位</span></div>
+                            </div>
+                            <div class="v-card" style="border-left: 4px solid #ffc000;">
+                                <div class="v-card-top"><span class="v-label">海外投票</span><span class="v-pct-pill" id="p3g" style="color:#d35400; background:#ffeaa7;">0%</span></div>
+                                <div class="v-card-bottom"><span class="v-count-big" id="v3g">0</span><span class="v-rank-sub" id="r3g">--位</span></div>
+                            </div>
+                        </div>
+                        <div class="chart-box-doughnut"><canvas id="chart3"></canvas></div>
+                    </div>
+                </div>
+
+                <div class="bottom-sns-area">
+                    <div class="sns-stats-col">
+                        <div class="sns-card" style="border-left: 4px solid #1e293b;">
+                            <div class="sns-header"><span style="color: #000; font-weight: bold;">𝕏</span> <span>X  #名前 ポスト数(5/23～5/29)</span></div>
+                            <div style="display: flex; align-items: baseline;">
+                                <span class="sns-val" id="x_posts">0</span><span class="sns-rank" id="x_rank">--位</span>
+                            </div>
+                        </div>
+                        <div class="sns-card" style="border-left: 4px solid #1da1f2;">
+                            <div class="sns-header"><span style="color: #1da1f2;">♪</span> <span>TikTok #名前 投稿数(5/25～5/29)</span></div>
+                            <div style="display: flex; align-items: baseline;">
+                                <span class="sns-val" id="tt_posts">0</span><span class="sns-rank" id="tt_rank">--位</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sns-dist-box-right">
+                        <div class="sns-dist-title">SNS別ファン分布</div>
+                        <div class="sns-chart-container">
+                            <canvas id="snsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script>
-const dashboards=window.CHART_DASHBOARDS||{},dashboardManifest=window.CHART_DATA_MANIFEST||{},dashboardLoads=new Map();function dashboardKey(scope,chart){return scope+"|"+chart}function loadDashboardScript(source){return new Promise((resolve,reject)=>{const script=document.createElement("script");script.src=source;script.onload=()=>resolve();script.onerror=()=>reject(new Error("データを読み込めませんでした: "+source));document.head.appendChild(script)})}function loadDashboard(scope,chart){if(dashboards[scope]?.[chart])return Promise.resolve(dashboards[scope][chart]);const key=dashboardKey(scope,chart),files=dashboardManifest[key];if(!files)return Promise.reject(new Error("対象データがありません: "+key));if(!dashboardLoads.has(key)){const task=files.reduce((promise,file)=>promise.then(()=>loadDashboardScript(file)),Promise.resolve()).then(()=>{if(!dashboards[scope]?.[chart])throw new Error("データ登録に失敗しました: "+key);return dashboards[scope][chart]});dashboardLoads.set(key,task)}return dashboardLoads.get(key)}function allDashboardsLoaded(){return Object.keys(dashboardManifest).every(key=>{const[scope,chart]=key.split("|");return Boolean(dashboards[scope]?.[chart])})}function ensureAllDashboards(){return Promise.all(Object.keys(dashboardManifest).map(key=>{const[scope,chart]=key.split("|");return loadDashboard(scope,chart)}))}function showDataError(error){console.error(error);const status=document.getElementById("searchStatus");if(status)status.textContent="データの読み込みに失敗しました。再読み込みしてください。"}async function activateDashboard(scope,chart){try{await loadDashboard(scope,chart);scopeCode=scope;chartCode=chart;applyDashboard();return true}catch(error){showDataError(error);return false}};let scopeCode="boys";let chartCode="hot100";let dashboard=dashboards[scopeCode][chartCode];let artists=dashboard.artists;let artistDetails=dashboard.artistDetails;let songs=dashboard.songs;let latestSongs=dashboard.latestSongs;let artistExpanded=false;let songDisplayLimit=5;const fmt=n=>n==null?"—":n.toLocaleString("ja-JP");const signed=n=>n>0?`+${n}`:`${n}`;const cls=n=>n>0?"up":n<0?"down":"muted";const esc=v=>String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let latestAutoPausedUntil=0,latestAutoHover=false,latestAutoFocus=false,latestAutoTouching=false,latestAutoLast=0,latestAutoCycleWidth=0;const latestFinePointer=matchMedia("(hover:hover) and (pointer:fine)");function pauseLatestAuto(delay=5000){latestAutoPausedUntil=performance.now()+delay}function latestAutoIsPaused(){return latestAutoHover||latestAutoTouching||latestAutoFocus&&latestFinePointer.matches||performance.now()<latestAutoPausedUntil}function latestCardMarkup(song,isCopy=false){const copyAttrs=isCopy?' data-loop-copy="true" aria-hidden="true" tabindex="-1"':'';return `<button class="latest-song"${copyAttrs} data-song-title="${esc(song.title)}" data-song-artist="${esc(song.artist)}"><span class="latest-rank">#${song.latestRank}</span><span><span class="latest-title">${esc(song.title)}</span><span class="latest-artist">${esc(song.artist)}</span></span></button>`}function syncLatestCarousel(){requestAnimationFrame(()=>{const viewport=document.getElementById("latestViewport"),grid=document.getElementById("latestGrid"),copies=[...grid.querySelectorAll("[data-loop-copy]")];grid.style.setProperty("--latest-card-width",Math.max(220,(viewport.clientWidth-24)/3)+"px");copies.forEach(copy=>copy.hidden=false);requestAnimationFrame(()=>{const first=grid.querySelector(".latest-song:not([data-loop-copy])"),copyFirst=grid.querySelector("[data-loop-copy]");latestAutoCycleWidth=first&&copyFirst?copyFirst.offsetLeft-first.offsetLeft:0;const hasOverflow=latestAutoCycleWidth>viewport.clientWidth+4;copies.forEach(copy=>copy.hidden=!hasOverflow);if(!hasOverflow)latestAutoCycleWidth=0;document.getElementById("latestPrev").hidden=!hasOverflow;document.getElementById("latestNext").hidden=!hasOverflow;viewport.scrollLeft=0;latestAutoLast=0})})}function renderLatest(){document.getElementById("latestChartName").textContent=dashboard.chartName;document.getElementById("latestWeek").textContent=dashboard.latestDate;const grid=document.getElementById("latestGrid"),originals=latestSongs.map(song=>latestCardMarkup(song)).join(""),copies=latestSongs.length>1?latestSongs.map(song=>latestCardMarkup(song,true)).join(""):"";grid.innerHTML=latestSongs.length?originals+copies:'<p class="muted">対象アーティストのランクイン楽曲はありません。</p>';syncLatestCarousel()}
-function initLatestCarousel(){const viewport=document.getElementById("latestViewport"),step=direction=>{pauseLatestAuto(800);const distance=Math.max(260,viewport.clientWidth*.78);if(direction<0&&latestAutoCycleWidth&&viewport.scrollLeft<distance)viewport.scrollLeft+=latestAutoCycleWidth;viewport.scrollBy({left:direction*distance,behavior:"smooth"})};document.getElementById("latestPrev").addEventListener("click",()=>step(-1));document.getElementById("latestNext").addEventListener("click",()=>step(1));viewport.addEventListener("pointerenter",()=>{latestAutoHover=true});viewport.addEventListener("pointerleave",()=>{latestAutoHover=false});viewport.addEventListener("focusin",()=>{latestAutoFocus=true});viewport.addEventListener("focusout",()=>{latestAutoFocus=false});viewport.addEventListener("touchstart",()=>{latestAutoTouching=true;latestAutoFocus=false},{passive:true});const finishTouch=()=>{latestAutoTouching=false;pauseLatestAuto(2500)};viewport.addEventListener("touchend",finishTouch,{passive:true});viewport.addEventListener("touchcancel",finishTouch,{passive:true});viewport.addEventListener("wheel",()=>pauseLatestAuto(),{passive:true});let resizeTimer=0;window.addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(syncLatestCarousel,140)});if(!matchMedia("(prefers-reduced-motion: reduce)").matches){viewport.style.scrollBehavior="auto";const animate=now=>{const elapsed=latestAutoLast?Math.min(now-latestAutoLast,50):0;latestAutoLast=now;if(!latestAutoIsPaused()&&!document.hidden&&latestAutoCycleWidth>0){viewport.scrollLeft+=30*elapsed/1000;if(viewport.scrollLeft>=latestAutoCycleWidth)viewport.scrollLeft-=latestAutoCycleWidth}requestAnimationFrame(animate)};requestAnimationFrame(animate)}}function renderStats(){const active=artists.filter(a=>a.active).length,total=artists.reduce((s,a)=>s+a.appearances,0),top=artists[0],rising=[...artists].sort((a,b)=>b.ytdChange-a.ytdChange)[0];document.getElementById("stats").innerHTML=`<article class="stat"><div class="stat-label">2026年の存在感トップ</div><div class="stat-value">${esc(top.artist)}</div><div class="stat-note">延べ${fmt(top.appearances)}回</div></article><article class="stat"><div class="stat-label">最新週ランクイン中</div><div class="stat-value">${active}組</div><div class="stat-note">${dashboard.latestDate} 公開分</div></article><article class="stat"><div class="stat-label">表示中アーティスト総登場数</div><div class="stat-value">${fmt(total)}回</div><div class="stat-note">${dashboard.weeks2026}週分</div></article><article class="stat"><div class="stat-label">前年同期比の伸びトップ</div><div class="stat-value">${esc(rising.artist)}</div><div class="stat-note ${cls(rising.ytdChange)}">${signed(rising.ytdChange)}回</div></article>`}
-function card(a){return `<button class="artist-card" data-artist="${esc(a.artist)}">${a.active?'<span class="live">CHARTING NOW</span>':''}<span class="card-rank">#${a.rank}</span><h3>${esc(a.artist)}</h3><div class="big-number">${fmt(a.appearances)}</div><div class="muted">延べ登場回数</div><div class="mini-grid"><div class="mini">登場週<strong>${a.weeks}</strong></div><div class="mini">楽曲<strong>${a.songsCount}</strong></div><div class="mini">Top 10<strong>${a.top10}</strong></div><div class="mini">最高順位<strong>${a.best?`#${a.best}`:'—'}</strong></div></div></button>`}
-function renderPower(){document.getElementById("powerGrid").innerHTML=artists.slice(0,5).map(card).join("")}
+const rawData = [
+    {
+        "name": "加藤 大樹",
+        "history": [
+            3,
+            2,
+            1,
+            1,
+            1,
+            10
+        ],
+        "n1": 1296479,
+        "g1": 488603,
+        "nr1": 72.6,
+        "gr1": 27.4,
+        "n2": 1146156,
+        "g2": 517550,
+        "nr2": 68.9,
+        "gr2": 31.1,
+        "n1_rank": 2,
+        "g1_rank": 4,
+        "n2_rank": 2,
+        "g2_rank": 3,
+        "x_posts": 2253,
+        "x_rank": 12,
+        "tiktok_posts": 160,
+        "tiktok_rank": 2,
+        "sns_dist": {
+            "X": 18.4,
+            "Instagram": 33.6,
+            "TikTok": 26.6,
+            "YouTube": 21.5
+        },
+        "n3": 157868,
+        "g3": 67410,
+        "nr3": 70.1,
+        "gr3": 29.9,
+        "n3_rank": 7,
+        "g3_rank": 10
+    },
+    {
+        "name": "安部 結蘭",
+        "history": [
+            4,
+            4,
+            3,
+            4,
+            2,
+            2
+        ],
+        "n1": 1051560,
+        "g1": 501072,
+        "nr1": 67.7,
+        "gr1": 32.3,
+        "n2": 1028801,
+        "g2": 538718,
+        "nr2": 65.6,
+        "gr2": 34.4,
+        "n1_rank": 3,
+        "g1_rank": 3,
+        "n2_rank": 4,
+        "g2_rank": 2,
+        "x_posts": 2569,
+        "x_rank": 11,
+        "tiktok_posts": 122,
+        "tiktok_rank": 7,
+        "sns_dist": {
+            "X": 17.4,
+            "Instagram": 25.5,
+            "TikTok": 30.8,
+            "YouTube": 26.3
+        },
+        "n3": 201685,
+        "g3": 88061,
+        "nr3": 69.6,
+        "gr3": 30.4
+    },
+    {
+        "name": "照井 康祐",
+        "history": [
+            9,
+            8,
+            7,
+            2,
+            3,
+            4
+        ],
+        "n1": 981058,
+        "g1": 209766,
+        "nr1": 82.4,
+        "gr1": 17.6,
+        "n2": 1240023,
+        "g2": 340771,
+        "nr2": 78.4,
+        "gr2": 21.6,
+        "n1_rank": 4,
+        "g1_rank": 13,
+        "n2_rank": 1,
+        "g2_rank": 12,
+        "x_posts": 3871,
+        "x_rank": 5,
+        "tiktok_posts": 131,
+        "tiktok_rank": 5,
+        "sns_dist": {
+            "X": 27.4,
+            "Instagram": 21.1,
+            "TikTok": 26.2,
+            "YouTube": 25.4
+        },
+        "n3": 207714,
+        "g3": 67914,
+        "nr3": 75.4,
+        "gr3": 24.6
+    },
+    {
+        "name": "矢田 佳暉",
+        "history": [
+            1,
+            3,
+            4,
+            6,
+            5,
+            3
+        ],
+        "n1": 939786,
+        "g1": 590728,
+        "nr1": 61.4,
+        "gr1": 38.6,
+        "n2": 880055,
+        "g2": 588754,
+        "nr2": 59.9,
+        "gr2": 40.1,
+        "n1_rank": 5,
+        "g1_rank": 1,
+        "n2_rank": 8,
+        "g2_rank": 1,
+        "x_posts": 3120,
+        "x_rank": 8,
+        "tiktok_posts": 101,
+        "tiktok_rank": 12,
+        "sns_dist": {
+            "X": 20.7,
+            "Instagram": 27.1,
+            "TikTok": 22.9,
+            "YouTube": 29.4
+        },
+        "n3": 131167,
+        "g3": 150172,
+        "nr3": 46.6,
+        "gr3": 53.4
+    },
+    {
+        "name": "パク・シヨン",
+        "history": [
+            5,
+            5,
+            6,
+            5,
+            6,
+            6
+        ],
+        "n1": 897732,
+        "g1": 513636,
+        "nr1": 63.6,
+        "gr1": 36.4,
+        "n2": 923286,
+        "g2": 506079,
+        "nr2": 64.6,
+        "gr2": 35.4,
+        "n1_rank": 8,
+        "g1_rank": 2,
+        "n2_rank": 5,
+        "g2_rank": 4,
+        "x_posts": 1674,
+        "x_rank": 15,
+        "tiktok_posts": 131,
+        "tiktok_rank": 5,
+        "sns_dist": {
+            "X": 19.5,
+            "Instagram": 28.3,
+            "TikTok": 24.2,
+            "YouTube": 27.9
+        },
+        "n3": 136731,
+        "g3": 86186,
+        "nr3": 61.3,
+        "gr3": 38.7
+    },
+    {
+        "name": "オ・シンヘン",
+        "history": [
+            6,
+            6,
+            5,
+            7,
+            7,
+            1
+        ],
+        "n1": 939330,
+        "g1": 472529,
+        "nr1": 66.5,
+        "gr1": 33.5,
+        "n2": 870135,
+        "g2": 443837,
+        "nr2": 66.2,
+        "gr2": 33.8,
+        "n1_rank": 6,
+        "g1_rank": 5,
+        "n2_rank": 10,
+        "g2_rank": 6,
+        "x_posts": 1400,
+        "x_rank": 18,
+        "tiktok_posts": 100,
+        "tiktok_rank": 14,
+        "sns_dist": {
+            "X": 21.2,
+            "Instagram": 31.6,
+            "TikTok": 23.4,
+            "YouTube": 23.8
+        },
+        "n3": 125315,
+        "g3": 89780,
+        "nr3": 58.3,
+        "gr3": 41.7
+    },
+    {
+        "name": "飯塚 亮賀",
+        "history": [
+            10,
+            11,
+            12,
+            12,
+            8,
+            5
+        ],
+        "n1": 783434,
+        "g1": 142348,
+        "nr1": 84.6,
+        "gr1": 15.4,
+        "n2": 889505,
+        "g2": 231443,
+        "nr2": 79.4,
+        "gr2": 20.6,
+        "n1_rank": 10,
+        "g1_rank": 27,
+        "n2_rank": 7,
+        "g2_rank": 16,
+        "x_posts": 4921,
+        "x_rank": 1,
+        "tiktok_posts": 106,
+        "tiktok_rank": 8,
+        "sns_dist": {
+            "X": 27.6,
+            "Instagram": 24.9,
+            "TikTok": 23.6,
+            "YouTube": 24.0
+        },
+        "n3": 171106,
+        "g3": 63471,
+        "nr3": 72.9,
+        "gr3": 27.1
+    },
+    {
+        "name": "ユ・ヒョンスン",
+        "history": [
+            15,
+            10,
+            8,
+            8,
+            9,
+            21
+        ],
+        "n1": 634710,
+        "g1": 426353,
+        "nr1": 59.8,
+        "gr1": 40.2,
+        "n2": 713383,
+        "g2": 393432,
+        "nr2": 64.5,
+        "gr2": 35.5,
+        "n1_rank": 13,
+        "g1_rank": 6,
+        "n2_rank": 14,
+        "g2_rank": 8,
+        "x_posts": 689,
+        "x_rank": 21,
+        "tiktok_posts": 40,
+        "tiktok_rank": 20,
+        "sns_dist": {
+            "X": 13.0,
+            "Instagram": 29.6,
+            "TikTok": 18.0,
+            "YouTube": 39.3
+        },
+        "n3": 75317,
+        "g3": 71773,
+        "nr3": 51.2,
+        "gr3": 48.8
+    },
+    {
+        "name": "杉山 竜司",
+        "history": [
+            22,
+            25,
+            23,
+            11,
+            10,
+            12
+        ],
+        "n1": 517442,
+        "g1": 107469,
+        "nr1": 82.8,
+        "gr1": 17.2,
+        "n2": 876385,
+        "g2": 218560,
+        "nr2": 80.0,
+        "gr2": 20.0,
+        "n1_rank": 17,
+        "g1_rank": 34,
+        "n2_rank": 9,
+        "g2_rank": 18,
+        "x_posts": 2483,
+        "x_rank": 13,
+        "tiktok_posts": 77,
+        "tiktok_rank": 18,
+        "sns_dist": {
+            "X": 28.3,
+            "Instagram": 21.2,
+            "TikTok": 24.9,
+            "YouTube": 25.6
+        },
+        "n3": 143840,
+        "g3": 50154,
+        "nr3": 74.1,
+        "gr3": 25.9
+    },
+    {
+        "name": "柳谷 伊冴",
+        "history": [
+            48,
+            37,
+            19,
+            9,
+            8,
+            8
+        ],
+        "n1": 554421,
+        "g1": 93744,
+        "nr1": 85.5,
+        "gr1": 14.5,
+        "n2": 897550,
+        "g2": 175217,
+        "nr2": 83.7,
+        "gr2": 16.3,
+        "n1_rank": 16,
+        "g1_rank": 37,
+        "n2_rank": 6,
+        "g2_rank": 22,
+        "x_posts": 3675,
+        "x_rank": 6,
+        "tiktok_posts": 101,
+        "tiktok_rank": 12,
+        "sns_dist": {
+            "X": 29.6,
+            "Instagram": 21.2,
+            "TikTok": 20.5,
+            "YouTube": 28.7
+        },
+        "n3": 191035,
+        "g3": 38565,
+        "nr3": 83.2,
+        "gr3": 16.8
+    },
+    {
+        "name": "土田 央修",
+        "history": [
+            14,
+            14,
+            13,
+            10,
+            12,
+            13
+        ],
+        "n1": 714427,
+        "g1": 166755,
+        "nr1": 81.1,
+        "gr1": 18.9,
+        "n2": 776690,
+        "g2": 292015,
+        "nr2": 72.7,
+        "gr2": 27.3,
+        "n1_rank": 12,
+        "g1_rank": 20,
+        "n2_rank": 12,
+        "g2_rank": 13,
+        "x_posts": 3220,
+        "x_rank": 7,
+        "tiktok_posts": 97,
+        "tiktok_rank": 15,
+        "sns_dist": {
+            "X": 43.9,
+            "Instagram": 18.7,
+            "TikTok": 18.2,
+            "YouTube": 19.2
+        },
+        "n3": 138751,
+        "g3": 46381,
+        "nr3": 74.9,
+        "gr3": 25.1
+    },
+    {
+        "name": "チェン・リッキー",
+        "history": [
+            38,
+            28,
+            25,
+            14,
+            13,
+            7
+        ],
+        "n1": 480239,
+        "g1": 116014,
+        "nr1": 80.5,
+        "gr1": 19.5,
+        "n2": 869006,
+        "g2": 114547,
+        "nr2": 88.4,
+        "gr2": 11.6,
+        "n1_rank": 24,
+        "g1_rank": 32,
+        "n2_rank": 11,
+        "g2_rank": 33,
+        "x_posts": 1616,
+        "x_rank": 16,
+        "tiktok_posts": 105,
+        "tiktok_rank": 10,
+        "sns_dist": {
+            "X": 14.8,
+            "Instagram": 25.3,
+            "TikTok": 24.7,
+            "YouTube": 35.2
+        },
+        "n3": 220740,
+        "g3": 27768,
+        "nr3": 88.8,
+        "gr3": 11.2
+    },
+    {
+        "name": "濱田 永遠",
+        "history": [
+            16,
+            16,
+            15,
+            13,
+            14,
+            14
+        ],
+        "n1": 515483,
+        "g1": 268686,
+        "nr1": 65.8,
+        "gr1": 34.2,
+        "n2": 559161,
+        "g2": 392724,
+        "nr2": 58.7,
+        "gr2": 41.3,
+        "n1_rank": 18,
+        "g1_rank": 10,
+        "n2_rank": 18,
+        "g2_rank": 9,
+        "x_posts": 4775,
+        "x_rank": 2,
+        "tiktok_posts": 175,
+        "tiktok_rank": 1,
+        "sns_dist": {
+            "X": 26.7,
+            "Instagram": 21.6,
+            "TikTok": 28.9,
+            "YouTube": 22.8
+        },
+        "n3": 136405,
+        "g3": 46296,
+        "nr3": 74.7,
+        "gr3": 25.3
+    },
+    {
+        "name": "熊部 拓斗",
+        "history": [
+            12,
+            9,
+            9,
+            15,
+            15,
+            11
+        ],
+        "n1": 904298,
+        "g1": 147917,
+        "nr1": 85.9,
+        "gr1": 14.1,
+        "n2": 714472,
+        "g2": 152387,
+        "nr2": 82.4,
+        "gr2": 17.6,
+        "n1_rank": 7,
+        "g1_rank": 25,
+        "n2_rank": 13,
+        "g2_rank": 27,
+        "x_posts": 3948,
+        "x_rank": 3,
+        "tiktok_posts": 146,
+        "tiktok_rank": 3,
+        "sns_dist": {
+            "X": 29.6,
+            "Instagram": 26.0,
+            "TikTok": 20.8,
+            "YouTube": 23.7
+        },
+        "n3": 156572,
+        "g3": 38698,
+        "nr3": 80.2,
+        "gr3": 19.8
+    },
+    {
+        "name": "後藤 結",
+        "history": [
+            17,
+            17,
+            17,
+            18,
+            16,
+            9
+        ],
+        "n1": 493758,
+        "g1": 180964,
+        "nr1": 73.2,
+        "gr1": 26.8,
+        "n2": 660696,
+        "g2": 199470,
+        "nr2": 76.8,
+        "gr2": 23.2,
+        "n1_rank": 19,
+        "g1_rank": 19,
+        "n2_rank": 15,
+        "g2_rank": 20,
+        "x_posts": 2749,
+        "x_rank": 10,
+        "tiktok_posts": 133,
+        "tiktok_rank": 4,
+        "sns_dist": {
+            "X": 25.6,
+            "Instagram": 23.4,
+            "TikTok": 33.3,
+            "YouTube": 17.6
+        },
+        "n3": 181124,
+        "g3": 46549,
+        "nr3": 79.6,
+        "gr3": 20.4
+    },
+    {
+        "name": "小野 慶人",
+        "history": [
+            13,
+            15,
+            16,
+            17,
+            18,
+            15
+        ],
+        "n1": 577221,
+        "g1": 193555,
+        "nr1": 74.9,
+        "gr1": 25.1,
+        "n2": 638558,
+        "g2": 169107,
+        "nr2": 79.1,
+        "gr2": 20.9,
+        "n1_rank": 14,
+        "g1_rank": 17,
+        "n2_rank": 16,
+        "g2_rank": 23,
+        "x_posts": 1559,
+        "x_rank": 17,
+        "tiktok_posts": 106,
+        "tiktok_rank": 8,
+        "sns_dist": {
+            "X": 18.9,
+            "Instagram": 23.9,
+            "TikTok": 32.8,
+            "YouTube": 24.5
+        },
+        "n3": 126475,
+        "g3": 45080,
+        "nr3": 73.7,
+        "gr3": 26.3
+    },
+    {
+        "name": "青沼 昂史朗",
+        "history": [
+            31,
+            27,
+            26,
+            19,
+            19,
+            16
+        ],
+        "n1": 384186,
+        "g1": 203900,
+        "nr1": 65.3,
+        "gr1": 34.7,
+        "n2": 439858,
+        "g2": 366617,
+        "nr2": 54.5,
+        "gr2": 45.5,
+        "n1_rank": 30,
+        "g1_rank": 14,
+        "n2_rank": 31,
+        "g2_rank": 11,
+        "x_posts": 2441,
+        "x_rank": 14,
+        "tiktok_posts": 44,
+        "tiktok_rank": 19,
+        "sns_dist": {
+            "X": 33.5,
+            "Instagram": 26.3,
+            "TikTok": 21.5,
+            "YouTube": 18.7
+        },
+        "n3": 71328,
+        "g3": 91572,
+        "nr3": 43.8,
+        "gr3": 56.2
+    },
+    {
+        "name": "小清水 蓮",
+        "history": [
+            8,
+            12,
+            14,
+            16,
+            20,
+            23
+        ],
+        "n1": 565502,
+        "g1": 297370,
+        "nr1": 65.6,
+        "gr1": 34.4,
+        "n2": 361952,
+        "g2": 427809,
+        "nr2": 45.8,
+        "gr2": 54.2,
+        "n1_rank": 15,
+        "g1_rank": 9,
+        "n2_rank": 33,
+        "g2_rank": 7,
+        "x_posts": 1287,
+        "x_rank": 19,
+        "tiktok_posts": 87,
+        "tiktok_rank": 16,
+        "sns_dist": {
+            "X": 30.4,
+            "Instagram": 29.8,
+            "TikTok": 22.2,
+            "YouTube": 17.7
+        },
+        "n3": 56660,
+        "g3": 78281,
+        "nr3": 42.0,
+        "gr3": 58.0
+    },
+    {
+        "name": "アダム・ナガイ",
+        "history": [
+            7,
+            7,
+            10,
+            22,
+            21,
+            19
+        ],
+        "n1": 749512,
+        "g1": 298131,
+        "nr1": 71.5,
+        "gr1": 28.5,
+        "n2": 528431,
+        "g2": 242254,
+        "nr2": 68.6,
+        "gr2": 31.4,
+        "n1_rank": 11,
+        "g1_rank": 8,
+        "n2_rank": 20,
+        "g2_rank": 14,
+        "x_posts": 363,
+        "x_rank": 22,
+        "tiktok_posts": 20,
+        "tiktok_rank": 22,
+        "sns_dist": {
+            "X": 9.4,
+            "Instagram": 24.1,
+            "TikTok": 34.3,
+            "YouTube": 32.2
+        },
+        "n3": 108155,
+        "g3": 45142,
+        "nr3": 70.6,
+        "gr3": 29.4
+    },
+    {
+        "name": "小林 千悟",
+        "history": [
+            23,
+            23,
+            27,
+            26,
+            26,
+            18
+        ],
+        "n1": 342390,
+        "g1": 232804,
+        "nr1": 59.5,
+        "gr1": 40.5,
+        "n2": 347892,
+        "g2": 376913,
+        "nr2": 48.0,
+        "gr2": 52.0,
+        "n1_rank": 31,
+        "g1_rank": 11,
+        "n2_rank": 34,
+        "g2_rank": 10,
+        "x_posts": 1160,
+        "x_rank": 20,
+        "tiktok_posts": 35,
+        "tiktok_rank": 21,
+        "sns_dist": {
+            "X": 38.5,
+            "Instagram": 21.6,
+            "TikTok": 11.0,
+            "YouTube": 28.9
+        },
+        "n3": 35536,
+        "g3": 120540,
+        "nr3": 22.8,
+        "gr3": 77.2
+    },
+    {
+        "name": "倉橋 吾槙",
+        "history": [
+            11,
+            13,
+            11,
+            20,
+            28,
+            20
+        ],
+        "n1": 804763,
+        "g1": 120893,
+        "nr1": 86.9,
+        "gr1": 13.1,
+        "n2": 504118,
+        "g2": 158540,
+        "nr2": 76.1,
+        "gr2": 23.9,
+        "n1_rank": 9,
+        "g1_rank": 30,
+        "n2_rank": 23,
+        "g2_rank": 26,
+        "x_posts": 2877,
+        "x_rank": 9,
+        "tiktok_posts": 102,
+        "tiktok_rank": 11,
+        "sns_dist": {
+            "X": 52.0,
+            "Instagram": 20.4,
+            "TikTok": 13.3,
+            "YouTube": 14.3
+        },
+        "n3": 134151,
+        "g3": 17409,
+        "nr3": 88.5,
+        "gr3": 11.5
+    },
+    {
+        "name": "岡田 侑磨",
+        "history": [
+            47,
+            48,
+            39,
+            32,
+            32,
+            17
+        ],
+        "n1": 237995,
+        "g1": 63227,
+        "nr1": 79.0,
+        "gr1": 21.0,
+        "n2": 467238,
+        "g2": 126329,
+        "nr2": 78.7,
+        "gr2": 21.3,
+        "n1_rank": 37,
+        "g1_rank": 41,
+        "n2_rank": 27,
+        "g2_rank": 31,
+        "x_posts": 3881,
+        "x_rank": 4,
+        "tiktok_posts": 78,
+        "tiktok_rank": 17,
+        "sns_dist": {
+            "X": 29.3,
+            "Instagram": 28.2,
+            "TikTok": 20.8,
+            "YouTube": 21.7
+        },
+        "n3": 129567,
+        "g3": 19192,
+        "nr3": 87.1,
+        "gr3": 12.9
+    }
+];
 
-const chartOrder=["hot100","stsongs","dlsongs"];function chartLabel(code){return({hot100:"Hot 100",stsongs:"ストリーミング",dlsongs:"ダウンロード"}[code]||code)}function normalized(value){return String(value||"").normalize("NFKC").toLowerCase()}function globalSearchData(){const artistMap=new Map(),songMap=new Map();chartOrder.forEach(code=>{const details=dashboards[scopeCode]?.[code]?.artistDetails||[];details.forEach(artist=>{if(!artist?.artist)return;let artistEntry=artistMap.get(artist.artist);if(!artistEntry){artistEntry={artist:artist.artist,charts:new Set};artistMap.set(artist.artist,artistEntry)}artistEntry.charts.add(code);(artist.songs||[]).forEach(song=>{if(!song?.title)return;const key=artist.artist+"\u0000"+song.title;let songEntry=songMap.get(key);if(!songEntry){songEntry={artist:artist.artist,title:song.title,charts:new Set};songMap.set(key,songEntry)}songEntry.charts.add(code)})})});return{artists:[...artistMap.values()],songs:[...songMap.values()]}}function resultPriority(value,query){const text=normalized(value);return text===query?0:text.startsWith(query)?1:2}function preferredChart(charts){return charts.has(chartCode)?chartCode:chartOrder.find(code=>charts.has(code))||chartCode}function renderGlobalSearch(){const input=document.getElementById("globalSearch"),results=document.getElementById("searchResults"),status=document.getElementById("searchStatus"),query=normalized(input.value).trim();if(!query){results.innerHTML="";status.textContent="文字を入力すると候補を表示します。";return}const index=globalSearchData(),matchedArtists=index.artists.filter(item=>normalized(item.artist).includes(query)).sort((a,b)=>resultPriority(a.artist,query)-resultPriority(b.artist,query)||a.artist.localeCompare(b.artist,"ja")),matchedSongs=index.songs.filter(item=>normalized(item.title+" "+item.artist).includes(query)).sort((a,b)=>resultPriority(a.title,query)-resultPriority(b.title,query)||a.title.localeCompare(b.title,"ja")),visibleArtists=matchedArtists.slice(0,12),visibleSongs=matchedSongs.slice(0,18);status.textContent=`アーティスト ${matchedArtists.length}組・楽曲 ${matchedSongs.length}曲が見つかりました${matchedArtists.length>12||matchedSongs.length>18?"（関連度の高い候補を表示）":""}`;results.innerHTML=visibleArtists.map(item=>`<button class="search-result" type="button" data-artist="${esc(item.artist)}" data-search-chart="${preferredChart(item.charts)}"><span class="search-result-main"><span class="search-result-name">${esc(item.artist)}</span><span class="search-result-sub">${[...item.charts].map(chartLabel).join(" / ")}</span></span><span class="search-result-type">ARTIST</span></button>`).join("")+visibleSongs.map(item=>`<button class="search-result" type="button" data-song-title="${esc(item.title)}" data-song-artist="${esc(item.artist)}" data-search-chart="${preferredChart(item.charts)}"><span class="search-result-main"><span class="search-result-name">${esc(item.title)}</span><span class="search-result-sub">${esc(item.artist)} ・ ${[...item.charts].map(chartLabel).join(" / ")}</span></span><span class="search-result-type">SONG</span></button>`).join("");if(!results.innerHTML)results.innerHTML='<p class="search-status">一致するデータはありません。</p>'}function rankingYear(){return String(dashboard.latestDate||"").slice(0,4)}function rankedArtistsForYear(){const year=rankingYear();return artists.filter(a=>(a.yearCounts?.[year]??a.appearances??0)>0).slice(0,50)}function rankedSongsForYear(){const year=rankingYear(),ranked=artistDetails.flatMap(artist=>(artist.songs||[]).flatMap(song=>{const history=(song.history||[]).filter(item=>String(item.date||"").slice(0,4)===year);if(!history.length)return[];return[{...song,artist:artist.artist,history,appearances:history.length,weeks:new Set(history.map(item=>item.date)).size,best:Math.min(...history.map(item=>item.rank)),top10:history.filter(item=>item.rank<=10).length,latest:history[history.length-1].date}]}));return ranked.sort((a,b)=>b.appearances-a.appearances||b.weeks-a.weeks||a.best-b.best||a.artist.localeCompare(b.artist,"ja")||a.title.localeCompare(b.title,"ja")).slice(0,100).map((song,index)=>({...song,rankingPosition:index+1}))}function renderArtists(){const year=rankingYear(),f=document.getElementById("artistFilter").value,data=rankedArtistsForYear().filter(a=>f==="all"||f==="active"&&a.active||f==="rising"&&a.ytdChange>0||f==="top10"&&a.top10>0),showAll=f!=="all"||artistExpanded,visible=showAll?data:data.slice(0,5),button=document.getElementById("artistMore");document.getElementById("artistRankingYear").textContent=year;document.getElementById("artistRows").innerHTML=visible.map(a=>`<tr class="click-row" data-artist="${esc(a.artist)}"><td><span class="rank-dot">${a.rank}</span></td><td>${esc(a.artist)} ${a.active?'<span class="badge">NOW</span>':''}</td><td>${fmt(a.appearances)}</td><td>${a.weeks}</td><td>${a.songsCount}</td><td>${a.top10}</td><td>${a.best?`#${a.best}`:'—'}</td><td class="${cls(a.ytdChange)}">${signed(a.ytdChange)}</td></tr>`).join("");document.getElementById("artistCount").textContent=`${visible.length} / ${data.length}組を表示（最大50組）`;button.hidden=f!=="all"||data.length<=5;button.textContent=artistExpanded?"上位5組に戻す":"もっと見る"}
-function renderSongs(){const year=rankingYear(),data=rankedSongsForYear(),limit=Math.min(songDisplayLimit,data.length),visible=data.slice(0,limit),button=document.getElementById("songMore");document.getElementById("songRankingYear").textContent=year;document.getElementById("songRows").innerHTML=visible.map(s=>`<tr class="click-row" data-song-title="${esc(s.title)}" data-song-artist="${esc(s.artist)}"><td><span class="rank-dot">${s.rankingPosition}</span></td><td>${esc(s.title)}</td><td>${esc(s.artist)}</td><td>${s.appearances}</td><td>${s.weeks}</td><td>#${s.best}</td><td>${s.top10}</td></tr>`).join("");document.getElementById("songCount").textContent=`${visible.length} / ${data.length}曲を表示（最大100曲）`;button.hidden=data.length<=5;button.textContent=songDisplayLimit>=data.length?"上位5曲に戻す":"もっと見る"}
-document.getElementById("artistMore").addEventListener("click",()=>{artistExpanded=!artistExpanded;renderArtists()});document.getElementById("songMore").addEventListener("click",()=>{const total=rankedSongsForYear().length;songDisplayLimit=songDisplayLimit>=total?5:total;renderSongs()});
-function drawYearTrend(a){const canvas=document.getElementById("yearTrend"),ratio=window.devicePixelRatio||1,width=Math.max(canvas.parentElement.clientWidth,560),height=300;canvas.width=width*ratio;canvas.height=height*ratio;canvas.style.width=`${width}px`;canvas.style.height=`${height}px`;const context=canvas.getContext("2d");context.setTransform(ratio,0,0,ratio,0,0);context.clearRect(0,0,width,height);const left=48,right=20,top=20,bottom=36,graphWidth=width-left-right,graphHeight=height-top-bottom,v24=a.weeklyCumulative["2024"],v25=a.weeklyCumulative["2025"],v26=a.weeklyCumulative["2026"],maximum=Math.max(...v24,...v25,...v26,1),rounded=Math.ceil(maximum/10)*10||10;context.font="11px sans-serif";context.fillStyle="#6b6b67";context.strokeStyle="rgba(18,18,18,.12)";context.lineWidth=1;for(let step=0;step<=4;step+=1){const value=rounded*step/4,y=top+graphHeight-(value/rounded*graphHeight);context.beginPath();context.moveTo(left,y);context.lineTo(width-right,y);context.stroke();context.textAlign="right";context.textBaseline="middle";context.fillText(Math.round(value),left-8,y)}[1,13,26,39,53].forEach(week=>{const x=left+(week-1)/52*graphWidth;context.textAlign="center";context.textBaseline="top";context.fillText(`第${week}週`,x,height-bottom+10)});function line(values,color){context.beginPath();values.forEach((value,index)=>{const x=left+index/52*graphWidth,y=top+graphHeight-(value/rounded*graphHeight);if(index===0)context.moveTo(x,y);else context.lineTo(x,y)});context.strokeStyle=color;context.lineWidth=3;context.lineJoin="round";context.lineCap="round";context.stroke();const last=values.length-1,x=left+last/52*graphWidth,y=top+graphHeight-(values[last]/rounded*graphHeight);context.fillStyle=color;context.beginPath();context.arc(x,y,4,0,Math.PI*2);context.fill()}line(v24,"#6b7280");line(v25,"#0072b2");line(v26,"#d55e00")}
-function findSongDetail(artist,title){const artistData=artistDetails.find(a=>a.artist===artist),historySong=artistData?.songs.find(s=>s.title===title),summary=songs.find(s=>s.artist===artist&&s.title===title),latest=latestSongs.find(s=>s.artist===artist&&s.title===title);if(!historySong&&!summary&&!latest)return null;return{artist,title,...(summary||{}),...(historySong||{}),...(latest||{}),history:historySong?.history||[]}}function openSongDetail(artist,title){const artistDialog=document.getElementById("detailDialog");if(artistDialog.open)artistDialog.close();const s=findSongDetail(artist,title);if(!s)return;const history=s.history||[],last=history.length?history[history.length-1]:null,first=history.length?history[0]:null,latestRank=s.latestRank??(last&&last.date===dashboard.latestDate?last.rank:null);document.getElementById("songDetailTitle").textContent=s.title;const artistButton=document.getElementById("songDetailArtist");artistButton.textContent=s.artist+" のArtist Detailへ";artistButton.dataset.artistName=s.artist;document.getElementById("songDetailChart").textContent=dashboard.chartName+"・"+(first?first.date+"〜"+last.date:"順位履歴なし");const stats=[["最新順位",latestRank?"#"+latestRank:"—"],["最高順位",s.best?"#"+s.best:"—"],["延べ登場",(s.appearances??history.length)+"回"],["登場週",(s.weeks??history.length)+"週"],["Top 10",(s.top10??history.filter(h=>h.rank<=10).length)+"回"],["最終登場",s.latest??(last?last.date:"—")]];document.getElementById("songDetailStats").innerHTML=stats.map(([label,value])=>"<div class=\"detail-stat\"><span>"+esc(label)+"</span><strong>"+esc(value)+"</strong></div>").join("");document.getElementById("songDetailHistory").innerHTML=history.length?[...history].reverse().map(h=>"<div class=\"song-history-item\"><span>"+esc(h.date)+"</span><strong>#"+h.rank+"</strong></div>").join(""):"<p class=\"muted\">週別の順位履歴はありません。</p>";const dialog=document.getElementById("songDialog");if(!dialog.open)dialog.showModal()}let currentArtistName="";function artistShareUrl(name){const base=location.href.split("#")[0],params=new URLSearchParams({artist:name,scope:scopeCode,chart:chartCode});return base+"#"+params.toString()}function openDetail(name,updateUrl=true){const a=artistDetails.find(x=>x.artist===name);if(!a)return;currentArtistName=a.artist;if(updateUrl)history.replaceState(null,"",artistShareUrl(a.artist));document.getElementById("detailName").textContent=a.artist;const stats=[['延べ登場',a.appearances+'回'],['登場週',a.weeks+'週'],['ランクイン曲',a.songsCount+'曲'],['Top 10',a.top10+'回'],['最高順位',a.best?'#'+a.best:'—'],['前年同期比',signed(a.ytdChange)]];document.getElementById("detailStats").innerHTML=stats.map(([l,v])=>`<div class="detail-stat"><span>${l}</span><strong>${v}</strong></div>`).join('');document.getElementById("detailSongs").innerHTML=a.songs.length?a.songs.map(s=>`<button class="song-item" type="button" data-song-title="${esc(s.title)}" data-song-artist="${esc(a.artist)}"><div class="song-title">${esc(s.title)}</div><div class="song-meta">延べ${s.appearances}回・${s.weeks}週・最高#${s.best}・最終登場 ${s.latest}</div></button>`).join(''):'<p class="muted">2026年のランクイン曲はありません。</p>';const dialog=document.getElementById("detailDialog");if(!dialog.open)dialog.showModal();requestAnimationFrame(()=>drawYearTrend(a))}document.addEventListener("click",e=>{const songTarget=e.target.closest("[data-song-title]");if(songTarget)openSongDetail(songTarget.dataset.songArtist,songTarget.dataset.songTitle);else{const target=e.target.closest("[data-artist]");if(target)openDetail(target.dataset.artist)}});document.getElementById("artistSearch").addEventListener("input",renderArtists);document.getElementById("artistFilter").addEventListener("change",renderArtists);document.getElementById("songSearch").addEventListener("input",renderSongs);const songDialog=document.getElementById("songDialog");document.getElementById("songDetailClose").addEventListener("click",()=>songDialog.close());songDialog.addEventListener("click",e=>{if(e.target===e.currentTarget)e.currentTarget.close()});document.getElementById("songDetailArtist").addEventListener("click",e=>{const name=e.currentTarget.dataset.artistName;songDialog.close();if(name)openDetail(name)});document.getElementById("shareX").addEventListener("click",()=>{if(!currentArtistName)return;const query=new URLSearchParams({text:currentArtistName+"のBillboard JAPANチャート推移をチェック",url:artistShareUrl(currentArtistName)});window.open("https://twitter.com/intent/tweet?"+query.toString(),"_blank","noopener,noreferrer,width=640,height=520")});const detailDialog=document.getElementById("detailDialog");document.getElementById("detailClose").addEventListener("click",()=>detailDialog.close());detailDialog.addEventListener("click",e=>{if(e.target===e.currentTarget)e.currentTarget.close()});detailDialog.addEventListener("close",()=>{currentArtistName="";history.replaceState(null,"",location.href.split("#")[0])});function applyDashboard(){dashboard=dashboards[scopeCode][chartCode];artists=dashboard.artists;artistDetails=dashboard.artistDetails;songs=dashboard.songs;latestSongs=dashboard.latestSongs;document.getElementById("scopeName").textContent=({boys:"ボーイズグループ",girls:"ガールズグループ",all:"全アーティスト"}[scopeCode]);document.getElementById("chartName").textContent=dashboard.chartName;document.querySelectorAll("[data-chart]").forEach(button=>button.classList.toggle("active",button.dataset.chart===chartCode));document.querySelectorAll("[data-scope]").forEach(button=>button.classList.toggle("active",button.dataset.scope===scopeCode));renderLatest();renderStats();renderPower();renderArtists();renderSongs()}
-function drawSongRankTrend(rawHistory){const canvas=document.getElementById("songRankTrend"),ratio=window.devicePixelRatio||1,width=Math.max(canvas.parentElement.clientWidth,560),height=300;canvas.width=width*ratio;canvas.height=height*ratio;canvas.style.width=`${width}px`;canvas.style.height=`${height}px`;const context=canvas.getContext("2d");context.setTransform(ratio,0,0,ratio,0,0);context.clearRect(0,0,width,height);const history=[...rawHistory].sort((a,b)=>a.date.localeCompare(b.date));if(!history.length){context.fillStyle="#686868";context.font="700 13px sans-serif";context.textAlign="center";context.textBaseline="middle";context.fillText("順位推移データはありません",width/2,height/2);return}const left=52,right=22,top=24,bottom=48,graphWidth=width-left-right,graphHeight=height-top-bottom,times=history.map(item=>new Date(item.date+"T00:00:00Z").getTime()),minimum=times[0],maximum=times[times.length-1],xFor=time=>maximum===minimum?left+graphWidth/2:left+(time-minimum)/(maximum-minimum)*graphWidth,yFor=rank=>top+(Math.max(1,Math.min(100,rank))-1)/99*graphHeight;context.fillStyle="rgba(184,255,37,.18)";context.fillRect(left,top,graphWidth,yFor(10)-top);context.font="11px sans-serif";context.lineWidth=1;[1,10,25,50,75,100].forEach(rank=>{const y=yFor(rank);context.strokeStyle=rank===10?"rgba(87,123,0,.45)":"rgba(18,18,18,.12)";context.beginPath();context.moveTo(left,y);context.lineTo(width-right,y);context.stroke();context.fillStyle="#6b6b67";context.textAlign="right";context.textBaseline="middle";context.fillText("#"+rank,left-8,y)});const labelIndexes=[0,Math.round((history.length-1)*.25),Math.round((history.length-1)*.5),Math.round((history.length-1)*.75),history.length-1];[...new Set(labelIndexes)].forEach(index=>{const item=history[index],x=xFor(times[index]),date=new Date(item.date+"T00:00:00Z");context.fillStyle="#6b6b67";context.textAlign="center";context.textBaseline="top";context.fillText((date.getUTCMonth()+1)+"/"+date.getUTCDate(),x,height-bottom+12)});context.strokeStyle="#0072b2";context.lineWidth=3;context.lineJoin="round";context.lineCap="round";context.beginPath();history.forEach((item,index)=>{const x=xFor(times[index]),y=yFor(item.rank),gap=index?times[index]-times[index-1]:0;if(index===0||gap>9*24*60*60*1000)context.moveTo(x,y);else context.lineTo(x,y)});context.stroke();history.forEach((item,index)=>{const x=xFor(times[index]),y=yFor(item.rank);context.fillStyle=item.rank<=10?"#b8ff25":"#25d8ff";context.strokeStyle="#050505";context.lineWidth=2;context.beginPath();context.arc(x,y,5,0,Math.PI*2);context.fill();context.stroke();if(history.length<=12){context.fillStyle="#050505";context.font="800 10px sans-serif";context.textAlign="center";context.textBaseline="bottom";context.fillText("#"+item.rank,x,y-8)}})}
-let handlingHistoryPop=false,artistHistoryActive=false,songHistoryActive=false;
-const openDetailWithoutHistory=openDetail;
-openDetail=(name,updateUrl=true)=>{if(!artistDetails.some(a=>a.artist===name))return;if(updateUrl){const base=location.href.split("#")[0];history.replaceState(null,"",base);history.pushState({modal:"artist",artist:name,scope:scopeCode,chart:chartCode},"",artistShareUrl(name));artistHistoryActive=true}openDetailWithoutHistory(name,false)};
-function songShareUrl(artist,title){const base=location.href.split("#")[0],params=new URLSearchParams({song:title,songArtist:artist,scope:scopeCode,chart:chartCode});return base+"#"+params.toString()}
-const openSongDetailWithoutTrend=openSongDetail;
-openSongDetail=(artist,title,updateUrl=true)=>{const song=findSongDetail(artist,title);if(!song)return;currentSongShare=song;openSongDetailWithoutTrend(artist,title);if(updateUrl){const base=location.href.split("#")[0];history.replaceState(null,"",base);history.pushState({modal:"song",song:title,songArtist:artist,scope:scopeCode,chart:chartCode},"",songShareUrl(artist,title));songHistoryActive=true}requestAnimationFrame(()=>drawSongRankTrend(song.history||[]))};
-detailDialog.addEventListener("close",()=>{const movingToSong=songDialog.open;if(artistHistoryActive&&!handlingHistoryPop&&!movingToSong){artistHistoryActive=false;history.back()}else if(movingToSong)artistHistoryActive=false});
-songDialog.addEventListener("close",()=>{const movingToArtist=detailDialog.open;if(songHistoryActive&&!handlingHistoryPop&&!movingToArtist){songHistoryActive=false;history.back()}else if(movingToArtist)songHistoryActive=false});
-addEventListener("popstate",()=>{handlingHistoryPop=true;artistHistoryActive=false;songHistoryActive=false;if(detailDialog.open)detailDialog.close();if(songDialog.open)songDialog.close();setTimeout(()=>{handlingHistoryPop=false},0)});
-function scopeLabel(){return({boys:"ボーイズグループ",girls:"ガールズグループ",korean:"K-POPグループ",all:"全アーティスト"}[scopeCode])}
-let currentShareTarget=null,currentSongShare=null;
-function setShareStatus(message,type=""){const status=document.getElementById("shareStatus");status.textContent=message;status.className="share-status"+(type?" "+type:"")}
-const shareCanvasFont='Arial, "Yu Gothic UI", "Hiragino Kaku Gothic ProN", sans-serif';
-function fitCanvasText(context,text,maxWidth,startSize,minSize,weight=900){let size=startSize;while(size>minSize){context.font=`${weight} ${size}px ${shareCanvasFont}`;if(context.measureText(text).width<=maxWidth)break;size-=2}return size}
-function clipCanvasText(context,text,maxWidth){let output=String(text);if(context.measureText(output).width<=maxWidth)return output;while(output.length>1&&context.measureText(output+"…").width>maxWidth)output=output.slice(0,-1);return output+"…"}
-function drawShareFrame(context,kind){const width=1200,height=630;context.clearRect(0,0,width,height);context.fillStyle="#fffdf8";context.fillRect(0,0,width,height);context.strokeStyle="#1f1c19";context.lineWidth=2;context.strokeRect(24,24,1152,582);context.fillStyle="#9b3344";context.fillRect(24,24,1152,14);context.fillRect(64,60,64,64);context.fillStyle="#fff";context.font=`900 24px ${shareCanvasFont}`;context.textAlign="center";context.textBaseline="middle";context.fillText("JP",96,92);context.textAlign="left";context.fillStyle="#1f1c19";context.font=`900 25px ${shareCanvasFont}`;context.fillText("JAPAN CHART PULSE",150,84);context.fillStyle="#9b3344";context.font=`800 17px ${shareCanvasFont}`;context.fillText(kind,150,114);context.textAlign="right";context.fillStyle="#70685f";context.font=`700 17px ${shareCanvasFont}`;context.fillText("LATEST  "+dashboard.latestDate,1136,88);context.strokeStyle="#d8cfc2";context.lineWidth=2;context.beginPath();context.moveTo(64,150);context.lineTo(1136,150);context.stroke();context.textAlign="left";context.textBaseline="alphabetic"}
-function drawShareMetrics(context,stats){stats.forEach(([label,value],index)=>{const x=64+index*266;context.fillStyle="#f3eee4";context.fillRect(x,354,246,112);context.fillStyle="#9b3344";context.fillRect(x,354,246,6);context.fillStyle="#70685f";context.font=`800 17px ${shareCanvasFont}`;context.fillText(label,x+16,390);context.fillStyle="#1f1c19";context.font=`900 38px ${shareCanvasFont}`;context.fillText(value,x+16,442)})}
-function drawArtistShareCard(a){const canvas=document.getElementById("shareCard"),context=canvas.getContext("2d");drawShareFrame(context,"ARTIST PROFILE");context.fillStyle="#70685f";context.font=`800 19px ${shareCanvasFont}`;context.fillText(scopeLabel()+"  /  "+dashboard.chartName,64,190);const artistSize=fitCanvasText(context,a.artist,790,72,40);context.fillStyle="#1f1c19";context.font=`900 ${artistSize}px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,a.artist,790),64,292);context.textAlign="right";context.fillStyle="#9b3344";context.font=`800 16px ${shareCanvasFont}`;context.fillText("ARTIST RANK",1136,216);context.fillStyle="#1f1c19";context.font=`900 72px ${shareCanvasFont}`;context.fillText(a.rank?"#"+a.rank:"—",1136,292);context.textAlign="left";drawShareMetrics(context,[["延べ登場",a.appearances+"回"],["登場週",a.weeks+"週"],["Top 10",a.top10+"回"],["最高順位",a.best?"#"+a.best:"—"]]);context.fillStyle="#9b3344";context.font=`800 16px ${shareCanvasFont}`;context.fillText("TOP SONGS",64,510);context.fillStyle="#1f1c19";context.font=`700 20px ${shareCanvasFont}`;const songLine=(a.songs||[]).slice(0,3).map((song,index)=>(index+1)+". "+song.title).join("   /   ")||"ランクイン曲はありません";context.fillText(clipCanvasText(context,songLine,1072),64,544);context.fillStyle="#70685f";context.font=`700 16px ${shareCanvasFont}`;context.fillText(rankingYear()+"年集計  ・  "+dashboard.chartName,64,584)}
-function drawSongShareCard(song){const canvas=document.getElementById("shareCard"),context=canvas.getContext("2d"),history=song.history||[],last=history.length?history[history.length-1]:null,latestRank=song.latestRank??(last&&last.date===dashboard.latestDate?last.rank:null);drawShareFrame(context,"SONG PROFILE");context.fillStyle="#70685f";context.font=`800 19px ${shareCanvasFont}`;context.fillText(scopeLabel()+"  /  "+dashboard.chartName,64,190);const titleSize=fitCanvasText(context,song.title,810,64,34);context.fillStyle="#1f1c19";context.font=`900 ${titleSize}px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,song.title,810),64,278);context.fillStyle="#9b3344";context.font=`800 23px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,song.artist,810),64,322);context.textAlign="right";context.fillStyle="#9b3344";context.font=`800 16px ${shareCanvasFont}`;context.fillText("HIT SONG RANK",1136,216);context.fillStyle="#1f1c19";context.font=`900 72px ${shareCanvasFont}`;context.fillText(song.rankingPosition?"#"+song.rankingPosition:"—",1136,292);context.textAlign="left";drawShareMetrics(context,[["最新順位",latestRank?"#"+latestRank:"—"],["最高順位",song.best?"#"+song.best:"—"],["登場週",(song.weeks??history.length)+"週"],["Top 10",(song.top10??history.filter(item=>item.rank<=10).length)+"回"]]);context.fillStyle="#9b3344";context.font=`800 16px ${shareCanvasFont}`;context.fillText("CHART HISTORY",64,510);context.fillStyle="#1f1c19";context.font=`700 21px ${shareCanvasFont}`;const first=history[0],period=first&&last?first.date+"  —  "+last.date:"順位履歴なし";context.fillText(period,64,544);context.fillStyle="#70685f";context.font=`700 16px ${shareCanvasFont}`;context.fillText(rankingYear()+"年集計  ・  "+dashboard.chartName,64,584)}
-function canvasBlob(){return new Promise((resolve,reject)=>document.getElementById("shareCard").toBlob(blob=>blob?resolve(blob):reject(new Error("画像を作成できませんでした")),"image/png"))}
-async function copyText(value){if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(value);return}const field=document.createElement("textarea");field.value=value;field.style.position="fixed";field.style.opacity="0";document.body.appendChild(field);field.select();const copied=document.execCommand("copy");field.remove();if(!copied)throw new Error("コピーできませんでした")}
-function openShareDialog(){if(!currentArtistName)return;const artist=artistDetails.find(item=>item.artist===currentArtistName);if(!artist)return;currentShareTarget={type:"artist",data:artist};document.getElementById("shareKind").textContent="SHARE ARTIST";document.getElementById("shareTitle").textContent=artist.artist+"を共有";setShareStatus("");drawArtistShareCard(artist);const dialog=document.getElementById("shareDialog");if(!dialog.open)dialog.showModal()}
-function openSongShareDialog(){if(!currentSongShare)return;const ranked=rankedSongsForYear().find(item=>item.artist===currentSongShare.artist&&item.title===currentSongShare.title),song={...currentSongShare,...(ranked||{})};currentShareTarget={type:"song",data:song};document.getElementById("shareKind").textContent="SHARE SONG";document.getElementById("shareTitle").textContent=song.title+"を共有";setShareStatus("");drawSongShareCard(song);const dialog=document.getElementById("shareDialog");if(!dialog.open)dialog.showModal()}
-function sharePayload(){if(!currentShareTarget)return null;if(currentShareTarget.type==="song"){const song=currentShareTarget.data;return{url:songShareUrl(song.artist,song.title),text:song.artist+"「"+song.title+"」のBillboard JAPANチャート推移をチェック",title:song.title+" / "+song.artist+" | JAPAN CHART PULSE",fileName:"chart-pulse-song.png"}}const artist=currentShareTarget.data;return{url:artistShareUrl(artist.artist),text:artist.artist+"のBillboard JAPANチャート推移をチェック",title:artist.artist+" | JAPAN CHART PULSE",fileName:"chart-pulse-artist.png"}}
-document.getElementById("openShare").addEventListener("click",openShareDialog);document.getElementById("openSongShare").addEventListener("click",openSongShareDialog);const shareDialog=document.getElementById("shareDialog");document.getElementById("shareClose").addEventListener("click",()=>shareDialog.close());shareDialog.addEventListener("click",event=>{if(event.target===event.currentTarget)event.currentTarget.close()});
-document.getElementById("copyShareLink").addEventListener("click",async()=>{const payload=sharePayload();if(!payload)return;try{await copyText(payload.url);setShareStatus("リンクをコピーしました。","success")}catch(error){setShareStatus("リンクをコピーできませんでした。","error")}});
-document.getElementById("shareWithImage").addEventListener("click",async()=>{const payload=sharePayload();if(!payload)return;setShareStatus("共有画像を準備しています…");try{const blob=await canvasBlob(),file=new File([blob],payload.fileName,{type:"image/png"}),shareData={title:payload.title,text:payload.text,url:payload.url,files:[file]};if(navigator.share&&navigator.canShare?.({files:[file]})){await navigator.share(shareData);setShareStatus("画像とリンクを共有しました。","success");return}const popup=window.open("about:blank","_blank","width=640,height=520");if(popup)popup.opener=null;let imageReady=false;if(navigator.clipboard?.write&&window.ClipboardItem){try{await navigator.clipboard.write([new ClipboardItem({"image/png":blob})]);imageReady=true}catch(error){imageReady=false}}if(!imageReady){const download=document.createElement("a");download.href=URL.createObjectURL(blob);download.download=payload.fileName;download.click();setTimeout(()=>URL.revokeObjectURL(download.href),1000)}const query=new URLSearchParams({text:payload.text,url:payload.url}),composer="https://twitter.com/intent/tweet?"+query.toString();if(popup)popup.location.href=composer;else window.open(composer,"_blank","noopener,noreferrer");setShareStatus(imageReady?"画像をコピーしました。Xの投稿画面で貼り付けてください。":"画像を保存しました。Xの投稿画面で添付してください。","success")}catch(error){if(error?.name==="AbortError"){setShareStatus("共有をキャンセルしました。");return}setShareStatus("画像付き共有を開始できませんでした。","error")}});const applyDashboardWithScopeLabel=applyDashboard;applyDashboard=()=>{artistExpanded=false;songDisplayLimit=5;applyDashboardWithScopeLabel();document.getElementById("scopeName").textContent=scopeLabel()};
-function emptyArtistDetail(name){const zeroes=()=>Array(53).fill(0);return{artist:name,appearances:0,weeks:0,songsCount:0,top10:0,best:null,active:false,previousYtd:0,ytdChange:0,rank:null,weeklyCumulative:{"2024":zeroes(),"2025":zeroes(),"2026":zeroes()},yearCounts:{"2024":0,"2025":0,"2026":0},songs:[]}}function artistDetailForChart(name,code=chartCode){return dashboards[scopeCode]?.[code]?.artistDetails?.find(item=>item.artist===name)||emptyArtistDetail(name)}function renderArtistDetailAcrossCharts(name,updateUrl=true){if(!name)return;const a=artistDetailForChart(name);currentArtistName=name;if(updateUrl){const base=location.href.split("#")[0];history.replaceState(null,"",base);history.pushState({modal:"artist",artist:name,scope:scopeCode,chart:chartCode},"",artistShareUrl(name));artistHistoryActive=true}document.getElementById("detailName").textContent=name;document.querySelectorAll("[data-detail-chart]").forEach(button=>{const active=button.dataset.detailChart===chartCode;button.classList.toggle("active",active);button.setAttribute("aria-selected",String(active))});document.getElementById("detailChartContext").textContent=dashboard.chartName+(a.appearances?" の集計":" ではランクイン実績がありません");const stats=[["延べ登場",a.appearances+"回"],["登場週",a.weeks+"週"],["ランクイン曲",a.songsCount+"曲"],["Top 10",a.top10+"回"],["最高順位",a.best?"#"+a.best:"—"],["前年同期比",signed(a.ytdChange)]];document.getElementById("detailStats").innerHTML=stats.map(([label,value])=>`<div class="detail-stat"><span>${label}</span><strong>${value}</strong></div>`).join("");document.getElementById("detailSongs").innerHTML=a.songs.length?a.songs.map(song=>`<button class="song-item" type="button" data-song-title="${esc(song.title)}" data-song-artist="${esc(name)}"><div class="song-title">${esc(song.title)}</div><div class="song-meta">延べ${song.appearances}回・${song.weeks}週・最高#${song.best}・最終登場 ${song.latest}</div></button>`).join(""):`<p class="muted">${esc(dashboard.chartName)}では2026年のランクイン曲はありません。</p>`;const dialog=document.getElementById("detailDialog");if(!dialog.open)dialog.showModal();requestAnimationFrame(()=>drawYearTrend(a))}openDetail=renderArtistDetailAcrossCharts;document.getElementById("detailChartSwitch").addEventListener("click",async event=>{const button=event.target.closest("[data-detail-chart]");if(!button||!currentArtistName||button.dataset.detailChart===chartCode)return;const name=currentArtistName;if(!await activateDashboard(scopeCode,button.dataset.detailChart))return;history.replaceState({modal:"artist",artist:name,scope:scopeCode,chart:chartCode},"",artistShareUrl(name));openDetail(name,false)});document.getElementById("globalSearch").addEventListener("input",renderGlobalSearch);document.addEventListener("click",async event=>{const target=event.target.closest("[data-search-chart]");if(!target)return;event.preventDefault();event.stopImmediatePropagation();const nextChart=target.dataset.searchChart,artist=target.dataset.songArtist||target.dataset.artist,title=target.dataset.songTitle;if(nextChart&&nextChart!==chartCode&&!await activateDashboard(scopeCode,nextChart))return;if(title)openSongDetail(artist,title);else if(artist)openDetail(artist)},true);document.getElementById("openShare").addEventListener("click",event=>{if(!currentArtistName)return;event.preventDefault();event.stopImmediatePropagation();const artist=artistDetailForChart(currentArtistName);currentShareTarget={type:"artist",data:artist};document.getElementById("shareKind").textContent="SHARE ARTIST";document.getElementById("shareTitle").textContent=artist.artist+"を共有";setShareStatus("");drawArtistShareCard(artist);const dialog=document.getElementById("shareDialog");if(!dialog.open)dialog.showModal()},true);const applyDashboardWithGlobalSearch=applyDashboard;applyDashboard=()=>{applyDashboardWithGlobalSearch();renderGlobalSearch()};
-function scopeCodeLabel(code){return({boys:"ボーイズグループ",girls:"ガールズグループ",korean:"K-POPグループ",all:"全アーティスト"}[code]||code)}globalSearchData=()=>{const artistMap=new Map(),songMap=new Map();Object.entries(dashboards).forEach(([sourceScope,charts])=>{chartOrder.forEach(sourceChart=>{const details=charts?.[sourceChart]?.artistDetails||[];details.forEach(artist=>{if(!artist?.artist)return;let artistEntry=artistMap.get(artist.artist);if(!artistEntry){artistEntry={artist:artist.artist,sources:new Set};artistMap.set(artist.artist,artistEntry)}artistEntry.sources.add(sourceScope+"|"+sourceChart);(artist.songs||[]).forEach(song=>{if(!song?.title)return;const key=artist.artist+"\u0000"+song.title;let songEntry=songMap.get(key);if(!songEntry){songEntry={artist:artist.artist,title:song.title,sources:new Set};songMap.set(key,songEntry)}songEntry.sources.add(sourceScope+"|"+sourceChart)})})})});return{artists:[...artistMap.values()],songs:[...songMap.values()]}};function preferredSearchSource(sources){const parsed=[...sources].map(value=>{const[scope,chart]=value.split("|");return{scope,chart}});return parsed.find(item=>item.scope===scopeCode&&item.chart===chartCode)||parsed.find(item=>item.scope==="all"&&item.chart===chartCode)||parsed.find(item=>item.chart===chartCode)||parsed.find(item=>item.scope===scopeCode)||parsed[0]||{scope:scopeCode,chart:chartCode}}function searchSourceSummary(sources){const parsed=[...sources].map(value=>{const[scope,chart]=value.split("|");return{scope,chart}}),scopes=[...new Set(parsed.map(item=>scopeCodeLabel(item.scope)))],charts=[...new Set(parsed.map(item=>chartLabel(item.chart)))];return(scopes.slice(0,2).join(" / ")+(scopes.length>2?" ほか":""))+" ・ "+charts.join(" / ")}renderGlobalSearch=()=>{const input=document.getElementById("globalSearch"),results=document.getElementById("searchResults"),status=document.getElementById("searchStatus"),query=normalized(input.value).trim();if(!query){results.innerHTML="";status.textContent="文字を入力すると候補を表示します。";return}const index=globalSearchData(),matchedArtists=index.artists.filter(item=>normalized(item.artist).includes(query)).sort((a,b)=>resultPriority(a.artist,query)-resultPriority(b.artist,query)||a.artist.localeCompare(b.artist,"ja")),matchedSongs=index.songs.filter(item=>normalized(item.title+" "+item.artist).includes(query)).sort((a,b)=>resultPriority(a.title,query)-resultPriority(b.title,query)||a.title.localeCompare(b.title,"ja")),visibleArtists=matchedArtists.slice(0,12),visibleSongs=matchedSongs.slice(0,18);status.textContent=`全表示対象からアーティスト ${matchedArtists.length}組・楽曲 ${matchedSongs.length}曲が見つかりました${matchedArtists.length>12||matchedSongs.length>18?"（関連度の高い候補を表示）":""}`;results.innerHTML=visibleArtists.map(item=>{const source=preferredSearchSource(item.sources);return`<button class="search-result" type="button" data-global-scope="${source.scope}" data-global-chart="${source.chart}" data-artist="${esc(item.artist)}"><span class="search-result-main"><span class="search-result-name">${esc(item.artist)}</span><span class="search-result-sub">${esc(searchSourceSummary(item.sources))}</span></span><span class="search-result-type">ARTIST</span></button>`}).join("")+visibleSongs.map(item=>{const source=preferredSearchSource(item.sources);return`<button class="search-result" type="button" data-global-scope="${source.scope}" data-global-chart="${source.chart}" data-song-title="${esc(item.title)}" data-song-artist="${esc(item.artist)}"><span class="search-result-main"><span class="search-result-name">${esc(item.title)}</span><span class="search-result-sub">${esc(item.artist)} ・ ${esc(searchSourceSummary(item.sources))}</span></span><span class="search-result-type">SONG</span></button>`}).join("");if(!results.innerHTML)results.innerHTML='<p class="search-status">一致するデータはありません。</p>'};document.getElementById("globalSearch").addEventListener("input",renderGlobalSearch);document.addEventListener("click",async event=>{const target=event.target.closest("[data-global-chart]");if(!target)return;event.preventDefault();event.stopImmediatePropagation();const nextScope=target.dataset.globalScope,nextChart=target.dataset.globalChart,artist=target.dataset.songArtist||target.dataset.artist,title=target.dataset.songTitle;if(nextScope&&nextChart&&(nextScope!==scopeCode||nextChart!==chartCode)&&!await activateDashboard(nextScope,nextChart))return;if(title)openSongDetail(artist,title);else if(artist)openDetail(artist)},true);
-const renderGlobalSearchWithLoadedData=renderGlobalSearch;renderGlobalSearch=()=>{const input=document.getElementById("globalSearch");if(input.value.trim()&&!allDashboardsLoaded()){document.getElementById("searchStatus").textContent="全データを読み込んでいます…";ensureAllDashboards().then(renderGlobalSearchWithLoadedData).catch(showDataError);return}renderGlobalSearchWithLoadedData()};
-const shareAcid="#b8ff25",shareAccent="#4f7200";let artistShareChartCode=chartCode;drawShareFrame=(context,kind)=>{const width=1200,height=630;context.clearRect(0,0,width,height);context.fillStyle="#fffdf8";context.fillRect(0,0,width,height);context.strokeStyle="#1f1c19";context.lineWidth=2;context.strokeRect(24,24,1152,582);context.fillStyle=shareAcid;context.fillRect(24,24,1152,14);context.fillRect(64,60,64,64);context.fillStyle="#111";context.font=`900 24px ${shareCanvasFont}`;context.textAlign="center";context.textBaseline="middle";context.fillText("JP",96,92);context.textAlign="left";context.fillStyle="#1f1c19";context.font=`900 25px ${shareCanvasFont}`;context.fillText("JAPAN CHART PULSE",150,84);context.fillStyle=shareAccent;context.font=`800 17px ${shareCanvasFont}`;context.fillText(kind,150,114);context.textAlign="right";context.fillStyle="#70685f";context.font=`700 17px ${shareCanvasFont}`;context.fillText("LATEST  "+dashboard.latestDate,1136,88);context.strokeStyle="#d8cfc2";context.lineWidth=2;context.beginPath();context.moveTo(64,150);context.lineTo(1136,150);context.stroke();context.textAlign="left";context.textBaseline="alphabetic"};drawShareMetrics=(context,stats)=>{stats.forEach(([label,value],index)=>{const x=64+index*266;context.fillStyle="#f3eee4";context.fillRect(x,354,246,112);context.fillStyle=shareAcid;context.fillRect(x,354,246,6);context.fillStyle="#70685f";context.font=`800 17px ${shareCanvasFont}`;context.fillText(label,x+16,390);context.fillStyle="#1f1c19";context.font=`900 38px ${shareCanvasFont}`;context.fillText(value,x+16,442)})};function drawMiniChartFrame(context,title){const x=824,y=178,width=312,height=148;context.fillStyle="#f3eee4";context.fillRect(x,y,width,height);context.fillStyle=shareAccent;context.font=`800 14px ${shareCanvasFont}`;context.fillText(title,x+14,y+24);context.strokeStyle="#d8cfc2";context.lineWidth=1;[0,1,2].forEach(index=>{const lineY=y+48+index*38;context.beginPath();context.moveTo(x+14,lineY);context.lineTo(x+width-14,lineY);context.stroke()});return{x:x+14,y:y+42,width:width-28,height:height-54}}function drawArtistMiniChart(context,artist){const area=drawMiniChartFrame(context,"2026 CUMULATIVE"),values=artist.weeklyCumulative?.["2026"]||[],maximum=Math.max(...values,1);context.strokeStyle="#111";context.lineWidth=4;context.lineJoin="round";context.lineCap="round";context.beginPath();values.forEach((value,index)=>{const x=area.x+(values.length<=1?0:index/(values.length-1))*area.width,y=area.y+area.height-(value/maximum)*area.height;if(index===0)context.moveTo(x,y);else context.lineTo(x,y)});context.stroke();context.fillStyle=shareAcid;const last=values.length-1,lastX=area.x+area.width,lastY=area.y+area.height-((values[last]||0)/maximum)*area.height;context.beginPath();context.arc(lastX,lastY,7,0,Math.PI*2);context.fill();context.strokeStyle="#111";context.lineWidth=2;context.stroke();context.fillStyle="#111";context.font=`900 18px ${shareCanvasFont}`;context.textAlign="right";context.fillText((values[last]||0)+"回",area.x+area.width,area.y+18);context.textAlign="left"}function drawSongMiniChart(context,song){const area=drawMiniChartFrame(context,"WEEKLY RANK"),history=[...(song.history||[])].sort((a,b)=>a.date.localeCompare(b.date));if(!history.length){context.fillStyle="#70685f";context.font=`700 16px ${shareCanvasFont}`;context.fillText("順位推移データなし",area.x,area.y+48);return}context.strokeStyle="#111";context.lineWidth=4;context.lineJoin="round";context.lineCap="round";context.beginPath();history.forEach((item,index)=>{const x=area.x+(history.length<=1?.5:index/(history.length-1))*area.width,y=area.y+((Math.max(1,Math.min(100,item.rank))-1)/99)*area.height;if(index===0)context.moveTo(x,y);else context.lineTo(x,y)});context.stroke();const last=history[history.length-1],lastY=area.y+((Math.max(1,Math.min(100,last.rank))-1)/99)*area.height;context.fillStyle=shareAcid;context.beginPath();context.arc(area.x+area.width,lastY,7,0,Math.PI*2);context.fill();context.strokeStyle="#111";context.lineWidth=2;context.stroke();context.fillStyle="#111";context.font=`900 18px ${shareCanvasFont}`;context.textAlign="right";context.fillText("#"+last.rank,area.x+area.width,area.y+18);context.textAlign="left"}drawArtistShareCard=artist=>{const dialog=document.getElementById("shareDialog");if(!dialog.open)artistShareChartCode=chartCode;const selected=artistDetailForChart(artist.artist,artistShareChartCode),selectedDashboard=dashboards[scopeCode][artistShareChartCode];currentShareTarget={type:"artist",data:selected};const picker=document.getElementById("shareChartPicker");picker.hidden=false;picker.querySelectorAll("[data-share-chart]").forEach(button=>button.classList.toggle("active",button.dataset.shareChart===artistShareChartCode));document.getElementById("shareTitle").textContent=selected.artist+"を共有・"+chartLabel(artistShareChartCode);const canvas=document.getElementById("shareCard"),context=canvas.getContext("2d");drawShareFrame(context,"ARTIST PROFILE");context.fillStyle="#70685f";context.font=`800 19px ${shareCanvasFont}`;context.fillText(scopeLabel()+"  /  "+selectedDashboard.chartName,64,190);const artistSize=fitCanvasText(context,selected.artist,720,68,38);context.fillStyle="#1f1c19";context.font=`900 ${artistSize}px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,selected.artist,720),64,292);drawArtistMiniChart(context,selected);drawShareMetrics(context,[["延べ登場",selected.appearances+"回"],["登場週",selected.weeks+"週"],["Top 10",selected.top10+"回"],["最高順位",selected.best?"#"+selected.best:"—"]]);context.fillStyle=shareAccent;context.font=`800 16px ${shareCanvasFont}`;context.fillText("TOP SONGS",64,510);context.fillStyle="#1f1c19";context.font=`700 20px ${shareCanvasFont}`;const songLine=(selected.songs||[]).slice(0,3).map((song,index)=>(index+1)+". "+song.title).join("   /   ")||"ランクイン曲はありません";context.fillText(clipCanvasText(context,songLine,1072),64,544);context.fillStyle="#70685f";context.font=`700 16px ${shareCanvasFont}`;context.fillText(rankingYear()+"年集計  ・  "+selectedDashboard.chartName,64,584)};drawSongShareCard=song=>{document.getElementById("shareChartPicker").hidden=true;const canvas=document.getElementById("shareCard"),context=canvas.getContext("2d"),history=song.history||[],last=history.length?history[history.length-1]:null,latestRank=song.latestRank??(last&&last.date===dashboard.latestDate?last.rank:null);drawShareFrame(context,"SONG PROFILE");context.fillStyle="#70685f";context.font=`800 19px ${shareCanvasFont}`;context.fillText(scopeLabel()+"  /  "+dashboard.chartName,64,190);const titleSize=fitCanvasText(context,song.title,720,60,32);context.fillStyle="#1f1c19";context.font=`900 ${titleSize}px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,song.title,720),64,270);context.fillStyle=shareAccent;context.font=`800 23px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,song.artist,720),64,316);drawSongMiniChart(context,song);drawShareMetrics(context,[["最新順位",latestRank?"#"+latestRank:"—"],["最高順位",song.best?"#"+song.best:"—"],["登場週",(song.weeks??history.length)+"週"],["Top 10",(song.top10??history.filter(item=>item.rank<=10).length)+"回"]]);context.fillStyle=shareAccent;context.font=`800 16px ${shareCanvasFont}`;context.fillText("CHART HISTORY",64,510);context.fillStyle="#1f1c19";context.font=`700 21px ${shareCanvasFont}`;const first=history[0],period=first&&last?first.date+"  —  "+last.date:"順位履歴なし";context.fillText(period,64,544);context.fillStyle="#70685f";context.font=`700 16px ${shareCanvasFont}`;context.fillText(rankingYear()+"年集計  ・  "+dashboard.chartName,64,584)};document.getElementById("shareChartPicker").addEventListener("click",async event=>{const button=event.target.closest("[data-share-chart]");if(!button||currentShareTarget?.type!=="artist")return;try{await loadDashboard(scopeCode,button.dataset.shareChart);artistShareChartCode=button.dataset.shareChart;drawArtistShareCard(currentShareTarget.data)}catch(error){showDataError(error)}});const sharePayloadBeforeChartSelection=sharePayload;sharePayload=()=>{if(currentShareTarget?.type!=="artist")return sharePayloadBeforeChartSelection();const artist=currentShareTarget.data,base=location.href.split("#")[0],params=new URLSearchParams({artist:artist.artist,scope:scopeCode,chart:artistShareChartCode});return{url:base+"#"+params.toString(),text:artist.artist+"のBillboard JAPANチャート推移をチェック",title:artist.artist+" | JAPAN CHART PULSE",fileName:"chart-pulse-artist.png"}};
-let shareViewMode="summary";const latestMobileViewport=matchMedia("(max-width:650px)"),latestAutoIsPausedWithInteraction=latestAutoIsPaused;latestAutoIsPaused=()=>latestMobileViewport.matches||latestAutoIsPausedWithInteraction();function syncShareViewPicker(){document.querySelectorAll("[data-share-view]").forEach(button=>button.classList.toggle("active",button.dataset.shareView===shareViewMode))}function drawArtistShareSummary(context,selected,selectedDashboard){context.fillStyle="#70685f";context.font=`800 19px ${shareCanvasFont}`;context.fillText(scopeLabel()+"  /  "+selectedDashboard.chartName,64,190);const artistSize=fitCanvasText(context,selected.artist,1072,72,40);context.fillStyle="#1f1c19";context.font=`900 ${artistSize}px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,selected.artist,1072),64,292);drawShareMetrics(context,[["延べ登場",selected.appearances+"回"],["登場週",selected.weeks+"週"],["Top 10",selected.top10+"回"],["最高順位",selected.best?"#"+selected.best:"—"]]);context.fillStyle=shareAccent;context.font=`800 16px ${shareCanvasFont}`;context.fillText("TOP SONGS",64,510);context.fillStyle="#1f1c19";context.font=`700 20px ${shareCanvasFont}`;const songLine=(selected.songs||[]).slice(0,3).map((song,index)=>(index+1)+". "+song.title).join("   /   ")||"ランクイン曲はありません";context.fillText(clipCanvasText(context,songLine,1072),64,544);context.fillStyle="#70685f";context.font=`700 16px ${shareCanvasFont}`;context.fillText(rankingYear()+"年集計  ・  "+selectedDashboard.chartName,64,584)}function drawSongShareSummary(context,song){const history=song.history||[],last=history.length?history[history.length-1]:null,latestRank=song.latestRank??(last&&last.date===dashboard.latestDate?last.rank:null);context.fillStyle="#70685f";context.font=`800 19px ${shareCanvasFont}`;context.fillText(scopeLabel()+"  /  "+dashboard.chartName,64,190);const titleSize=fitCanvasText(context,song.title,1072,62,34);context.fillStyle="#1f1c19";context.font=`900 ${titleSize}px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,song.title,1072),64,270);context.fillStyle=shareAccent;context.font=`800 23px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,song.artist,1072),64,316);drawShareMetrics(context,[["最新順位",latestRank?"#"+latestRank:"—"],["最高順位",song.best?"#"+song.best:"—"],["登場週",(song.weeks??history.length)+"週"],["Top 10",(song.top10??history.filter(item=>item.rank<=10).length)+"回"]]);context.fillStyle=shareAccent;context.font=`800 16px ${shareCanvasFont}`;context.fillText("CHART HISTORY",64,510);context.fillStyle="#1f1c19";context.font=`700 21px ${shareCanvasFont}`;const first=history[0],period=first&&last?first.date+"  —  "+last.date:"順位履歴なし";context.fillText(period,64,544);context.fillStyle="#70685f";context.font=`700 16px ${shareCanvasFont}`;context.fillText(rankingYear()+"年集計  ・  "+dashboard.chartName,64,584)}function graphArea(context,title,subtitle){context.fillStyle="#70685f";context.font=`800 17px ${shareCanvasFont}`;context.fillText(subtitle,64,184);context.fillStyle="#1f1c19";context.font=`900 38px ${shareCanvasFont}`;context.fillText(clipCanvasText(context,title,1072),64,230);return{x:90,y:272,width:1026,height:242}}function drawArtistGraphShare(context,artist,selectedDashboard){const area=graphArea(context,artist.artist,scopeLabel()+"  /  "+selectedDashboard.chartName+"  /  2024—2026 累積推移"),years=["2024","2025","2026"],colors={"2024":"#6b7280","2025":"#0072b2","2026":"#d55e00"},series=years.map(year=>({year,values:artist.weeklyCumulative?.[year]||[]})),maximum=Math.max(1,...series.flatMap(item=>item.values)),axisMaximum=Math.max(10,Math.ceil(maximum/10)*10);context.fillStyle="#f3eee4";context.fillRect(area.x,area.y,area.width,area.height);context.strokeStyle="#d8cfc2";context.lineWidth=1;context.font=`700 14px ${shareCanvasFont}`;context.fillStyle="#70685f";context.textAlign="right";for(let index=0;index<=4;index++){const y=area.y+area.height*index/4,value=Math.round(axisMaximum*(1-index/4));context.beginPath();context.moveTo(area.x,y);context.lineTo(area.x+area.width,y);context.stroke();context.fillText(String(value),area.x-12,y+5)}context.textAlign="center";[1,13,26,39,53].forEach(week=>{const x=area.x+(week-1)/52*area.width;context.fillText("W"+week,x,area.y+area.height+24)});series.forEach(({year,values})=>{if(!values.length)return;context.strokeStyle=colors[year];context.lineWidth=5;context.lineJoin="round";context.lineCap="round";context.beginPath();values.forEach((value,index)=>{const x=area.x+(values.length<=1?0:index/(Math.max(52,values.length-1)))*area.width,y=area.y+area.height-value/axisMaximum*area.height;if(index===0)context.moveTo(x,y);else context.lineTo(x,y)});context.stroke()});context.textAlign="left";years.forEach((year,index)=>{const x=760+index*126,y=560;context.fillStyle=colors[year];context.fillRect(x,y-12,30,5);context.fillStyle="#1f1c19";context.font=`800 16px ${shareCanvasFont}`;context.fillText(year,x+40,y-5)});context.fillStyle="#70685f";context.font=`700 15px ${shareCanvasFont}`;context.fillText("詳細画面の年別累積チャートを共有用に再構成",64,584)}function drawSongGraphShare(context,song){const history=[...(song.history||[])].sort((a,b)=>a.date.localeCompare(b.date)),area=graphArea(context,song.title,song.artist+"  /  "+dashboard.chartName+"  /  週間順位推移");context.fillStyle="#f3eee4";context.fillRect(area.x,area.y,area.width,area.height);const rankY=rank=>area.y+(Math.max(1,Math.min(100,rank))-1)/99*area.height;context.fillStyle="rgba(184,255,37,.2)";context.fillRect(area.x,area.y,area.width,rankY(10)-area.y);context.strokeStyle="#d8cfc2";context.lineWidth=1;context.font=`700 14px ${shareCanvasFont}`;context.fillStyle="#70685f";context.textAlign="right";[1,10,25,50,75,100].forEach(rank=>{const y=rankY(rank);context.beginPath();context.moveTo(area.x,y);context.lineTo(area.x+area.width,y);context.stroke();context.fillText("#"+rank,area.x-12,y+5)});if(history.length){const dates=history.map(item=>new Date(item.date+"T00:00:00").getTime()),minimum=Math.min(...dates),maximum=Math.max(...dates),span=Math.max(1,maximum-minimum),pointX=index=>area.x+(history.length<=1?.5:(dates[index]-minimum)/span)*area.width;context.strokeStyle="#0072b2";context.lineWidth=5;context.lineJoin="round";context.lineCap="round";context.beginPath();history.forEach((item,index)=>{const x=pointX(index),y=rankY(item.rank),gap=index?dates[index]-dates[index-1]:0;if(index===0||gap>9*86400000)context.moveTo(x,y);else context.lineTo(x,y)});context.stroke();history.forEach((item,index)=>{context.fillStyle=item.rank<=10?shareAcid:"#79dcff";context.beginPath();context.arc(pointX(index),rankY(item.rank),6,0,Math.PI*2);context.fill();context.strokeStyle="#1f1c19";context.lineWidth=1.5;context.stroke()});context.textAlign="left";context.fillStyle="#70685f";context.font=`700 15px ${shareCanvasFont}`;context.fillText(history[0].date,area.x,area.y+area.height+24);context.textAlign="right";context.fillText(history[history.length-1].date,area.x+area.width,area.y+area.height+24)}else{context.textAlign="center";context.fillStyle="#70685f";context.font=`800 20px ${shareCanvasFont}`;context.fillText("順位推移データなし",area.x+area.width/2,area.y+area.height/2)}context.textAlign="left";context.fillStyle="#70685f";context.font=`700 15px ${shareCanvasFont}`;context.fillText("詳細画面の週間順位チャートを共有用に再構成",64,584)}drawArtistShareCard=artist=>{const dialog=document.getElementById("shareDialog");if(!dialog.open){artistShareChartCode=chartCode;shareViewMode="summary"}const selected=artistDetailForChart(artist.artist,artistShareChartCode),selectedDashboard=dashboards[scopeCode][artistShareChartCode];currentShareTarget={type:"artist",data:selected};syncShareViewPicker();const picker=document.getElementById("shareChartPicker");picker.hidden=false;picker.querySelectorAll("[data-share-chart]").forEach(button=>button.classList.toggle("active",button.dataset.shareChart===artistShareChartCode));document.getElementById("shareTitle").textContent=selected.artist+"を共有・"+chartLabel(artistShareChartCode);const context=document.getElementById("shareCard").getContext("2d");drawShareFrame(context,shareViewMode==="graph"?"ARTIST GRAPH":"ARTIST PROFILE");if(shareViewMode==="graph")drawArtistGraphShare(context,selected,selectedDashboard);else drawArtistShareSummary(context,selected,selectedDashboard)};drawSongShareCard=song=>{const dialog=document.getElementById("shareDialog");if(!dialog.open)shareViewMode="summary";currentShareTarget={type:"song",data:song};syncShareViewPicker();document.getElementById("shareChartPicker").hidden=true;document.getElementById("shareTitle").textContent=song.title+"を共有";const context=document.getElementById("shareCard").getContext("2d");drawShareFrame(context,shareViewMode==="graph"?"SONG GRAPH":"SONG PROFILE");if(shareViewMode==="graph")drawSongGraphShare(context,song);else drawSongShareSummary(context,song)};document.getElementById("shareViewPicker").addEventListener("click",event=>{const button=event.target.closest("[data-share-view]");if(!button||button.dataset.shareView===shareViewMode)return;shareViewMode=button.dataset.shareView;if(currentShareTarget?.type==="artist")drawArtistShareCard(currentShareTarget.data);else if(currentShareTarget?.type==="song")drawSongShareCard(currentShareTarget.data)});
-async function switchChart(code){await activateDashboard(scopeCode,code)}
-async function switchScope(code){await activateDashboard(code,chartCode)}
-initLatestCarousel();document.querySelectorAll("[data-chart]").forEach(button=>button.addEventListener("click",()=>switchChart(button.dataset.chart)));document.querySelectorAll("[data-scope]").forEach(button=>button.addEventListener("click",()=>switchScope(button.dataset.scope)));const sharedState=new URLSearchParams(location.hash.slice(1)),initialScope=sharedState.get("scope"),initialChart=sharedState.get("chart"),initialArtist=sharedState.get("artist"),initialSong=sharedState.get("song"),initialSongArtist=sharedState.get("songArtist");async function initializeSite(){if(dashboardManifest[dashboardKey(initialScope,initialChart)]&&await activateDashboard(initialScope,initialChart)){}else applyDashboard();if(initialSong&&initialSongArtist)openSongDetail(initialSongArtist,initialSong,false);else if(initialArtist)openDetail(initialArtist,false);const preload=()=>ensureAllDashboards().catch(showDataError);if("requestIdleCallback" in window)requestIdleCallback(preload,{timeout:4000});else setTimeout(preload,1500)}initializeSite();
+// 第3回国内票・海外票の順位を動的に計算してセットする処理（デモ用）
+const n3Sorted = [...rawData].sort((a, b) => (b.n3 || 0) - (a.n3 || 0));
+const g3Sorted = [...rawData].sort((a, b) => (b.g3 || 0) - (a.g3 || 0));
+rawData.forEach(t => {
+    t.n3_rank = n3Sorted.findIndex(x => x.name === t.name) + 1;
+    t.g3_rank = g3Sorted.findIndex(x => x.name === t.name) + 1;
+});
+
+function generateTags(t, isModal = false) {
+    let tags = '';
+    const diff = t.history[4] - t.history[5];
+    const prefix = isModal ? 'm-tag m-tag-' : 'tag tag-';
+    
+    if (t.nr3 >= 75) tags += `<span class="${prefix}national">#国内型</span>`;
+    if (t.nr3 > 65 && t.nr3 < 75) tags += `<span class="${prefix}balance">#バランス型</span>`;
+    if (t.gr3 >= 35) tags += `<span class="${prefix}global">#グローバル型</span>`;
+    if (diff >= 5) tags += `<span class="${prefix}rise">#急上昇</span>`;
+    return tags;
+}
+
+function getDiffBadge(diff) {
+    if (diff > 0) return `<div class="diff-badge diff-up">▲${diff}</div>`;
+    if (diff < 0) return `<div class="diff-badge diff-down">▼${Math.abs(diff)}</div>`;
+    return `<div class="diff-badge diff-none">±0</div>`;
+}
+
+function renderGrid() {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    
+    const sortValue = document.getElementById('sortSelect').value;
+    let sortedData = [...rawData];
+    
+    sortedData.sort((a, b) => {
+        if (sortValue === 'rank_asc') {
+            return a.history[5] - b.history[5]; // EP 10 (history[5]) の順位に変更
+        } else if (sortValue === 'n3_desc') {
+            return (b.n3 || 0) - (a.n3 || 0);
+        } else if (sortValue === 'g3_desc') {
+            return (b.g3 || 0) - (a.g3 || 0);
+        } else if (sortValue === 'x_desc') {
+            return b.x_posts - a.x_posts;
+        } else if (sortValue === 'tiktok_desc') {
+            return b.tiktok_posts - a.tiktok_posts;
+        }
+        return 0;
+    });
+
+    sortedData.forEach(t => {
+        const diff = t.history[4] - t.history[5]; // EP8からEP10への変動に変更
+        const card = document.createElement('div');
+        card.className = `summary-card ${t.history[5] <= 12 ? 'debut-zone' : ''}`; // デビュー圏内判定をEP10基準に変更
+        
+        let subInfoHtml = '';
+        if (sortValue === 'n3_desc') {
+            subInfoHtml = `<div style="font-size: 12px; color: #0097e6; margin-top: 4px; font-weight: bold;">第3回国内票: ${(t.n3 || 0).toLocaleString()} pt</div>`;
+        } else if (sortValue === 'g3_desc') {
+            subInfoHtml = `<div style="font-size: 12px; color: #d35400; margin-top: 4px; font-weight: bold;">第3回海外票: ${(t.g3 || 0).toLocaleString()} pt</div>`;
+        } else if (sortValue === 'x_desc') {
+            subInfoHtml = `<div style="font-size: 12px; color: #000; margin-top: 4px; font-weight: bold;">𝕏: ${t.x_posts.toLocaleString()} posts</div>`;
+        } else if (sortValue === 'tiktok_desc') {
+            subInfoHtml = `<div style="font-size: 12px; color: #ff0050; margin-top: 4px; font-weight: bold;">TikTok: ${t.tiktok_posts.toLocaleString()} posts</div>`;
+        }
+
+        card.innerHTML = `
+            <div style="display:flex; align-items:center; width: 100%;">
+                <div class="rank-num">${t.history[5]}</div> 
+                <div style="flex: 1;">
+                      <div class="name-main" style="font-size: 17px; font-weight: bold; color: var(--text-main);">${t.name}</div>
+                    ${subInfoHtml}
+                    <div class="tag-wrap">${generateTags(t)}</div>
+                </div>
+                <div style="margin-left: 10px;">${getDiffBadge(diff)}</div>
+            </div>
+        `;
+        card.onclick = () => openModal(t);
+        grid.appendChild(card);
+    });
+}
+
+let charts = [];
+function openModal(t) {
+    document.getElementById('mName').innerText = t.name;
+    document.getElementById('mRank').innerText = t.history[5];
+    document.getElementById('mDiff').innerHTML = getDiffBadge(t.history[4] - t.history[5]);
+    document.getElementById('mTags').innerHTML = generateTags(t, true);
+    
+    document.getElementById('h2').innerText = t.history[0] + "位";
+    document.getElementById('h3').innerText = t.history[1] + "位";
+    document.getElementById('h5').innerText = t.history[2] + "位";
+    document.getElementById('h6').innerText = t.history[3] + "位";
+    document.getElementById('h8').innerText = t.history[4] + "位";
+    document.getElementById('h10').innerText = t.history[5] + "位";
+
+    document.getElementById('v1n').innerText = t.n1.toLocaleString();
+    document.getElementById('v1g').innerText = t.g1.toLocaleString();
+    document.getElementById('r1n').innerText = t.n1_rank + "位";
+    document.getElementById('r1g').innerText = t.g1_rank + "位";
+    document.getElementById('p1n').innerText = t.nr1 + "%";
+    document.getElementById('p1g').innerText = t.gr1 + "%";
+    document.getElementById('v1t').innerText = (t.n1 + t.g1).toLocaleString() + " pt";
+
+    document.getElementById('v2n').innerText = t.n2.toLocaleString();
+    document.getElementById('v2g').innerText = t.g2.toLocaleString();
+    document.getElementById('r2n').innerText = t.n2_rank + "位";
+    document.getElementById('r2g').innerText = t.g2_rank + "位";
+    document.getElementById('p2n').innerText = t.nr2 + "%";
+    document.getElementById('p2g').innerText = t.gr2 + "%";
+    document.getElementById('v2t').innerText = (t.n2 + t.g2).toLocaleString() + " pt";
+    
+    document.getElementById('v3n').innerText = t.n3 ? t.n3.toLocaleString() : "0";
+    document.getElementById('v3g').innerText = t.g3 ? t.g3.toLocaleString() : "0";
+    document.getElementById('r3n').innerText = t.n3_rank ? t.n3_rank + "位" : "--位"; // 第3回国内順位を反映
+    document.getElementById('r3g').innerText = t.g3_rank ? t.g3_rank + "位" : "--位"; // 第3回海外順位を反映
+    document.getElementById('p3n').innerText = t.nr3 ? t.nr3 + "%" : "0%";
+    document.getElementById('p3g').innerText = t.gr3 ? t.gr3 + "%" : "0%";
+    document.getElementById('v3t').innerText = (t.n3 && t.g3) ? (t.n3 + t.g3).toLocaleString() + " pt" : "0 pt";
+    
+    document.getElementById('x_posts').innerText = t.x_posts ? t.x_posts.toLocaleString() : "0";
+    document.getElementById('x_rank').innerText = t.x_rank ? t.x_rank + "位" : "--位";
+    document.getElementById('tt_posts').innerText = t.tiktok_posts ? t.tiktok_posts.toLocaleString() : "0";
+    document.getElementById('tt_rank').innerText = t.tiktok_rank ? t.tiktok_rank + "位" : "--位";
+
+    document.getElementById('modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    charts.forEach(c => c.destroy());
+    
+    charts = [
+        createDoughnut('chart1', [t.nr1, t.gr1]),
+        createDoughnut('chart2', [t.nr2, t.gr2]),
+        createDoughnut('chart3', [t.nr3 || 50, t.gr3 || 50])
+    ];
+
+    let snsData = t.sns_dist ? [t.sns_dist.X, t.sns_dist.Instagram, t.sns_dist.TikTok, t.sns_dist.YouTube] : [40, 30, 20, 10];
+    let sum = snsData.reduce((a, b) => a + b, 0);
+    if (sum !== 100) {
+        let diff = 100 - sum;
+        let maxIndex = snsData.indexOf(Math.max(...snsData));
+        snsData[maxIndex] += diff;
+    }
+
+    charts.push(
+        new Chart(document.getElementById('snsChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['X', 'Instagram', 'TikTok', 'YouTube'],
+                datasets: [{
+                    data: snsData,
+                    backgroundColor: ['#000000', '#e1306c', '#1da1f2', '#ff0000'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { boxWidth: 10, font: { size: 9 } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    );
+}
+
+function createDoughnut(id, data) {
+    return new Chart(document.getElementById(id).getContext('2d'), {
+        type: 'doughnut',
+        data: {
+            labels: ['国内', '海外'],
+            datasets: [{
+                data: data,
+                backgroundColor: ['#0097e6', '#ffc000'],
+                borderWidth: 0,
+                hoverOffset: 10
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            cutout: '75%',
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+}
+
+function closeModal() { 
+    document.getElementById('modal').style.display = 'none';
+    document.body.style.overflow = '';
+}
+renderGrid();
 </script>
-</body></html>
+</body>
+</html>
